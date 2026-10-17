@@ -732,44 +732,44 @@ typedef struct PresetTypeDefinition {
 const std::map<PresetType, PresetTypeDefinition> presetTypes = {
     { PRESET_TYPE_ENHANCEMENTS, { enhancementsCvars, {
         { ENHANCEMENT_PRESET_DEFAULT, {
-            "Default",
-            "Reset all options to their default values.",
+            "Predeterminado",
+            "Restablece todas las opciones a sus valores predeterminados.",
             {},
         } },
         { ENHANCEMENT_PRESET_VANILLA_PLUS, {
             "Vanilla Plus",
-            "Adds Quality of Life features that enhance your experience, but don't alter gameplay. Recommended for a first playthrough of OoT.",
+            "Añade mejoras de calidad de vida que mejoran la experiencia sin alterar la jugabilidad. Recomendado para una primera partida a OoT.",
             vanillaPlusPresetEntries,
         } },
         { ENHANCEMENT_PRESET_ENHANCED, {
-            "Enhanced",
-            "The \"Vanilla Plus\" preset, but with more quality of life enhancements that might alter gameplay slightly. Recommended for returning players.",
+            "Mejorado",
+            "El preajuste \"Vanilla Plus\", pero con más mejoras de calidad de vida que podrían alterar ligeramente la jugabilidad. Recomendado para jugadores veteranos.",
             enhancedPresetEntries
         } },
         { ENHANCEMENT_PRESET_RANDOMIZER, {
             "Randomizer",
-            "The \"Enhanced\" preset, plus any other enhancements that are recommended for playing Randomizer.",
+            "El preajuste \"Mejorado\", más otras mejoras recomendadas para jugar al Randomizer.",
             randomizerPresetEntries
         } },
     } } },
     { PRESET_TYPE_RANDOMIZER, { randomizerCvars, {
         { RANDOMIZER_PRESET_DEFAULT, {
-            "Default",
-            "Reset all options to their default values.",
+            "Predeterminado",
+            "Restablece todas las opciones a sus valores predeterminados.",
             {},
         } },
         { RANDOMIZER_PRESET_S6, {
-            "S6 Tournament (Adapted)",
-            "Matches OOTR S6 tournament settings as close as we can get with the options available in SoH. The following differences are notable:\n" \
-            "- Both child and adult overworld spawns are randomized" \
-            "- Dungeon rewards are shuffled at the end of dungeons, rather than at the end of their own dungeon\n" \
-            "- Full adult trade sequence is shuffled instead of the selected 4\n" \
-            "- Hint distribution no \"tournament\" mode, falling back to balanced",
+            "Torneo S6 (adaptado)",
+            "Reproduce lo más fielmente posible los ajustes del torneo S6 de OOTR con las opciones disponibles en SoH. Hay estas diferencias notables:\n" \
+            "- Los puntos de aparición del exterior de Link niño y adulto son aleatorios\n" \
+            "- Las recompensas de mazmorra se mezclan al final de las mazmorras, en lugar de al final de su propia mazmorra\n" \
+            "- Se mezcla toda la secuencia de trueques de adulto en lugar de 4 seleccionadas\n" \
+            "- La distribución de pistas no tiene modo \"torneo\"; se usa la equilibrada",
             s6PresetEntries,
         } },
         { RANDOMIZER_PRESET_HELL_MODE, {
-            "Hell Mode",
-            "All settings maxed but still using glitchless logic. Expect pain.",
+            "Modo infierno",
+            "Todos los ajustes al máximo pero con lógica sin glitches. Prepárate para sufrir.",
             hellModePresetEntries
         } },
     } } }

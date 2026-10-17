@@ -545,10 +545,10 @@ namespace UIWidgets {
         bool changed = false;
         std::string Cvar_RBM = cvarName;
         Cvar_RBM += "RBM";
-        std::string MakeInvisible = "Reset";
+        std::string MakeInvisible = "Restab.";
         MakeInvisible += "##";
         MakeInvisible += cvarName;
-        MakeInvisible += "Reset";
+        MakeInvisible += "Restab.";
         if (ImGui::Button(MakeInvisible.c_str())) {
             colors->x = defaultcolors.x;
             colors->y = defaultcolors.y;
@@ -566,7 +566,7 @@ namespace UIWidgets {
             SohImGui::RequestCvarSaveOnNextTick();
             changed = true;
         }
-        Tooltip("Revert colors to the game's original colors (GameCube version)\nOverwrites previously chosen color");
+        Tooltip("Restaura los colores originales del juego (versión de GameCube)\nSobrescribe el color elegido anteriormente");
         return changed;
     }
 
@@ -577,8 +577,8 @@ namespace UIWidgets {
         Cvar_RBM += "RBM";
         std::string MakeInvisible = "##";
         MakeInvisible += cvarName;
-        MakeInvisible += "Random";
-        std::string FullName = "Random";
+        MakeInvisible += "Azar";
+        std::string FullName = "Azar";
         FullName += MakeInvisible;
         if (ImGui::Button(FullName.c_str())) {
 #if defined(__SWITCH__) || defined(__WIIU__)
@@ -596,29 +596,29 @@ namespace UIWidgets {
             SohImGui::RequestCvarSaveOnNextTick();
             changed = true;
         }
-        Tooltip("Chooses a random color\nOverwrites previously chosen color");
+        Tooltip("Elige un color al azar\nSobrescribe el color elegido anteriormente");
         return changed;
     }
 
     void DrawLockColorCheckbox(const char* cvarName) {
         std::string Cvar_Lock = cvarName;
-        Cvar_Lock += "Lock";
+        Cvar_Lock += "Fijar";
         s32 lock = CVarGetInteger(Cvar_Lock.c_str(), 0);
-        std::string FullName = "Lock##" + Cvar_Lock;
+        std::string FullName = "Fijar##" + Cvar_Lock;
         EnhancementCheckbox(FullName.c_str(), Cvar_Lock.c_str());
-        Tooltip("Prevents this color from being changed upon selecting \"Randomize all\"");
+        Tooltip("Evita que este color cambie al elegir \"Aleatorizar todo\"");
     }
 
     void RainbowColor(const char* cvarName, ImVec4* colors) {
         std::string Cvar_RBM = cvarName;
         Cvar_RBM += "RBM";
-        std::string MakeInvisible = "Rainbow";
+        std::string MakeInvisible = "Arcoíris";
         MakeInvisible += "##";
         MakeInvisible += cvarName;
-        MakeInvisible += "Rainbow";
+        MakeInvisible += "Arcoíris";
 
         EnhancementCheckbox(MakeInvisible.c_str(), Cvar_RBM.c_str());
-        Tooltip("Cycles through colors on a timer\nOverwrites previously chosen color");
+        Tooltip("Recorre los colores con un temporizador\nSobrescribe el color elegido anteriormente");
     }
 
     bool EnhancementColor(const char* text, const char* cvarName, ImVec4 ColorRGBA, ImVec4 default_colors, bool allow_rainbow, bool has_alpha, bool TitleSameLine) {

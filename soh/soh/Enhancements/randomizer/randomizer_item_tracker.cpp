@@ -137,19 +137,19 @@ std::vector<ItemTrackerDungeon> itemTrackerDungeonsCompact = {
 };
 
 std::map<uint16_t, std::string> itemTrackerDungeonShortNames = {
-    { SCENE_BMORI1, "FRST" },
-    { SCENE_HIDAN, "FIRE" },
-    { SCENE_MIZUSIN, "WATR" },
-    { SCENE_JYASINZOU, "SPRT" },
-    { SCENE_HAKADAN, "SHDW" },
-    { SCENE_HAKADANCH, "BOTW" },
+    { SCENE_BMORI1, "BOSQ" },
+    { SCENE_HIDAN, "FUEG" },
+    { SCENE_MIZUSIN, "AGUA" },
+    { SCENE_JYASINZOU, "ESPI" },
+    { SCENE_HAKADAN, "SOMB" },
+    { SCENE_HAKADANCH, "POZO" },
     { SCENE_YDAN, "DEKU" },
-    { SCENE_DDAN, "DCVN" },
+    { SCENE_DDAN, "DODO" },
     { SCENE_BDAN, "JABU" },
-    { SCENE_ICE_DOUKUTO, "ICE" },
+    { SCENE_ICE_DOUKUTO, "HIEL" },
     { SCENE_GANONTIKA, "GANON" },
-    { SCENE_MEN, "GTG" },
-    { SCENE_GERUDOWAY, "HIDE" },
+    { SCENE_MEN, "CIG" },
+    { SCENE_GERUDOWAY, "GUAR" },
 };
 
 std::vector<ItemTrackerItem> dungeonItems = {};
@@ -913,7 +913,7 @@ void DrawItemTracker(bool& open) {
             (CVarGetInteger("gItemTrackerGregDisplayType", 0) == 1) ||
             (CVarGetInteger("gItemTrackerNotesDisplayType", 0) == 1)
         ) {
-            BeginFloatingWindows("Item Tracker##main window");
+            BeginFloatingWindows("Rastreador de objetos##main window");
             DrawItemsInRows(mainWindowItems, 6);
 
             if (CVarGetInteger("gItemTrackerNotesDisplayType", 0) == 1 && CVarGetInteger("gItemTrackerDisplayType", 0) == 0) {
@@ -923,25 +923,25 @@ void DrawItemTracker(bool& open) {
         }
 
         if (CVarGetInteger("gItemTrackerInventoryItemsDisplayType", 1) == 2) {
-            BeginFloatingWindows("Inventory Items Tracker");
+            BeginFloatingWindows("Rastreador de inventario");
             DrawItemsInRows(inventoryItems);
             EndFloatingWindows();
         }
 
         if (CVarGetInteger("gItemTrackerEquipmentItemsDisplayType", 1) == 2) {
-            BeginFloatingWindows("Equipment Items Tracker");
+            BeginFloatingWindows("Rastreador de equipo");
             DrawItemsInRows(equipmentItems, 3);
             EndFloatingWindows();
         }
 
         if (CVarGetInteger("gItemTrackerMiscItemsDisplayType", 1) == 2) {
-            BeginFloatingWindows("Misc Items Tracker");
+            BeginFloatingWindows("Rastreador de varios");
             DrawItemsInRows(miscItems, 4);
             EndFloatingWindows();
         }
 
         if (CVarGetInteger("gItemTrackerDungeonRewardsDisplayType", 1) == 2) {
-            BeginFloatingWindows("Dungeon Rewards Tracker");
+            BeginFloatingWindows("Rastreador de recompensas");
             if (CVarGetInteger("gItemTrackerDungeonRewardsCircle", 0) == 1) {
                 ImGui::BeginGroup();
                 DrawItemsInACircle(dungeonRewardMedallions);
@@ -956,13 +956,13 @@ void DrawItemTracker(bool& open) {
         }
 
         if (CVarGetInteger("gItemTrackerSongsDisplayType", 1) == 2) {
-            BeginFloatingWindows("Songs Tracker");
+            BeginFloatingWindows("Rastreador de canciones");
             DrawItemsInRows(songItems);
             EndFloatingWindows();
         }
 
         if (CVarGetInteger("gItemTrackerDungeonItemsDisplayType", 0) == 2) {
-            BeginFloatingWindows("Dungeon Items Tracker");
+            BeginFloatingWindows("Rastreador de mazmorras");
             if (CVarGetInteger("gItemTrackerDisplayDungeonItemsHorizontal", 1)) {
                 if (CVarGetInteger("gItemTrackerDisplayDungeonItemsMaps", 1)) {
                     DrawItemsInRows(dungeonItems, 12);
@@ -976,22 +976,22 @@ void DrawItemTracker(bool& open) {
         }
 
         if (CVarGetInteger("gItemTrackerGregDisplayType", 0) == 3) {
-            BeginFloatingWindows("Greg Tracker");
+            BeginFloatingWindows("Rastreador de Greg");
             DrawItemsInRows(gregItems);
             EndFloatingWindows();
         }
 
         if (CVarGetInteger("gItemTrackerNotesDisplayType", 0) == 2 && CVarGetInteger("gItemTrackerDisplayType", 0) == 0) {
             ImGui::SetNextWindowSize(ImVec2(400,300), ImGuiCond_FirstUseEver);
-            BeginFloatingWindows("Personal Notes", ImGuiWindowFlags_NoFocusOnAppearing);
+            BeginFloatingWindows("Notas personales", ImGuiWindowFlags_NoFocusOnAppearing);
             DrawNotes(true);
             EndFloatingWindows();
         }
     }
 }
 
-const char* itemTrackerCapacityTrackOptions[5] = { "No Numbers", "Current Capacity", "Current Ammo", "Current Capacity / Max Capacity", "Current Ammo / Current Capacity" };
-const char* itemTrackerKeyTrackOptions[3] = { "Collected / Max", "Current / Collected / Max", "Current / Max" };
+const char* itemTrackerCapacityTrackOptions[5] = { "Sin números", "Capacidad actual", "Munición actual", "Capacidad actual / máxima", "Munición actual / capacidad" };
+const char* itemTrackerKeyTrackOptions[3] = { "Obtenidas / máx.", "Actuales / obtenidas / máx.", "Actuales / máx." };
 
 void DrawItemTrackerOptions(bool& open) {
     if (!open) {
@@ -1001,22 +1001,22 @@ void DrawItemTrackerOptions(bool& open) {
 
     ImGui::SetNextWindowSize(ImVec2(600,375), ImGuiCond_FirstUseEver);
 
-    if (!ImGui::Begin("Item Tracker Settings", &open, ImGuiWindowFlags_NoFocusOnAppearing)) {
+    if (!ImGui::Begin("Ajust. rastreador objetos", &open, ImGuiWindowFlags_NoFocusOnAppearing)) {
         ImGui::End();
         return;
     }
 
     ImGui::PushStyleVar(ImGuiStyleVar_CellPadding, { 8.0f, 8.0f });
     ImGui::BeginTable("itemTrackerSettingsTable", 2, ImGuiTableFlags_BordersH | ImGuiTableFlags_BordersV);
-    ImGui::TableSetupColumn("General settings", ImGuiTableColumnFlags_WidthStretch, 200.0f);
-    ImGui::TableSetupColumn("Section settings", ImGuiTableColumnFlags_WidthStretch, 200.0f);
+    ImGui::TableSetupColumn("Ajustes generales", ImGuiTableColumnFlags_WidthStretch, 200.0f);
+    ImGui::TableSetupColumn("Ajustes de secciones", ImGuiTableColumnFlags_WidthStretch, 200.0f);
     ImGui::TableHeadersRow();
     ImGui::TableNextRow();
     ImGui::TableNextColumn();
-    ImGui::Text("BG Color");
+    ImGui::Text("Color de fondo");
     ImGui::SameLine();
     ImGui::PushItemWidth(ImGui::GetContentRegionAvail().x);
-    if (ImGui::ColorEdit4("BG Color##gItemTrackerBgColor", (float*)&ChromaKeyBackground, ImGuiColorEditFlags_AlphaPreview | ImGuiColorEditFlags_AlphaBar | ImGuiColorEditFlags_NoLabel)) {
+    if (ImGui::ColorEdit4("Color de fondo##gItemTrackerBgColor", (float*)&ChromaKeyBackground, ImGuiColorEditFlags_AlphaPreview | ImGuiColorEditFlags_AlphaBar | ImGuiColorEditFlags_NoLabel)) {
         CVarSetFloat("gItemTrackerBgColorR", ChromaKeyBackground.x);
         CVarSetFloat("gItemTrackerBgColorG", ChromaKeyBackground.y);
         CVarSetFloat("gItemTrackerBgColorB", ChromaKeyBackground.z);
@@ -1025,53 +1025,53 @@ void DrawItemTrackerOptions(bool& open) {
     }
     ImGui::PopItemWidth();
 
-    LabeledComboBoxRightAligned("Window Type", "gItemTrackerWindowType", { "Floating", "Window" }, 0);
+    LabeledComboBoxRightAligned("Tipo de ventana", "gItemTrackerWindowType", { "Flotante", "Ventana" }, 0);
 
     if (CVarGetInteger("gItemTrackerWindowType", 0) == 0) {
-        PaddedEnhancementCheckbox("Enable Dragging", "gItemTrackerHudEditMode", 0);
-        PaddedEnhancementCheckbox("Only enable while paused", "gItemTrackerShowOnlyPaused", 0);
-        LabeledComboBoxRightAligned("Display Mode", "gItemTrackerDisplayType", { "Always", "Combo Button Hold" }, 0);
+        PaddedEnhancementCheckbox("Permitir arrastrar", "gItemTrackerHudEditMode", 0);
+        PaddedEnhancementCheckbox("Solo activo en pausa", "gItemTrackerShowOnlyPaused", 0);
+        LabeledComboBoxRightAligned("Modo de visualización", "gItemTrackerDisplayType", { "Siempre", "Mantener combinación" }, 0);
         if (CVarGetInteger("gItemTrackerDisplayType", 0) > 0) {
-            LabeledComboBoxRightAligned("Combo Button 1", "gItemTrackerComboButton1", { "A", "B", "C-Up", "C-Down", "C-Left", "C-Right", "L", "Z", "R", "Start", "D-Up", "D-Down", "D-Left", "D-Right" }, 6);
-            LabeledComboBoxRightAligned("Combo Button 2", "gItemTrackerComboButton2", { "A", "B", "C-Up", "C-Down", "C-Left", "C-Right", "L", "Z", "R", "Start", "D-Up", "D-Down", "D-Left", "D-Right" }, 8);
+            LabeledComboBoxRightAligned("Botón de combinación 1", "gItemTrackerComboButton1", { "A", "B", "C-Arriba", "C-Abajo", "C-Izquierda", "C-Derecha", "L", "Z", "R", "Start", "D-Arriba", "D-Abajo", "D-Izquierda", "D-Derecha" }, 6);
+            LabeledComboBoxRightAligned("Botón de combinación 2", "gItemTrackerComboButton2", { "A", "B", "C-Arriba", "C-Abajo", "C-Izquierda", "C-Derecha", "L", "Z", "R", "Start", "D-Arriba", "D-Abajo", "D-Izquierda", "D-Derecha" }, 8);
         }
     }
     UIWidgets::PaddedSeparator();
-    UIWidgets::EnhancementSliderInt("Icon size : %dpx", "##ITEMTRACKERICONSIZE", "gItemTrackerIconSize", 25, 128, "", 36, true);
-    UIWidgets::EnhancementSliderInt("Icon margins : %dpx", "##ITEMTRACKERSPACING", "gItemTrackerIconSpacing", -5, 50, "", 12, true);
+    UIWidgets::EnhancementSliderInt("Tamaño de iconos: %dpx", "##ITEMTRACKERICONSIZE", "gItemTrackerIconSize", 25, 128, "", 36, true);
+    UIWidgets::EnhancementSliderInt("Margen de iconos: %dpx", "##ITEMTRACKERSPACING", "gItemTrackerIconSpacing", -5, 50, "", 12, true);
     
-    ImGui::Text("Ammo/Capacity Tracking");
+    ImGui::Text("Seguimiento de munición/capacidad");
     UIWidgets::EnhancementCombobox("gItemTrackerCapacityTrack", itemTrackerCapacityTrackOptions, 5, 1);
-    UIWidgets::InsertHelpHoverText("Customize what the numbers under each item are tracking."
-                                    "\n\nNote: items without capacity upgrades will track ammo even in capacity mode");
+    UIWidgets::InsertHelpHoverText("Elige qué indican los números bajo cada objeto."
+                                    "\n\nNota: los objetos sin mejoras de capacidad mostrarán la munición incluso en modo capacidad");
     if (CVarGetInteger("gItemTrackerCapacityTrack", 1) == ITEM_TRACKER_NUMBER_CURRENT_CAPACITY_ONLY || CVarGetInteger("gItemTrackerCapacityTrack", 1) == ITEM_TRACKER_NUMBER_CURRENT_AMMO_ONLY) {
-        PaddedEnhancementCheckbox("Align count to left side", "gItemTrackerCurrentOnLeft", 0);
+        PaddedEnhancementCheckbox("Alinear cuenta a la izquierda", "gItemTrackerCurrentOnLeft", 0);
     }
-    ImGui::Text("Key Count Tracking");
+    ImGui::Text("Seguimiento de llaves");
     UIWidgets::EnhancementCombobox("gItemTrackerKeyTrack", itemTrackerKeyTrackOptions, 3, 0);
-    UIWidgets::InsertHelpHoverText("Customize what numbers are shown for key tracking.");
+    UIWidgets::InsertHelpHoverText("Elige qué números se muestran para las llaves.");
 
     ImGui::TableNextColumn();
 
-    LabeledComboBoxRightAligned("Inventory", "gItemTrackerInventoryItemsDisplayType", { "Hidden", "Main Window", "Seperate" }, 1);
-    LabeledComboBoxRightAligned("Equipment", "gItemTrackerEquipmentItemsDisplayType", { "Hidden", "Main Window", "Seperate" }, 1);
-    LabeledComboBoxRightAligned("Misc", "gItemTrackerMiscItemsDisplayType", { "Hidden", "Main Window", "Seperate" }, 1);
-    LabeledComboBoxRightAligned("Dungeon Rewards", "gItemTrackerDungeonRewardsDisplayType", { "Hidden", "Main Window", "Seperate" }, 1);
+    LabeledComboBoxRightAligned("Inventario", "gItemTrackerInventoryItemsDisplayType", { "Oculto", "Ventana principal", "Separada" }, 1);
+    LabeledComboBoxRightAligned("Equipo", "gItemTrackerEquipmentItemsDisplayType", { "Oculto", "Ventana principal", "Separada" }, 1);
+    LabeledComboBoxRightAligned("Varios", "gItemTrackerMiscItemsDisplayType", { "Oculto", "Ventana principal", "Separada" }, 1);
+    LabeledComboBoxRightAligned("Recompensas", "gItemTrackerDungeonRewardsDisplayType", { "Oculto", "Ventana principal", "Separada" }, 1);
     if (CVarGetInteger("gItemTrackerDungeonRewardsDisplayType", 1) == 2) {
-        PaddedEnhancementCheckbox("Circle display", "gItemTrackerDungeonRewardsCircle", 1);
+        PaddedEnhancementCheckbox("Disposición circular", "gItemTrackerDungeonRewardsCircle", 1);
     }
-    LabeledComboBoxRightAligned("Songs", "gItemTrackerSongsDisplayType", { "Hidden", "Main Window", "Seperate" }, 1);
-    LabeledComboBoxRightAligned("Dungeon Items", "gItemTrackerDungeonItemsDisplayType", { "Hidden", "Main Window", "Seperate" }, 0);
+    LabeledComboBoxRightAligned("Canciones", "gItemTrackerSongsDisplayType", { "Oculto", "Ventana principal", "Separada" }, 1);
+    LabeledComboBoxRightAligned("Objetos de mazmorra", "gItemTrackerDungeonItemsDisplayType", { "Oculto", "Ventana principal", "Separada" }, 0);
     if (CVarGetInteger("gItemTrackerDungeonItemsDisplayType", 0) != 0) {
         if (CVarGetInteger("gItemTrackerDungeonItemsDisplayType", 0) == 2) {
-            PaddedEnhancementCheckbox("Horizontal display", "gItemTrackerDisplayDungeonItemsHorizontal", 1);
+            PaddedEnhancementCheckbox("Disposición horizontal", "gItemTrackerDisplayDungeonItemsHorizontal", 1);
         }
-        PaddedEnhancementCheckbox("Maps and compasses", "gItemTrackerDisplayDungeonItemsMaps", 1);
+        PaddedEnhancementCheckbox("Mapas y brújulas", "gItemTrackerDisplayDungeonItemsMaps", 1);
     }
-    LabeledComboBoxRightAligned("Greg", "gItemTrackerGregDisplayType", { "Hidden", "Main Window", "Misc Window", "Seperate" }, 0);
+    LabeledComboBoxRightAligned("Greg", "gItemTrackerGregDisplayType", { "Oculto", "Ventana principal", "Ventana de varios", "Separada" }, 0);
 
     if (CVarGetInteger("gItemTrackerDisplayType", 0) != 1) {
-        LabeledComboBoxRightAligned("Personal notes", "gItemTrackerNotesDisplayType", { "Hidden", "Main Window", "Seperate" }, 0);
+        LabeledComboBoxRightAligned("Notas personales", "gItemTrackerNotesDisplayType", { "Oculto", "Ventana principal", "Separada" }, 0);
     }
 
     ImGui::PopStyleVar(1);

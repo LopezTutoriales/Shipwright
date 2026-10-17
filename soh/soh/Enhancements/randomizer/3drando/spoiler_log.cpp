@@ -645,54 +645,75 @@ std::string AutoFormatHintTextString(std::string unformattedHintTextString) {
   return textStr;
 }
 
+// Sizes of the matching char buffers in SaveContext (see z64save.h). The save format must stay untouched, so
+// a hint that does not fit in its buffer can not simply be stored.
+static constexpr size_t kHintTextBufferSize = 200;
+static constexpr size_t kChildAltarTextBufferSize = 250;
+static constexpr size_t kAdultAltarTextBufferSize = 750;
+static constexpr size_t kGanonHintTextBufferSize = 150;
+static constexpr size_t kGregTextBufferSize = 250;
+static constexpr size_t kGanonTextBufferSize = 250;
+static constexpr size_t kDampeTextBufferSize = 150;
+static constexpr size_t kWarpTextBufferSize = 100;
+
+// The in-game message font has no n-tilde, no acute i/o/u and no inverted punctuation marks, so the Spanish
+// text is reduced to glyphs the font really has (a and e with acute exist and are converted when the message
+// is created).
+static std::string ToMessageFontSpanish(const std::string& text) {
+    static const std::vector<std::pair<std::string, std::string>> replacements = {
+        { "ñ", "n" }, { "Ñ", "N" }, { "í", "i" }, { "Í", "I" }, { "ó", "o" }, { "Ó", "O" }, { "ú", "u" },
+        { "Ú", "U" }, { "Á", "A" }, { "¿", "" },  { "¡", "" },  { "º", "o" }, { "ª", "a" },
+    };
+    std::string result = text;
+    for (const auto& replacement : replacements) {
+        size_t position = 0;
+        while ((position = result.find(replacement.first, position)) != std::string::npos) {
+            result.replace(position, replacement.first.length(), replacement.second);
+            position += replacement.second.length();
+        }
+    }
+    return result;
+}
+
+// The game appends one terminator byte to the stored text and strncpy keeps the last byte of the buffer for '\0'.
+static bool FitsInBuffer(const std::string& text, size_t bufferSize) {
+    return text.length() + 2 <= bufferSize;
+}
+
+// Picks the (formatted) text stored in the spoiler file. Spanish is preferred; if it would not fit in its save
+// buffer the text falls back to the previous behaviour (English, or French when selected).
+static std::string ChooseHintText(const Text& text, int language, size_t bufferSize) {
+    std::string spanish = AutoFormatHintTextString(ToMessageFontSpanish(text.GetSpanish()));
+    if (FitsInBuffer(spanish, bufferSize)) {
+        return spanish;
+    }
+    return AutoFormatHintTextString(language == 2 ? text.GetFrench() : text.GetEnglish());
+}
+
+// Same as ChooseHintText for the texts that are stored without line formatting.
+static std::string ChooseRawHintText(const Text& text, int language, size_t bufferSize) {
+    std::string spanish = ToMessageFontSpanish(text.GetSpanish());
+    if (FitsInBuffer(spanish, bufferSize)) {
+        return spanish;
+    }
+    return language == 2 ? text.GetFrench() : text.GetEnglish();
+}
+
 // Writes the hints to the spoiler log, if they are enabled.
 static void WriteHints(int language) {
-    std::string unformattedGanonText;
-    std::string unformattedGanonHintText;
-    std::string unformattedDampesText;
-    std::string unformattedGregText;
+    jsonData["warpMinuetText"] = ChooseRawHintText(GetWarpMinuetText(), language, kWarpTextBufferSize);
+    jsonData["warpBoleroText"] = ChooseRawHintText(GetWarpBoleroText(), language, kWarpTextBufferSize);
+    jsonData["warpSerenadeText"] = ChooseRawHintText(GetWarpSerenadeText(), language, kWarpTextBufferSize);
+    jsonData["warpRequiemText"] = ChooseRawHintText(GetWarpRequiemText(), language, kWarpTextBufferSize);
+    jsonData["warpNocturneText"] = ChooseRawHintText(GetWarpNocturneText(), language, kWarpTextBufferSize);
+    jsonData["warpPreludeText"] = ChooseRawHintText(GetWarpPreludeText(), language, kWarpTextBufferSize);
+    jsonData["childAltarText"] = ChooseRawHintText(GetChildAltarText(), language, kChildAltarTextBufferSize);
+    jsonData["adultAltarText"] = ChooseRawHintText(GetAdultAltarText(), language, kAdultAltarTextBufferSize);
 
-    switch (language) {
-        case 0:
-        default:
-            unformattedGanonText = GetGanonText().GetEnglish();
-            unformattedGanonHintText = GetGanonHintText().GetEnglish();
-            unformattedDampesText = GetDampeHintText().GetEnglish();
-            unformattedGregText = GetGregHintText().GetEnglish();
-            jsonData["warpMinuetText"] = GetWarpMinuetText().GetEnglish();
-            jsonData["warpBoleroText"] = GetWarpBoleroText().GetEnglish();
-            jsonData["warpSerenadeText"] = GetWarpSerenadeText().GetEnglish();
-            jsonData["warpRequiemText"] = GetWarpRequiemText().GetEnglish();
-            jsonData["warpNocturneText"] = GetWarpNocturneText().GetEnglish();
-            jsonData["warpPreludeText"] = GetWarpPreludeText().GetEnglish();
-            jsonData["childAltarText"] = GetChildAltarText().GetEnglish();
-            jsonData["adultAltarText"] = GetAdultAltarText().GetEnglish();
-            break;
-        case 2:
-            unformattedGanonText = GetGanonText().GetFrench();
-            unformattedGanonHintText = GetGanonHintText().GetFrench();
-            unformattedDampesText = GetDampeHintText().GetFrench();
-            unformattedGregText = GetGregHintText().GetFrench();
-            jsonData["warpMinuetText"] = GetWarpMinuetText().GetFrench();
-            jsonData["warpBoleroText"] = GetWarpBoleroText().GetFrench();
-            jsonData["warpSerenadeText"] = GetWarpSerenadeText().GetFrench();
-            jsonData["warpRequiemText"] = GetWarpRequiemText().GetFrench();
-            jsonData["warpNocturneText"] = GetWarpNocturneText().GetFrench();
-            jsonData["warpPreludeText"] = GetWarpPreludeText().GetFrench();
-            jsonData["childAltarText"] = GetChildAltarText().GetFrench();
-            jsonData["adultAltarText"] = GetAdultAltarText().GetFrench();
-            break;
-    }
-
-    std::string ganonText = AutoFormatHintTextString(unformattedGanonText);
-    std::string ganonHintText = AutoFormatHintTextString(unformattedGanonHintText);
-    std::string dampesText = AutoFormatHintTextString(unformattedDampesText);
-    std::string gregText = AutoFormatHintTextString(unformattedGregText);
-
-    jsonData["ganonText"] = ganonText;
-    jsonData["ganonHintText"] = ganonHintText;
-    jsonData["dampeText"] = dampesText;
-    jsonData["gregText"] = gregText;
+    jsonData["ganonText"] = ChooseHintText(GetGanonText(), language, kGanonTextBufferSize);
+    jsonData["ganonHintText"] = ChooseHintText(GetGanonHintText(), language, kGanonHintTextBufferSize);
+    jsonData["dampeText"] = ChooseHintText(GetDampeHintText(), language, kDampeTextBufferSize);
+    jsonData["gregText"] = ChooseHintText(GetGregHintText(), language, kGregTextBufferSize);
 
     if (Settings::GossipStoneHints.Is(HINTS_NO_HINTS)) {
         return;
@@ -700,19 +721,8 @@ static void WriteHints(int language) {
 
     for (const uint32_t key : gossipStoneLocations) {
         ItemLocation* location = Location(key);
-        std::string unformattedHintTextString;
-        switch (language) {
-            case 0:
-            default:
-                unformattedHintTextString = location->GetPlacedItemName().GetEnglish();
-                break;
-            case 2:
-                unformattedHintTextString = location->GetPlacedItemName().GetFrench();
-                break;
-        }
-
-        std::string textStr = AutoFormatHintTextString(unformattedHintTextString);
-        jsonData["hints"][location->GetName()] = textStr;
+        jsonData["hints"][location->GetName()] =
+            ChooseHintText(location->GetPlacedItemName(), language, kHintTextBufferSize);
     }
 }
 

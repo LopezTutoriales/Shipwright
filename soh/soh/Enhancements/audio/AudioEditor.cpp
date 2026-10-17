@@ -121,8 +121,8 @@ void ResetGroup(const std::map<u16, SequenceInfo>& map, SeqType type) {
 void DrawPreviewButton(uint16_t sequenceId, std::string sfxKey, SeqType sequenceType) {
     const std::string cvarKey = "gAudioEditor.ReplacedSequences." + sfxKey;
     const std::string hiddenKey = "##" + cvarKey;
-    const std::string stopButton = " Stop  " + hiddenKey;
-    const std::string previewButton = "Preview" + hiddenKey;
+    const std::string stopButton = " Parar  " + hiddenKey;
+    const std::string previewButton = "Probar" + hiddenKey;
 
     if (CVarGetInteger("gAudioEditor.Playing", 0) == sequenceId) {
         if (ImGui::Button(stopButton.c_str())) {
@@ -154,8 +154,8 @@ void Draw_SfxTab(const std::string& tabId, SeqType type) {
     const std::map<u16, SequenceInfo>& map = AudioCollection::Instance->GetAllSequences();
 
     const std::string hiddenTabId = "##" + tabId;
-    const std::string resetAllButton = "Reset All" + hiddenTabId;
-    const std::string randomizeAllButton = "Randomize All" + hiddenTabId;
+    const std::string resetAllButton = "Reiniciar todo" + hiddenTabId;
+    const std::string randomizeAllButton = "Aleatorizar todo" + hiddenTabId;
     if (ImGui::Button(resetAllButton.c_str())) {
         ResetGroup(map, type);
         SohImGui::RequestCvarSaveOnNextTick();
@@ -175,7 +175,7 @@ void Draw_SfxTab(const std::string& tabId, SeqType type) {
     ImGui::BeginTable(tabId.c_str(), 3, ImGuiTableFlags_SizingFixedFit);
     ImGui::TableSetupColumn("", ImGuiTableColumnFlags_WidthStretch);
     ImGui::TableSetupColumn("", ImGuiTableColumnFlags_WidthStretch);
-    ImGui::TableSetupColumn("", ImGuiTableColumnFlags_WidthFixed, 190.0f);
+    ImGui::TableSetupColumn("", ImGuiTableColumnFlags_WidthFixed, 240.0f);
     for (const auto& [defaultValue, seqData] : map) {
         if (~(seqData.category) & type) {
             continue;
@@ -187,8 +187,8 @@ void Draw_SfxTab(const std::string& tabId, SeqType type) {
 
         const std::string cvarKey = "gAudioEditor.ReplacedSequences." + seqData.sfxKey;
         const std::string hiddenKey = "##" + cvarKey;
-        const std::string resetButton = "Reset" + hiddenKey;
-        const std::string randomizeButton = "Randomize" + hiddenKey;
+        const std::string resetButton = "Reiniciar" + hiddenKey;
+        const std::string randomizeButton = "Aleatorio" + hiddenKey;
         const int currentValue = CVarGetInteger(cvarKey.c_str(), defaultValue);
 
         ImGui::TableNextRow();
@@ -251,27 +251,27 @@ extern "C" u16 AudioEditor_GetReplacementSeq(u16 seqId) {
 std::string GetSequenceTypeName(SeqType type) {
     switch (type) {
         case SEQ_NOSHUFFLE:
-            return "No Shuffle";
+            return "Sin mezcla";
         case SEQ_BGM_WORLD:
-            return "World";
+            return "Mundo";
         case SEQ_BGM_EVENT:
-            return "Event";
+            return "Evento";
         case SEQ_BGM_BATTLE:
-            return "Battle";
+            return "Combate";
         case SEQ_OCARINA:
             return "Ocarina";
         case SEQ_FANFARE:
-            return "Fanfare";
+            return "Fanfarria";
         case SEQ_BGM_ERROR:
             return "Error";
         case SEQ_SFX:
             return "SFX";
         case SEQ_INSTRUMENT:
-            return "Instrument";
+            return "Instrumento";
         case SEQ_BGM_CUSTOM:
-            return "Custom";
+            return "Personalizada";
         default:
-            return "No Sequence Type";
+            return "Sin tipo";
     }
 }
 
@@ -315,25 +315,25 @@ void DrawSfxEditor(bool& open) {
     AudioCollection::Instance->InitializeShufflePool();
 
     ImGui::SetNextWindowSize(ImVec2(820, 630), ImGuiCond_FirstUseEver);
-    if (!ImGui::Begin("Audio Editor", &open)) {
+    if (!ImGui::Begin("Editor de audio", &open)) {
         ImGui::End();
         return;
     }
 
     if (ImGui::BeginTabBar("SfxContextTabBar", ImGuiTabBarFlags_NoCloseWithMiddleMouseButton)) {
-        if (ImGui::BeginTabItem("Background Music")) {
+        if (ImGui::BeginTabItem("Música de fondo")) {
             Draw_SfxTab("backgroundMusic", SEQ_BGM_WORLD);
             ImGui::EndTabItem();
         }
-        if (ImGui::BeginTabItem("Fanfares")) {
+        if (ImGui::BeginTabItem("Fanfarrias")) {
             Draw_SfxTab("fanfares", SEQ_FANFARE);
             ImGui::EndTabItem();
         }
-        if (ImGui::BeginTabItem("Events")) {
+        if (ImGui::BeginTabItem("Eventos")) {
             Draw_SfxTab("event", SEQ_BGM_EVENT);
             ImGui::EndTabItem();
         }
-        if (ImGui::BeginTabItem("Battle Music")) {
+        if (ImGui::BeginTabItem("Música de combate")) {
             Draw_SfxTab("battleMusic", SEQ_BGM_BATTLE);
             ImGui::EndTabItem();
         }
@@ -342,40 +342,40 @@ void DrawSfxEditor(bool& open) {
             Draw_SfxTab("ocarina", SEQ_OCARINA);
             ImGui::EndTabItem();
         }
-        if (ImGui::BeginTabItem("Sound Effects")) {
+        if (ImGui::BeginTabItem("Efectos de sonido")) {
             Draw_SfxTab("sfx", SEQ_SFX);
             ImGui::EndTabItem();
         }
 
         static ImVec2 cellPadding(8.0f, 8.0f);
-        if (ImGui::BeginTabItem("Options")) {
+        if (ImGui::BeginTabItem("Opciones")) {
             ImGui::PushStyleVar(ImGuiStyleVar_CellPadding, cellPadding);
-            ImGui::BeginTable("Options", 1, ImGuiTableFlags_SizingStretchSame);
+            ImGui::BeginTable("Opciones", 1, ImGuiTableFlags_SizingStretchSame);
             ImGui::TableSetupColumn("", ImGuiTableColumnFlags_WidthStretch);
             ImGui::TableNextRow();
             ImGui::TableNextColumn();
             if (ImGui::BeginChild("SfxOptions", ImVec2(0, -8))) {
                 ImGui::PushItemWidth(-FLT_MIN);
-                UIWidgets::EnhancementCheckbox("Disable Enemy Proximity Music", "gEnemyBGMDisable");
+                UIWidgets::EnhancementCheckbox("Sin música al acercarse a enemigos", "gEnemyBGMDisable");
                 UIWidgets::InsertHelpHoverText(
-                    "Disables the music change when getting close to enemies. Useful for hearing "
-                    "your custom music for each scene more often.");
-                UIWidgets::EnhancementCheckbox("Display Sequence Name on Overlay", "gSeqNameOverlay");
+                    "Desactiva el cambio de música al acercarte a enemigos. Útil para oír "
+                    "más a menudo tu música personalizada de cada escena.");
+                UIWidgets::EnhancementCheckbox("Mostrar nombre de la pista en pantalla", "gSeqNameOverlay");
                 UIWidgets::InsertHelpHoverText(
-                    "Displays the name of the current sequence in the corner of the screen whenever a new sequence "
-                    "is loaded to the main sequence player (does not apply to fanfares or enemy BGM)."
+                    "Muestra el nombre de la pista actual en una esquina de la pantalla cada vez que se carga una nueva pista "
+                    "en el reproductor principal (no se aplica a fanfarrias ni a la música de enemigos)."
                 );
                 ImGui::SameLine();
-                UIWidgets::EnhancementSliderInt("Overlay Duration: %d seconds", "##SeqNameOverlayDuration",
+                UIWidgets::EnhancementSliderInt("Duración del aviso: %d segundos", "##SeqNameOverlayDuration",
                                                 "gSeqNameOverlayDuration", 1, 10, "", 5, true);
                 ImGui::NewLine();
                 UIWidgets::PaddedSeparator();
-                UIWidgets::PaddedText("The following options are experimental and may cause music\nto sound odd or have other undesireable effects.");
-                UIWidgets::EnhancementCheckbox("Lower Octaves of Unplayable High Notes", "gExperimentalOctaveDrop");
-                UIWidgets::InsertHelpHoverText("Some custom sequences may have notes that are too high for the game's audio "
-                                            "engine to play. Enabling this checkbox will cause these notes to drop a "
-                                            "couple of octaves so they can still harmonize with the other notes of the "
-                                            "sequence.");
+                UIWidgets::PaddedText("Las siguientes opciones son experimentales y pueden hacer que la música\nsuene rara o tener otros efectos no deseados.");
+                UIWidgets::EnhancementCheckbox("Bajar octavas de notas agudas imposibles", "gExperimentalOctaveDrop");
+                UIWidgets::InsertHelpHoverText("Algunas pistas personalizadas pueden tener notas demasiado agudas para que el motor de audio del juego "
+                                            "las reproduzca. Al activar esta casilla, esas notas bajarán "
+                                            "un par de octavas para que sigan armonizando con las demás notas de la "
+                                            "pista.");
                 ImGui::PopItemWidth();
             }
             ImGui::EndChild();
@@ -385,7 +385,7 @@ void DrawSfxEditor(bool& open) {
         }
 
         static bool excludeTabOpen = false;
-        if (ImGui::BeginTabItem("Audio Shuffle Pool Management")) {
+        if (ImGui::BeginTabItem("Gestión de la mezcla de audio")) {
             ImGui::PushStyleVar(ImGuiStyleVar_CellPadding, cellPadding);
             if (!excludeTabOpen) {
                 excludeTabOpen = true;
@@ -407,9 +407,9 @@ void DrawSfxEditor(bool& open) {
             std::set<SequenceInfo*> seqsToExclude = {};
 
             static ImGuiTextFilter sequenceSearch;
-            sequenceSearch.Draw("Filter (inc,-exc)", 490.0f);
+            sequenceSearch.Draw("Filtro (inc,-exc)", 490.0f);
             ImGui::SameLine();
-            if (ImGui::Button("Exclude All")) {
+            if (ImGui::Button("Excluir todo")) {
                 for (auto seqInfo : AudioCollection::Instance->GetIncludedSequences()) {
                     if (sequenceSearch.PassFilter(seqInfo->label.c_str()) && showType[seqInfo->category]) {
                         seqsToExclude.insert(seqInfo);
@@ -417,7 +417,7 @@ void DrawSfxEditor(bool& open) {
                 }
             }
             ImGui::SameLine();
-            if (ImGui::Button("Include All")) {
+            if (ImGui::Button("Incluir todo")) {
                 for (auto seqInfo : AudioCollection::Instance->GetExcludedSequences()) {
                     if (sequenceSearch.PassFilter(seqInfo->label.c_str()) && showType[seqInfo->category]) {
                         seqsToInclude.insert(seqInfo);
@@ -470,8 +470,8 @@ void DrawSfxEditor(bool& open) {
             ImGui::EndTable();
 
             if (ImGui::BeginTable("tableAllSequences", 2, ImGuiTableFlags_BordersH | ImGuiTableFlags_BordersV)) {
-                ImGui::TableSetupColumn("Included", ImGuiTableColumnFlags_WidthStretch, 200.0f);
-                ImGui::TableSetupColumn("Excluded", ImGuiTableColumnFlags_WidthStretch, 200.0f);
+                ImGui::TableSetupColumn("Incluidas", ImGuiTableColumnFlags_WidthStretch, 200.0f);
+                ImGui::TableSetupColumn("Excluidas", ImGuiTableColumnFlags_WidthStretch, 200.0f);
                 ImGui::TableHeadersRow();
                 ImGui::TableNextRow();
 

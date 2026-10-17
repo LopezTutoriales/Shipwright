@@ -461,6 +461,9 @@ void Init(WindowImpl windowImpl) {
     if (CVarGetInteger("gOpenMenuBar", 0) != 1) {
 #if defined(__SWITCH__) || defined(__WIIU__)
         SohImGui::overlay->TextDrawNotification(30.0f, true, "Press - to access enhancements menu");
+#endif
+#if defined(__vita__)
+		SohImGui::overlay->TextDrawNotification(30.0f, true, "Pulsa Select para el menu de mejoras");
 #else
         SohImGui::overlay->TextDrawNotification(30.0f, true, "Press F1 to access enhancements menu");
 #endif
@@ -625,7 +628,7 @@ void DrawMainMenuAndCalculateGameSize(void) {
 
         ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, windowPadding);
         if (ImGui::BeginMenu("Shipwright")) {
-            if (ImGui::MenuItem("Reset",
+            if (ImGui::MenuItem("Reiniciar",
 #ifdef __APPLE__
                                 "Command-R"
 #else
@@ -637,10 +640,10 @@ void DrawMainMenuAndCalculateGameSize(void) {
 #if !defined(__SWITCH__) && !defined(__WIIU__)
             const char* keyboardShortcut =
                 strcmp(SohImGui::GetCurrentRenderingBackend().first, "sdl") == 0 ? "F10" : "ALT+Enter";
-            if (ImGui::MenuItem("Toggle Fullscreen", keyboardShortcut)) {
+            if (ImGui::MenuItem("Pantalla Completa", keyboardShortcut)) {
                 Window::GetInstance()->ToggleFullscreen();
             }
-            if (ImGui::MenuItem("Quit")) {
+            if (ImGui::MenuItem("Salir")) {
                 Window::GetInstance()->Close();
             }
 #endif
@@ -679,19 +682,21 @@ void DrawMainMenuAndCalculateGameSize(void) {
         ImGui::Begin("Debug Stats", &statsWindowOpen, ImGuiWindowFlags_NoFocusOnAppearing);
 
 #if defined(_WIN32)
-        ImGui::Text("Platform: Windows");
+        ImGui::Text("Plataforma: Windows");
 #elif defined(__APPLE__)
-        ImGui::Text("Platform: macOS");
+        ImGui::Text("Plataforma: macOS");
 #elif defined(__SWITCH__)
-        ImGui::Text("Platform: Nintendo Switch");
+        ImGui::Text("Plataforma: Nintendo Switch");
 #elif defined(__WIIU__)
-        ImGui::Text("Platform: Nintendo Wii U");
+        ImGui::Text("Plataforma: Nintendo Wii U");
 #elif defined(__linux__)
-        ImGui::Text("Platform: Linux");
+        ImGui::Text("Plataforma: Linux");
+#elif defined(__vita__)
+		ImGui::Text("Plataforma: PlayStation Vita");
 #else
-        ImGui::Text("Platform: Unknown");
+        ImGui::Text("Plataforma: Desconocido");
 #endif
-        ImGui::Text("Status: %.3f ms/frame (%.1f FPS)", 1000.0f / framerate, framerate);
+        ImGui::Text("Estado: %.3f ms/frame (%.1f FPS)", 1000.0f / framerate, framerate);
         ImGui::End();
         ImGui::PopStyleColor();
     }

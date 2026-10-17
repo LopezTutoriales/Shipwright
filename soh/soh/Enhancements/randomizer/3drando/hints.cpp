@@ -763,13 +763,13 @@ void CreateDampesDiaryText() {
   Text temp1 = Text{
     "Whoever reads this, please enter %g", 
     "Toi qui lit ce journal, rends-toi dans %g",
-    "Wer immer dies liest, der möge folgenden Ort aufsuchen: %g"
+    "Quien lea esto, que acuda a %g"
   };
 
   Text temp2 = {
     "%w. I will let you have my stretching, shrinking keepsake.^I'm waiting for you.&--Dampé",
     "%w. Et peut-être auras-tu droit à mon précieux %rtrésor%w.^Je t'attends...&--Igor",
-    "%w. Ihm gebe ich meinen langen, kurzen Schatz.^Ich warte!&Boris"
+    "%w. Te cederé mi recuerdo que se estira y se encoge.^Te espero.&--Dampé"
   };
   
   dampesText = temp1 + area + temp2;
@@ -787,13 +787,13 @@ void CreateGregRupeeHint() {
   Text temp1 = Text{
     "By the way, if you're interested, I saw the shiniest %gGreen Rupee%w somewhere in%g ",
     "",
-    ""
+    "Por cierto, por si te interesa, vi la %grupia verde%w más reluciente en %g"
   };
 
   Text temp2 = {
     "%w.^It's said to have %rmysterious powers%w...^But then, it could just be another regular rupee.&Oh well.",
     "",
-    ""
+    "%w.^Dicen que tiene %rpoderes misteriosos%w...^Aunque podría ser una rupia más.&En fin."
   };
 
     gregText = temp1 + area + temp2;

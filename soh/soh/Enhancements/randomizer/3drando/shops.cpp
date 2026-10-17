@@ -417,7 +417,7 @@ void InitTrickNames() {
   trickNameTable[0x89] = {
      Text{"Progressive Bomblings", "Bombinsectes (prog.)", "Bombinsectos progresivos"},
      Text{"Progressive Missiles", "Missiles (prog.)", "Misiles progresivos"},
-     Text{"Progressive Bombchu Bag", "Sac à Bombchu (prog.)", "Bombachus progresivos"}};
+     Text{"Progressive Bombchu Bag", "Sac à Bombchu (prog.)", "Bombuchus progresivos"}};
   trickNameTable[0x8A] = {
      Text{"Progressive Stamina Meter", "Jauge d'endurance (prog.)", "Medidor de vigor progresivo"},
      Text{"Progressive Energy Meter", "Jauge d'énergie (prog.)", "Medidor de energía progresivo"},

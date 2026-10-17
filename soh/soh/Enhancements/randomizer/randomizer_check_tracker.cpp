@@ -140,10 +140,10 @@ void DrawCheckTracker(bool& open) {
         }
     }
 
-    BeginFloatWindows("Check Tracker", open, ImGuiWindowFlags_NoScrollbar);
+    BeginFloatWindows("Rastreador de checks", open, ImGuiWindowFlags_NoScrollbar);
 
     if (!initialized) {
-        ImGui::Text("Waiting for file load..."); //TODO Language
+        ImGui::Text("Esperando a cargar la partida..."); //TODO Language
         EndFloatWindows();
         return;
     }
@@ -179,7 +179,7 @@ void DrawCheckTracker(bool& open) {
 #endif
     ImVec2 size = ImGui::GetContentRegionMax();
     size.y -= headerHeight;
-    if (!ImGui::BeginTable("Check Tracker", 1, 0, size)) {
+    if (!ImGui::BeginTable("Rastreador de checks", 1, 0, size)) {
         EndFloatWindows();
         return;
     }
@@ -187,15 +187,15 @@ void DrawCheckTracker(bool& open) {
     ImGui::TableNextRow(0, headerHeight);
     ImGui::TableNextColumn();
     UIWidgets::EnhancementCheckbox(
-        "Show Hidden Items", "gCheckTrackerOptionShowHidden", false,
-        "When active, items will show hidden checks by default when updated to this state.");
+        "Mostrar ocultos", "gCheckTrackerOptionShowHidden", false,
+        "Si está activo, los checks ocultos se mostrarán por defecto al actualizarse a este estado.");
     ImGui::SameLine();
-    if (ImGui::Button("Expand All")) {
+    if (ImGui::Button("Expandir todo")) {
         optCollapseAll = false;
         optExpandAll = true;
     }
     ImGui::SameLine();
-    if (ImGui::Button("Collapse All")) {
+    if (ImGui::Button("Contraer todo")) {
         optExpandAll = false;
         optCollapseAll = true;
     }
@@ -294,7 +294,7 @@ void DrawCheckTracker(bool& open) {
                         if (OTRGlobals::Instance->gRandomizer->masterQuestDungeons.contains(DungeonSceneLookupByArea(obj.rcArea)))
                             ImGui::Text("(%d/%d) - MQ", areaChecksGotten[obj.rcArea], areaChecksTotal[obj.rcArea]);
                         else
-                            ImGui::Text("(%d/%d) - Vanilla", areaChecksGotten[obj.rcArea], areaChecksTotal[obj.rcArea]);
+                            ImGui::Text("(%d/%d) - Original", areaChecksGotten[obj.rcArea], areaChecksTotal[obj.rcArea]);
                     } else {
                         ImGui::Text("(%d/%d)", areaChecksGotten[obj.rcArea], areaChecksTotal[obj.rcArea]);
                     }
@@ -547,7 +547,7 @@ void InitializeChecks() {
                 startingArea = RCAREA_KOKIRI_FOREST;
                 break;
         }
-        RandomizerCheckObject linksPocket = { RC_LINKS_POCKET, RCVORMQ_BOTH, RCTYPE_LINKS_POCKET, startingArea, ACTOR_ID_MAX, SCENE_ID_MAX, 0x00, GI_NONE, false, "Link's Pocket", "Link's Pocket" };
+        RandomizerCheckObject linksPocket = { RC_LINKS_POCKET, RCVORMQ_BOTH, RCTYPE_LINKS_POCKET, startingArea, ACTOR_ID_MAX, SCENE_ID_MAX, 0x00, GI_NONE, false, "Bolsillo de Link", "Link's Pocket" };
 
         checks.push_back(linksPocket);
         checkStatusMap.emplace(RC_LINKS_POCKET, RCSHOW_SAVED);
@@ -852,7 +852,7 @@ void DrawLocation(RandomizerCheckObject rcObj, RandomizerCheckShow* thisCheckSta
                     txt = ItemFromGIID(rcObj.ogItemId).GetName().french;
                 break;
             case RCSHOW_SKIPPED:
-                txt = "Skipped"; //TODO language
+                txt = "Omitido"; //TODO language
                 break;
             case RCSHOW_SEEN:
                 if (gSaveContext.n64ddFlag)
@@ -864,7 +864,7 @@ void DrawLocation(RandomizerCheckObject rcObj, RandomizerCheckShow* thisCheckSta
                     txt = ItemFromGIID(rcObj.ogItemId).GetName().french;
                 break;
             case RCSHOW_HINTED:
-                txt = "Hints are WIP"; // TODO language
+                txt = "Las pistas están en desarrollo"; // TODO language
                 break;
         }
 
@@ -921,9 +921,9 @@ void ImGuiDrawTwoColorPickerSection(const char* text, const char* cvarMainName, 
             std::string label = cvarHideName;
             label += "##Hidden";
             ImGui::PushID(label.c_str());
-            UIWidgets::EnhancementCheckbox("Hidden", cvarHideName, false,
-                                           "When active, checks will hide by default when updated to this state. Can "
-                                           "be overriden with the \"Show Hidden Items\" option.");
+            UIWidgets::EnhancementCheckbox("Oculto", cvarHideName, false,
+                                           "Si está activo, los checks se ocultarán por defecto al actualizarse a este estado. Se puede "
+                                           "anular con la opción \"Mostrar ocultos\".");
             ImGui::PopID();
         }
         if (ImGui::BeginTable(text, 2, ImGuiTableFlags_BordersH | ImGuiTableFlags_BordersV | ImGuiTableFlags_Hideable)) {
@@ -941,7 +941,7 @@ void ImGuiDrawTwoColorPickerSection(const char* text, const char* cvarMainName, 
             ImGui::TableNextColumn();
             ImGui::AlignTextToFramePadding();
             ImGui::PushItemWidth(ImGui::GetContentRegionAvail().x);
-            if (UIWidgets::EnhancementColor("Details", cvarExtraName,
+            if (UIWidgets::EnhancementColor("Detalles", cvarExtraName,
                 ImVec4(extra_color.r, extra_color.g, extra_color.b, extra_color.a),
                 ImVec4(extra_default_color.r, extra_default_color.g, extra_default_color.b, extra_default_color.a)))
             {
@@ -956,10 +956,10 @@ void ImGuiDrawTwoColorPickerSection(const char* text, const char* cvarMainName, 
 
 
 
-const char* windowType[] = { "Floating", "Window" };
-const char* displayType[] = { "Always", "Combo Button Hold" };
-const char* buttonStrings[] = { "A Button", "B Button", "C-Up",  "C-Down", "C-Left", "C-Right", "L Button",
-                                "Z Button", "R Button", "Start", "D-Up",   "D-Down", "D-Left",  "D-Right" };
+const char* windowType[] = { "Flotante", "Ventana" };
+const char* displayType[] = { "Siempre", "Mantener combinación" };
+const char* buttonStrings[] = { "Botón A", "Botón B", "C-Arriba",  "C-Abajo", "C-Izquierda", "C-Derecha", "Botón L",
+                                "Botón Z", "Botón R", "Start", "D-Arriba",   "D-Abajo", "D-Izquierda",  "D-Derecha" };
 void DrawCheckTrackerOptions(bool& open) {
     if (!open) {
         CVarSetInteger("gCheckTrackerSettingsEnabled", 0);
@@ -968,20 +968,20 @@ void DrawCheckTrackerOptions(bool& open) {
 
     ImGui::SetNextWindowSize(ImVec2(600, 375), ImGuiCond_FirstUseEver);
 
-    if (!ImGui::Begin("Check Tracker Settings", &open, ImGuiWindowFlags_NoFocusOnAppearing)) {
+    if (!ImGui::Begin("Ajustes del rastreador de checks", &open, ImGuiWindowFlags_NoFocusOnAppearing)) {
         ImGui::End();
         return;
     }
 
     ImGui::PushStyleVar(ImGuiStyleVar_CellPadding, { 8.0f, 8.0f });
     ImGui::BeginTable("CheckTrackerSettingsTable", 2, ImGuiTableFlags_BordersH | ImGuiTableFlags_BordersV);
-    ImGui::TableSetupColumn("General settings", ImGuiTableColumnFlags_WidthStretch, 200.0f);
-    ImGui::TableSetupColumn("Section settings", ImGuiTableColumnFlags_WidthStretch, 200.0f);
+    ImGui::TableSetupColumn("Ajustes generales", ImGuiTableColumnFlags_WidthStretch, 200.0f);
+    ImGui::TableSetupColumn("Ajustes de secciones", ImGuiTableColumnFlags_WidthStretch, 200.0f);
     ImGui::TableHeadersRow();
     ImGui::TableNextRow();
     ImGui::TableNextColumn();
     ImGui::PushItemWidth(ImGui::GetContentRegionAvail().x);
-    if (UIWidgets::EnhancementColor("BG Color", "gCheckTrackerBgColor",
+    if (UIWidgets::EnhancementColor("Color de fondo", "gCheckTrackerBgColor",
         ImVec4(Color_Background.r, Color_Background.g, Color_Background.b, Color_Background.a),
         ImVec4(Color_Bg_Default.r, Color_Bg_Default.g, Color_Bg_Default.b, Color_Bg_Default.a),
         false, true))
@@ -990,41 +990,41 @@ void DrawCheckTrackerOptions(bool& open) {
     }
     ImGui::PopItemWidth();
 
-    ImGui::Text("Window Type");
+    ImGui::Text("Tipo de ventana");
     ImGui::SameLine();
     UIWidgets::EnhancementCombobox("gCheckTrackerWindowType", windowType, 2, 1);
 
     if (CVarGetInteger("gCheckTrackerWindowType", 1) == 0) {
-        UIWidgets::EnhancementCheckbox("Enable Dragging", "gCheckTrackerHudEditMode");
-        UIWidgets::EnhancementCheckbox("Only enable while paused", "gCheckTrackerShowOnlyPaused");
-        ImGui::Text("Display Mode");
+        UIWidgets::EnhancementCheckbox("Permitir arrastrar", "gCheckTrackerHudEditMode");
+        UIWidgets::EnhancementCheckbox("Solo activo en pausa", "gCheckTrackerShowOnlyPaused");
+        ImGui::Text("Modo de visualización");
         ImGui::SameLine();
         UIWidgets::EnhancementCombobox("gCheckTrackerDisplayType", displayType, 2, 0);
         if (CVarGetInteger("gCheckTrackerDisplayType", 0) > 0) {
-            ImGui::Text("Combo Button 1");
+            ImGui::Text("Botón de combinación 1");
             ImGui::SameLine();
             UIWidgets::EnhancementCombobox("gCheckTrackerComboButton1", buttonStrings, 14, 6);
-            ImGui::Text("Combo Button 2");
+            ImGui::Text("Botón de combinación 2");
             ImGui::SameLine();
             UIWidgets::EnhancementCombobox("gCheckTrackerComboButton2", buttonStrings, 14, 8);
         }
     }
-    UIWidgets::EnhancementCheckbox("Performance mode", "gCheckTrackerOptionPerformanceMode");
-    UIWidgets::Tooltip("Slows down checking for updates to 1 check per frame. Only required if experiencing poor performance when using Check Tracker.");
-    UIWidgets::EnhancementCheckbox("Vanilla/MQ Dungeon Spoilers", "gCheckTrackerOptionMQSpoilers");
-    UIWidgets::Tooltip("If enabled, Vanilla/MQ dungeons will show on the tracker immediately. Otherwise, Vanilla/MQ dungeon locations must be unlocked. ");
+    UIWidgets::EnhancementCheckbox("Modo rendimiento", "gCheckTrackerOptionPerformanceMode");
+    UIWidgets::Tooltip("Limita la actualización a 1 check por fotograma. Solo es necesario si el rastreador ralentiza el juego.");
+    UIWidgets::EnhancementCheckbox("Spoilers de mazmorras Original/MQ", "gCheckTrackerOptionMQSpoilers");
+    UIWidgets::Tooltip("Si está activo, las mazmorras Original/MQ aparecen en el rastreador de inmediato. Si no, sus localizaciones deben desbloquearse. ");
 
     ImGui::TableNextColumn();
 
-    ImGuiDrawTwoColorPickerSection("Area Incomplete",  "gCheckTrackerAreaMainIncompleteColor",   "gCheckTrackerAreaExtraIncompleteColor",  Color_Area_Incomplete_Main,   Color_Area_Incomplete_Extra,  Color_Main_Default, Color_Area_Incomplete_Extra_Default, "gCheckTrackerAreaIncompleteHide" );
-    ImGuiDrawTwoColorPickerSection("Area Complete",    "gCheckTrackerAreaMainCompleteColor",     "gCheckTrackerAreaExtraCompleteColor",    Color_Area_Complete_Main,     Color_Area_Complete_Extra,    Color_Main_Default, Color_Area_Complete_Extra_Default,   "gCheckTrackerAreaCompleteHide"   );
-    ImGuiDrawTwoColorPickerSection("Unchecked",        "gCheckTrackerUncheckedMainColor",        "gCheckTrackerUncheckedExtraColor",       Color_Unchecked_Main,         Color_Unchecked_Extra,        Color_Main_Default, Color_Unchecked_Extra_Default,       "gCheckTrackerUncheckedHide"      );
-    ImGuiDrawTwoColorPickerSection("Skipped",          "gCheckTrackerSkippedMainColor",          "gCheckTrackerSkippedExtraColor",         Color_Skipped_Main,           Color_Skipped_Extra,          Color_Main_Default, Color_Skipped_Extra_Default,         "gCheckTrackerSkippedHide"        );
-    ImGuiDrawTwoColorPickerSection("Seen (WIP)",       "gCheckTrackerSeenMainColor",             "gCheckTrackerSeenExtraColor",            Color_Seen_Main,              Color_Seen_Extra,             Color_Main_Default, Color_Seen_Extra_Default,            "gCheckTrackerSeenHide"           );
-    ImGuiDrawTwoColorPickerSection("Hinted (WIP)",     "gCheckTrackerHintedMainColor",           "gCheckTrackerHintedExtraColor",          Color_Hinted_Main,            Color_Hinted_Extra,           Color_Main_Default, Color_Hinted_Extra_Default,          "gCheckTrackerHintedHide"         );
-    ImGuiDrawTwoColorPickerSection("Checked (WIP)",    "gCheckTrackerCheckedMainColor",          "gCheckTrackerCheckedExtraColor",         Color_Checked_Main,           Color_Checked_Extra,          Color_Main_Default, Color_Checked_Extra_Default,         "gCheckTrackerCheckedHide"        );
-    ImGuiDrawTwoColorPickerSection("Scummed (WIP)",    "gCheckTrackerScummedMainColor",          "gCheckTrackerScummedExtraColor",         Color_Scummed_Main,           Color_Scummed_Extra,          Color_Main_Default, Color_Scummed_Extra_Default,         "gCheckTrackerScummedHide"        );
-    ImGuiDrawTwoColorPickerSection("Saved",            "gCheckTrackerSavedMainColor",            "gCheckTrackerSavedExtraColor",           Color_Saved_Main,             Color_Saved_Extra,            Color_Main_Default, Color_Saved_Extra_Default,           "gCheckTrackerSavedHide"          );
+    ImGuiDrawTwoColorPickerSection("Zona incompleta",  "gCheckTrackerAreaMainIncompleteColor",   "gCheckTrackerAreaExtraIncompleteColor",  Color_Area_Incomplete_Main,   Color_Area_Incomplete_Extra,  Color_Main_Default, Color_Area_Incomplete_Extra_Default, "gCheckTrackerAreaIncompleteHide" );
+    ImGuiDrawTwoColorPickerSection("Zona completa",    "gCheckTrackerAreaMainCompleteColor",     "gCheckTrackerAreaExtraCompleteColor",    Color_Area_Complete_Main,     Color_Area_Complete_Extra,    Color_Main_Default, Color_Area_Complete_Extra_Default,   "gCheckTrackerAreaCompleteHide"   );
+    ImGuiDrawTwoColorPickerSection("Sin comprobar",        "gCheckTrackerUncheckedMainColor",        "gCheckTrackerUncheckedExtraColor",       Color_Unchecked_Main,         Color_Unchecked_Extra,        Color_Main_Default, Color_Unchecked_Extra_Default,       "gCheckTrackerUncheckedHide"      );
+    ImGuiDrawTwoColorPickerSection("Omitido",          "gCheckTrackerSkippedMainColor",          "gCheckTrackerSkippedExtraColor",         Color_Skipped_Main,           Color_Skipped_Extra,          Color_Main_Default, Color_Skipped_Extra_Default,         "gCheckTrackerSkippedHide"        );
+    ImGuiDrawTwoColorPickerSection("Visto (en desarrollo)",       "gCheckTrackerSeenMainColor",             "gCheckTrackerSeenExtraColor",            Color_Seen_Main,              Color_Seen_Extra,             Color_Main_Default, Color_Seen_Extra_Default,            "gCheckTrackerSeenHide"           );
+    ImGuiDrawTwoColorPickerSection("Con pista (en desarrollo)",     "gCheckTrackerHintedMainColor",           "gCheckTrackerHintedExtraColor",          Color_Hinted_Main,            Color_Hinted_Extra,           Color_Main_Default, Color_Hinted_Extra_Default,          "gCheckTrackerHintedHide"         );
+    ImGuiDrawTwoColorPickerSection("Comprobado (en desarrollo)",    "gCheckTrackerCheckedMainColor",          "gCheckTrackerCheckedExtraColor",         Color_Checked_Main,           Color_Checked_Extra,          Color_Main_Default, Color_Checked_Extra_Default,         "gCheckTrackerCheckedHide"        );
+    ImGuiDrawTwoColorPickerSection("Scummeado (en desarrollo)",    "gCheckTrackerScummedMainColor",          "gCheckTrackerScummedExtraColor",         Color_Scummed_Main,           Color_Scummed_Extra,          Color_Main_Default, Color_Scummed_Extra_Default,         "gCheckTrackerScummedHide"        );
+    ImGuiDrawTwoColorPickerSection("Guardado",            "gCheckTrackerSavedMainColor",            "gCheckTrackerSavedExtraColor",           Color_Saved_Main,             Color_Saved_Extra,            Color_Main_Default, Color_Saved_Extra_Default,           "gCheckTrackerSavedHide"          );
 
     ImGui::PopStyleVar(1);
     ImGui::EndTable();

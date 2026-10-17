@@ -45,7 +45,7 @@ const char* noControllerMsg[] = {
 };
 
 const char* pressStartMsg[] = {
-    "PRESS START",
+    "PULSA START",
     "DRUCKE START",
     "APPUYEZ SUR START",
 };
@@ -648,6 +648,121 @@ s16 GetCharArraySize(const char* str) {
     return length;
 }
 
+// Spanish mod credit line drawn under "PRESS START". The title font has no enye, so in the string below '~' stands
+// for an enye: it is drawn as an N with a small tilde (custom 16x16 I4 texture) above it.
+static const char* sModCreditMsg = "MOD EN ESPA~OL POR LOPEZ TUTORIALES";
+
+static u8 sModCreditTildeTex[FONT_CHAR_TEX_SIZE] = {
+    0x00, 0x00, 0xFF, 0x00, 0x00, 0xFF, 0x00, 0x00,
+    0x00, 0x0F, 0x00, 0xF0, 0x0F, 0x00, 0xF0, 0x00,
+    0x00, 0x00, 0x00, 0x0F, 0xF0, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+};
+
+// Per-character widths of the message font (defined in z_message_PAL.c), used to space the credit line like the
+// in-game text instead of with a fixed step.
+extern f32 sFontWidths[144];
+
+// Horizontal advance of a character, in quarter pixels.
+static s32 EnMag_GetCharAdvanceQ(char c) {
+    if (c == ' ') {
+        return YREG(9) * 4;
+    }
+    return (s32)(sFontWidths[c - ' '] * YREG(1) * 4 / 100.0f);
+}
+
+static s32 EnMag_GetMsgWidthQ(const char* msg) {
+    s32 width = 0;
+    s32 i;
+
+    for (i = 0; msg[i] != '\0'; i++) {
+        width += EnMag_GetCharAdvanceQ(msg[i]);
+    }
+
+    return width;
+}
+
+// Same as EnMag_DrawCharTexture, but the horizontal position is given in quarter pixels.
+static void EnMag_DrawCharTextureQ(Gfx** gfxp, u8* texture, s32 rectLeftQ, s32 rectTop) {
+    Gfx* gfx = *gfxp;
+
+    YREG(0) = 1024.0f / (YREG(1) / 100.0f);
+    YREG(2) = 16.0f * (YREG(1) / 100.0f);
+
+    gDPLoadTextureBlock_4b(gfx++, texture, G_IM_FMT_I, 16, 16, 0, G_TX_NOMIRROR | G_TX_CLAMP,
+                           G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+
+    gSPTextureRectangle(gfx++, rectLeftQ, rectTop << 2, rectLeftQ + (YREG(2) << 2), (rectTop + YREG(2)) << 2,
+                        G_TX_RENDERTILE, 0, 0, YREG(0), YREG(0));
+
+    *gfxp = gfx;
+}
+
+static void EnMag_DrawModCredit(Gfx** gfxp, Font* font, const char* pressMsg, s32 textAlpha) {
+    Gfx* gfx = *gfxp;
+    s32 pressLen = GetCharArraySize(pressMsg);
+    s32 pressLeftQ = (YREG(7) + ((pressLen - 11) * -3)) * 4;
+    s32 creditWidthQ = EnMag_GetMsgWidthQ(sModCreditMsg);
+    s32 pressWidthQ = 0;
+    s32 creditLeftQ;
+    s32 pass;
+    s32 i;
+    s32 rectLeftQ;
+    s32 rectTop;
+    s32 tildeShiftQ;
+    char c;
+
+    for (i = 0; i < pressLen; i++) {
+        pressWidthQ += ((pressMsg[i] == ' ') ? YREG(9) : YREG(8)) * 4;
+    }
+
+    creditLeftQ = (2 * pressLeftQ + pressWidthQ - creditWidthQ) / 2;
+
+    // The tilde texture is centered on texel 8 of its cell; the N glyph is centered on half of its own width.
+    tildeShiftQ = (s32)(((sFontWidths['N' - ' '] - 1.0f) / 2.0f - 8.0f) * YREG(1) * 4 / 100.0f);
+
+    for (pass = 0; pass < 2; pass++) {
+        gDPPipeSync(gfx++);
+        if (pass == 0) {
+            gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, textAlpha);
+        } else {
+            gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, textAlpha);
+        }
+
+        rectLeftQ = creditLeftQ + (pass == 0 ? 4 : 0);
+        rectTop = YREG(10) + 184 + (pass == 0 ? 1 : 0);
+        for (i = 0; sModCreditMsg[i] != '\0'; i++) {
+            c = sModCreditMsg[i];
+            if (c == ' ') {
+                rectLeftQ += EnMag_GetCharAdvanceQ(c);
+                continue;
+            }
+
+            if (c == '~') {
+                EnMag_DrawCharTextureQ(&gfx, sModCreditTildeTex, rectLeftQ + tildeShiftQ, rectTop - 2);
+                c = 'N';
+            }
+
+            EnMag_DrawCharTextureQ(&gfx, font->fontBuf + (c - '\x37') * FONT_CHAR_TEX_SIZE, rectLeftQ, rectTop);
+            rectLeftQ += EnMag_GetCharAdvanceQ(c);
+        }
+    }
+
+    *gfxp = gfx;
+}
+
 void EnMag_DrawInnerMq(Actor* thisx, PlayState* play, Gfx** gfxp) {
     static s16 textAlpha = 0;
     static s16 textFadeDirection = 0;
@@ -828,6 +943,8 @@ void EnMag_DrawInnerMq(Actor* thisx, PlayState* play, Gfx** gfxp) {
                 rectLeft += YREG(8);
             }
         }
+
+        EnMag_DrawModCredit(&gfx, font, pressStartMsg[lang], 255);
     }
 
     if (textFadeDirection != 0) {
@@ -1020,6 +1137,8 @@ void EnMag_DrawInnerVanilla(Actor* thisx, PlayState* play, Gfx** gfxp) {
                 rectLeft += YREG(8);
             }
         }
+
+        EnMag_DrawModCredit(&gfx, font, pressStartMsg[lang], 255);
     }
 
     if (textFadeDirection != 0) {

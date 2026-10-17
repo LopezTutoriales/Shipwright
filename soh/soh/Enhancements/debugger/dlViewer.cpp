@@ -45,16 +45,16 @@ void DrawDLViewer(bool& open) {
     }
 
     ImGui::SetNextWindowSize(ImVec2(520, 600), ImGuiCond_FirstUseEver);
-    if (!ImGui::Begin("Display List Viewer", &open, ImGuiWindowFlags_NoFocusOnAppearing)) {
+    if (!ImGui::Begin("Visor de listas de dibujo", &open, ImGuiWindowFlags_NoFocusOnAppearing)) {
         ImGui::End();
         return;
     }
 
-    if (ImGui::InputText("Search Display Lists", searchString, ARRAY_COUNT(searchString))) {
+    if (ImGui::InputText("Buscar listas de dibujo", searchString, ARRAY_COUNT(searchString))) {
         displayListsSearchResults = ResourceMgr_ListFiles(("*" + std::string(searchString) + "*DL").c_str(), &displayListsSearchResultsCount);
     }
 
-    if (ImGui::BeginCombo("Active Display List", activeDisplayList)) {
+    if (ImGui::BeginCombo("Lista de dibujo activa", activeDisplayList)) {
         for (int i = 0; i < displayListsSearchResultsCount; i++) {
             if (ImGui::Selectable(displayListsSearchResults[i])) {
                 activeDisplayList = displayListsSearchResults[i];

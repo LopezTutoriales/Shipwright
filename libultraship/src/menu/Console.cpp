@@ -18,7 +18,7 @@ std::string BuildUsage(const CommandEntry& entry) {
 }
 
 bool Console::HelpCommand(std::shared_ptr<Console> console, const std::vector<std::string>& args) {
-    console->SendInfoMessage("Commands:");
+    console->SendInfoMessage("Comandos:");
     for (const auto& cmd : console->mCommands) {
         console->SendInfoMessage(" - " + cmd.first);
     }
@@ -43,7 +43,7 @@ bool Console::BindCommand(std::shared_ptr<Console> console, const std::vector<st
                 std::ostringstream imploded;
                 std::copy(args.begin() + 2, args.end(), std::ostream_iterator<std::string>(imploded, delim));
                 console->mBindings[(ImGuiKey)k] = imploded.str();
-                console->SendInfoMessage("Binding '%s' to %s", args[1].c_str(),
+                console->SendInfoMessage("Asignando '%s' a %s", args[1].c_str(),
                                          console->mBindings[(ImGuiKey)k].c_str());
                 break;
             }
@@ -61,7 +61,7 @@ bool Console::BindToggleCommand(std::shared_ptr<Console> console, const std::vec
 
             if (toLowerCase(args[1]) == toLowerCase(key)) {
                 console->mBindingToggle[(ImGuiKey)k] = args[2];
-                console->SendInfoMessage("Binding toggle '%s' to %s", args[1].c_str(),
+                console->SendInfoMessage("Asignando interruptor '%s' a %s", args[1].c_str(),
                                          console->mBindingToggle[(ImGuiKey)k].c_str());
                 break;
             }
@@ -75,10 +75,10 @@ void Console::Init() {
     strcpy(this->mInputBuffer, "");
     this->mFilterBuffer = new char[gMaxBufferSize];
     strcpy(this->mFilterBuffer, "");
-    AddCommand("help", { HelpCommand, "Shows all the commands" });
-    AddCommand("clear", { ClearCommand, "Clear the console history" });
-    AddCommand("bind", { BindCommand, "Binds key to commands" });
-    AddCommand("bind-toggle", { BindToggleCommand, "Bind key as a bool toggle" });
+    AddCommand("help", { HelpCommand, "Muestra todos los comandos" });
+    AddCommand("clear", { ClearCommand, "Borra el historial de la consola" });
+    AddCommand("bind", { BindCommand, "Asigna una tecla a un comando" });
+    AddCommand("bind-toggle", { BindToggleCommand, "Asigna una tecla como interruptor" });
 }
 
 void Console::Update() {
@@ -103,7 +103,7 @@ void Console::Draw() {
     bool inputFocus = false;
 
     ImGui::SetNextWindowSize(ImVec2(520, 600), ImGuiCond_FirstUseEver);
-    ImGui::Begin("Console", &this->mOpened, ImGuiWindowFlags_NoFocusOnAppearing);
+    ImGui::Begin("Consola", &this->mOpened, ImGuiWindowFlags_NoFocusOnAppearing);
     const ImVec2 pos = ImGui::GetWindowPos();
     const ImVec2 size = ImGui::GetWindowSize();
     // SohImGui::ShowCursor(ImGui::IsWindowHovered(ImGuiHoveredFlags_RootAndChildWindows | ImGuiHoveredFlags_RectOnly),
@@ -144,7 +144,7 @@ void Console::Draw() {
     }
 
     if (ImGui::BeginPopupContextWindow("Context Menu")) {
-        if (ImGui::MenuItem("Copy Text")) {
+        if (ImGui::MenuItem("Copiar texto")) {
             ImGui::SetClipboardText(this->mLog[this->mCurrentChannel][this->mSelectedId].text.c_str());
             this->mSelectedId = -1;
         }
@@ -155,7 +155,7 @@ void Console::Draw() {
     }
 
     // Renders top bar filters
-    if (ImGui::Button("Clear")) {
+    if (ImGui::Button("Borrar")) {
         this->mLog[this->mCurrentChannel].clear();
     }
 
@@ -198,7 +198,7 @@ void Console::Draw() {
     }
     ImGui::SameLine();
     ImGui::PushItemWidth(-1);
-    if (ImGui::InputTextWithHint("##input", "Filter", this->mFilterBuffer, gMaxBufferSize)) {
+    if (ImGui::InputTextWithHint("##input", "Filtrar", this->mFilterBuffer, gMaxBufferSize)) {
         this->mFilter = std::string(this->mFilterBuffer);
     }
     ImGui::PopItemWidth();
@@ -296,7 +296,7 @@ void Console::Draw() {
 #else
         ImGui::SetCursorPosX(ImGui::GetCursorPosX() + ImGui::GetContentRegionAvail().x - 50);
 #endif
-        if (ImGui::Button("Submit") && !inputFocus && this->mInputBuffer[0] != '\0' && this->mInputBuffer[0] != ' ') {
+        if (ImGui::Button("Enviar") && !inputFocus && this->mInputBuffer[0] != '\0' && this->mInputBuffer[0] != ' ') {
             this->Dispatch(std::string(this->mInputBuffer));
             memset(this->mInputBuffer, 0, gMaxBufferSize);
         }
@@ -318,12 +318,12 @@ void Console::Dispatch(const std::string& line) {
     if (this->mCommands.contains(cmd_args[0])) {
         const CommandEntry entry = this->mCommands[cmd_args[0]];
         if (!entry.handler(shared_from_this(), cmd_args) && !entry.arguments.empty()) {
-            SendErrorMessage("[SOH] Usage: " + cmd_args[0] + " " + BuildUsage(entry));
+            SendErrorMessage("[SOH] Uso: " + cmd_args[0] + " " + BuildUsage(entry));
         }
 
         return;
     }
-    SendErrorMessage("[SOH] Command not found");
+    SendErrorMessage("[SOH] Comando no encontrado");
 }
 
 int Console::CallbackStub(ImGuiInputTextCallbackData* data) {

@@ -71,19 +71,19 @@ typedef enum {
 
 std::map<CosmeticGroup, const char*> groupLabels = {
     { GROUP_LINK, "Link" },
-    { GROUP_MIRRORSHIELD, "Mirror Shield" },
-    { GROUP_SWORDS, "Swords" },
-    { GROUP_GLOVES, "Gloves" },
-    { GROUP_EQUIPMENT, "Equipment" },
-    { GROUP_CONSUMABLE, "Consumables" },
-    { GROUP_HUD, "HUD" },
-    { GROUP_TITLE, "Title Screen" },
-    { GROUP_NPC, "NPCs" },
-    { GROUP_WORLD, "World" },
-    { GROUP_MAGIC, "Magic Effects" },
-    { GROUP_ARROWS, "Arrow Effects" },
-    { GROUP_SPIN_ATTACK, "Spin Attack" },
-    { GROUP_TRAILS, "Trails" },
+    { GROUP_MIRRORSHIELD, "Escudo espejo" },
+    { GROUP_SWORDS, "Espadas" },
+    { GROUP_GLOVES, "Guantes" },
+    { GROUP_EQUIPMENT, "Equipamiento" },
+    { GROUP_CONSUMABLE, "Consumibles" },
+    { GROUP_HUD, "Interfaz" },
+    { GROUP_TITLE, "Pantalla de título" },
+    { GROUP_NPC, "PNJ" },
+    { GROUP_WORLD, "Mundo" },
+    { GROUP_MAGIC, "Efectos de magia" },
+    { GROUP_ARROWS, "Efectos de flechas" },
+    { GROUP_SPIN_ATTACK, "Ataque giratorio" },
+    { GROUP_TRAILS, "Estelas" },
     { GROUP_NAVI, "Navi" },
 };
 
@@ -182,92 +182,92 @@ typedef struct {
     colors were darker than the gDPSetPrimColor. You will see many more examples of this below in the `ApplyOrResetCustomGfxPatches` method
 */
 static std::map<std::string, CosmeticOption> cosmeticOptions = {
-    COSMETIC_OPTION("Link_KokiriTunic",              "Kokiri Tunic",         GROUP_LINK,         ImVec4( 30, 105,  27, 255), false, true, false),
-    COSMETIC_OPTION("Link_GoronTunic",               "Goron Tunic",          GROUP_LINK,         ImVec4(100,  20,   0, 255), false, true, false),
-    COSMETIC_OPTION("Link_ZoraTunic",                "Zora Tunic",           GROUP_LINK,         ImVec4(  0,  60, 100, 255), false, true, false),
-    COSMETIC_OPTION("Link_Hair",                     "Hair",                 GROUP_LINK,         ImVec4(255, 173,  27, 255), false, true, true),
-    COSMETIC_OPTION("Link_Linen",                    "Linen",                GROUP_LINK,         ImVec4(255, 255, 255, 255), false, true, true),
-    COSMETIC_OPTION("Link_Boots",                    "Boots",                GROUP_LINK,         ImVec4( 93,  44,  18, 255), false, true, true),
+    COSMETIC_OPTION("Link_KokiriTunic",              "Sayo kokiri",         GROUP_LINK,         ImVec4( 30, 105,  27, 255), false, true, false),
+    COSMETIC_OPTION("Link_GoronTunic",               "Sayo goron",          GROUP_LINK,         ImVec4(100,  20,   0, 255), false, true, false),
+    COSMETIC_OPTION("Link_ZoraTunic",                "Sayo zora",           GROUP_LINK,         ImVec4(  0,  60, 100, 255), false, true, false),
+    COSMETIC_OPTION("Link_Hair",                     "Pelo",                 GROUP_LINK,         ImVec4(255, 173,  27, 255), false, true, true),
+    COSMETIC_OPTION("Link_Linen",                    "Camisa",                GROUP_LINK,         ImVec4(255, 255, 255, 255), false, true, true),
+    COSMETIC_OPTION("Link_Boots",                    "Botas",                GROUP_LINK,         ImVec4( 93,  44,  18, 255), false, true, true),
 
-    COSMETIC_OPTION("MirrorShield_Body",             "Body",                 GROUP_MIRRORSHIELD, ImVec4(215,   0,   0, 255), false, true, false),
-    COSMETIC_OPTION("MirrorShield_Mirror",           "Mirror",               GROUP_MIRRORSHIELD, ImVec4(255, 255, 255, 255), false, true, true),
-    COSMETIC_OPTION("MirrorShield_Emblem",           "Emblem",               GROUP_MIRRORSHIELD, ImVec4(205, 225, 255, 255), false, true, true),
+    COSMETIC_OPTION("MirrorShield_Body",             "Cuerpo",                 GROUP_MIRRORSHIELD, ImVec4(215,   0,   0, 255), false, true, false),
+    COSMETIC_OPTION("MirrorShield_Mirror",           "Espejo",               GROUP_MIRRORSHIELD, ImVec4(255, 255, 255, 255), false, true, true),
+    COSMETIC_OPTION("MirrorShield_Emblem",           "Emblema",               GROUP_MIRRORSHIELD, ImVec4(205, 225, 255, 255), false, true, true),
 
-    COSMETIC_OPTION("Swords_KokiriBlade",            "Kokiri Sword Blade",   GROUP_SWORDS,       ImVec4(255, 255, 255, 255), false, true, false),
+    COSMETIC_OPTION("Swords_KokiriBlade",            "Hoja espada Kokiri",   GROUP_SWORDS,       ImVec4(255, 255, 255, 255), false, true, false),
     // COSMETIC_OPTION("Swords_KokiriHilt",             "Kokiri Sword Hilt",    GROUP_SWORDS,       ImVec4(160, 100,  15, 255), false, true, true), // Todo (Cosmetics): Broken, need a better way to grayscale
-    COSMETIC_OPTION("Swords_MasterBlade",            "Master Sword Blade",   GROUP_SWORDS,       ImVec4(255, 255, 255, 255), false, true, false),
+    COSMETIC_OPTION("Swords_MasterBlade",            "Hoja Espada Maestra",   GROUP_SWORDS,       ImVec4(255, 255, 255, 255), false, true, false),
     // COSMETIC_OPTION("Swords_MasterHilt",             "Master Sword Hilt",    GROUP_SWORDS,       ImVec4( 80,  80, 168, 255), false, true, true), // Todo (Cosmetics): Broken, need a better way to grayscale
-    COSMETIC_OPTION("Swords_BiggoronBlade",          "Biggoron Sword Blade", GROUP_SWORDS,       ImVec4(255, 255, 255, 255), false, true, false),
+    COSMETIC_OPTION("Swords_BiggoronBlade",          "Hoja esp. Biggoron", GROUP_SWORDS,       ImVec4(255, 255, 255, 255), false, true, false),
     // COSMETIC_OPTION("Swords_BiggoronHilt",           "Biggoron Sword Hilt",  GROUP_SWORDS,       ImVec4( 80,  80, 168, 255), false, true, true), // Todo (Cosmetics): Broken, need a better way to grayscale
 
-    COSMETIC_OPTION("Gloves_GoronBracelet",          "Goron Bracelet",       GROUP_GLOVES,       ImVec4(255, 255, 170, 255), false, true, false),
-    COSMETIC_OPTION("Gloves_SilverGauntlets",        "Silver Gauntlets",     GROUP_GLOVES,       ImVec4(255, 255, 255, 255), false, true, false),
-    COSMETIC_OPTION("Gloves_GoldenGauntlets",        "Golden Gauntlets",     GROUP_GLOVES,       ImVec4(254, 207,  15, 255), false, true, false),
-    COSMETIC_OPTION("Gloves_GauntletsGem",           "Gauntlets Gem",        GROUP_GLOVES,       ImVec4(255,  60, 100, 255), false, true, true),
+    COSMETIC_OPTION("Gloves_GoronBracelet",          "Brazalete goron",       GROUP_GLOVES,       ImVec4(255, 255, 170, 255), false, true, false),
+    COSMETIC_OPTION("Gloves_SilverGauntlets",        "Guantes de plata",     GROUP_GLOVES,       ImVec4(255, 255, 255, 255), false, true, false),
+    COSMETIC_OPTION("Gloves_GoldenGauntlets",        "Guantes de oro",     GROUP_GLOVES,       ImVec4(254, 207,  15, 255), false, true, false),
+    COSMETIC_OPTION("Gloves_GauntletsGem",           "Gema de guantes",        GROUP_GLOVES,       ImVec4(255,  60, 100, 255), false, true, true),
     
-    COSMETIC_OPTION("Equipment_BoomerangBody",       "Boomerang Body",       GROUP_EQUIPMENT,    ImVec4(160, 100,   0, 255), false, true, false),
-    COSMETIC_OPTION("Equipment_BoomerangGem",        "Boomerang Gem",        GROUP_EQUIPMENT,    ImVec4(255,  50, 150, 255), false, true, true),
+    COSMETIC_OPTION("Equipment_BoomerangBody",       "Cuerpo bumerán",       GROUP_EQUIPMENT,    ImVec4(160, 100,   0, 255), false, true, false),
+    COSMETIC_OPTION("Equipment_BoomerangGem",        "Gema bumerán",        GROUP_EQUIPMENT,    ImVec4(255,  50, 150, 255), false, true, true),
     // COSMETIC_OPTION("Equipment_SlingshotBody",       "Slingshot Body",       GROUP_EQUIPMENT,    ImVec4(160, 100,   0, 255), false, true, true), // Todo (Cosmetics): Broken, need a better way to grayscale
-    COSMETIC_OPTION("Equipment_SlingshotString",     "Slingshot String",     GROUP_EQUIPMENT,    ImVec4(255, 255, 255, 255), false, true, true),
-    COSMETIC_OPTION("Equipment_HammerHead",          "Hammer Head",          GROUP_EQUIPMENT,    ImVec4(155, 192, 201, 255), false, true, false),
-    COSMETIC_OPTION("Equipment_HammerHandle",        "Hammer Handle",        GROUP_EQUIPMENT,    ImVec4(110,  60,   0, 255), false, true, true),
+    COSMETIC_OPTION("Equipment_SlingshotString",     "Cuerda tirachinas",     GROUP_EQUIPMENT,    ImVec4(255, 255, 255, 255), false, true, true),
+    COSMETIC_OPTION("Equipment_HammerHead",          "Cabeza martillo",          GROUP_EQUIPMENT,    ImVec4(155, 192, 201, 255), false, true, false),
+    COSMETIC_OPTION("Equipment_HammerHandle",        "Mango martillo",        GROUP_EQUIPMENT,    ImVec4(110,  60,   0, 255), false, true, true),
     // COSMETIC_OPTION("Equipment_HookshotChain",       "Hookshot Chain",       GROUP_EQUIPMENT,    ImVec4(255, 255, 255, 255), false, true, true), // Todo (Cosmetics): Implement
     // COSMETIC_OPTION("Equipment_HookshotReticle",     "Hookshot Reticle",     GROUP_EQUIPMENT,    ImVec4(255, 255, 255, 255), false, true, true), // Todo (Cosmetics): Implement
     // COSMETIC_OPTION("Equipment_HookshotTip",         "Hookshot Tip",         GROUP_EQUIPMENT,    ImVec4(255, 255, 255, 255), false, true, false), // Todo (Cosmetics): Implement
-    COSMETIC_OPTION("Equipment_BowTips",             "Bow Tips",             GROUP_EQUIPMENT,    ImVec4(200,   0,   0, 255), false, true, true),
-    COSMETIC_OPTION("Equipment_BowString",           "Bow String",           GROUP_EQUIPMENT,    ImVec4(255, 255, 255, 255), false, true, true),
-    COSMETIC_OPTION("Equipment_BowBody",             "Bow Body",             GROUP_EQUIPMENT,    ImVec4(140,  90,  10, 255), false, true, false),
-    COSMETIC_OPTION("Equipment_BowHandle",           "Bow Handle",           GROUP_EQUIPMENT,    ImVec4( 50, 150, 255, 255), false, true, true),
-    COSMETIC_OPTION("Equipment_ChuFace",             "Bombchu Face",         GROUP_EQUIPMENT,    ImVec4(  0, 100, 150, 255), false, true, true),
-    COSMETIC_OPTION("Equipment_ChuBody",             "Bombchu Body",         GROUP_EQUIPMENT,    ImVec4(180, 130,  50, 255), false, true, true), 
+    COSMETIC_OPTION("Equipment_BowTips",             "Puntas arco",             GROUP_EQUIPMENT,    ImVec4(200,   0,   0, 255), false, true, true),
+    COSMETIC_OPTION("Equipment_BowString",           "Cuerda arco",           GROUP_EQUIPMENT,    ImVec4(255, 255, 255, 255), false, true, true),
+    COSMETIC_OPTION("Equipment_BowBody",             "Cuerpo arco",             GROUP_EQUIPMENT,    ImVec4(140,  90,  10, 255), false, true, false),
+    COSMETIC_OPTION("Equipment_BowHandle",           "Empuñadura arco",           GROUP_EQUIPMENT,    ImVec4( 50, 150, 255, 255), false, true, true),
+    COSMETIC_OPTION("Equipment_ChuFace",             "Cara bombuchu",         GROUP_EQUIPMENT,    ImVec4(  0, 100, 150, 255), false, true, true),
+    COSMETIC_OPTION("Equipment_ChuBody",             "Cuerpo bombuchu",         GROUP_EQUIPMENT,    ImVec4(180, 130,  50, 255), false, true, true), 
 
-    COSMETIC_OPTION("Consumable_Hearts",             "Hearts",               GROUP_CONSUMABLE,   ImVec4(255,  70,  50, 255), false, true, false),
-    COSMETIC_OPTION("Consumable_HeartBorder",        "Heart Border",         GROUP_CONSUMABLE,   ImVec4( 50,  40,  60, 255), false, true, true),
-    COSMETIC_OPTION("Consumable_DDHearts",           "DD Hearts",            GROUP_CONSUMABLE,   ImVec4(200,   0,   0, 255), false, true, false),
-    COSMETIC_OPTION("Consumable_DDHeartBorder",      "DD Heart Border",      GROUP_CONSUMABLE,   ImVec4(255, 255, 255, 255), false, true, true),
-    COSMETIC_OPTION("Consumable_Magic",              "Magic",                GROUP_CONSUMABLE,   ImVec4(  0, 200,   0, 255), false, true, false),
-    COSMETIC_OPTION("Consumable_MagicActive",        "Magic Active",         GROUP_CONSUMABLE,   ImVec4(250, 250,   0, 255), false, true, true),
-    COSMETIC_OPTION("Consumable_MagicBorder",        "Magic Border",         GROUP_CONSUMABLE,   ImVec4(255, 255, 255, 255), false, false, true),
-    COSMETIC_OPTION("Consumable_MagicBorderActive",  "Magic Border Active",  GROUP_CONSUMABLE,   ImVec4(255, 255, 255, 255), false, false, true),
-    COSMETIC_OPTION("Consumable_GreenRupee",         "Green Rupee",          GROUP_CONSUMABLE,   ImVec4( 50, 255,  50, 255), false, true, true),
-    COSMETIC_OPTION("Consumable_BlueRupee",          "Blue Rupee",           GROUP_CONSUMABLE,   ImVec4( 50,  50, 255, 255), false, true, true),
-    COSMETIC_OPTION("Consumable_RedRupee",           "Red Rupee",            GROUP_CONSUMABLE,   ImVec4(255,  50,  50, 255), false, true, true),
-    COSMETIC_OPTION("Consumable_PurpleRupee",        "Purple Rupee",         GROUP_CONSUMABLE,   ImVec4(150,  50, 255, 255), false, true, true),
-    COSMETIC_OPTION("Consumable_GoldRupee",          "Gold Rupee",           GROUP_CONSUMABLE,   ImVec4(255, 190,  55, 255), false, true, true),
-    COSMETIC_OPTION("Consumable_SilverRupee",        "Silver Rupee",         GROUP_CONSUMABLE,   ImVec4(255, 255, 255, 255), false, true, true),
+    COSMETIC_OPTION("Consumable_Hearts",             "Corazones",               GROUP_CONSUMABLE,   ImVec4(255,  70,  50, 255), false, true, false),
+    COSMETIC_OPTION("Consumable_HeartBorder",        "Borde corazones",         GROUP_CONSUMABLE,   ImVec4( 50,  40,  60, 255), false, true, true),
+    COSMETIC_OPTION("Consumable_DDHearts",           "Corazones DD",            GROUP_CONSUMABLE,   ImVec4(200,   0,   0, 255), false, true, false),
+    COSMETIC_OPTION("Consumable_DDHeartBorder",      "Borde corazón DD",      GROUP_CONSUMABLE,   ImVec4(255, 255, 255, 255), false, true, true),
+    COSMETIC_OPTION("Consumable_Magic",              "Magia",                GROUP_CONSUMABLE,   ImVec4(  0, 200,   0, 255), false, true, false),
+    COSMETIC_OPTION("Consumable_MagicActive",        "Magia activa",         GROUP_CONSUMABLE,   ImVec4(250, 250,   0, 255), false, true, true),
+    COSMETIC_OPTION("Consumable_MagicBorder",        "Borde magia",         GROUP_CONSUMABLE,   ImVec4(255, 255, 255, 255), false, false, true),
+    COSMETIC_OPTION("Consumable_MagicBorderActive",  "Borde magia activa",  GROUP_CONSUMABLE,   ImVec4(255, 255, 255, 255), false, false, true),
+    COSMETIC_OPTION("Consumable_GreenRupee",         "Rupia verde",          GROUP_CONSUMABLE,   ImVec4( 50, 255,  50, 255), false, true, true),
+    COSMETIC_OPTION("Consumable_BlueRupee",          "Rupia azul",           GROUP_CONSUMABLE,   ImVec4( 50,  50, 255, 255), false, true, true),
+    COSMETIC_OPTION("Consumable_RedRupee",           "Rupia roja",            GROUP_CONSUMABLE,   ImVec4(255,  50,  50, 255), false, true, true),
+    COSMETIC_OPTION("Consumable_PurpleRupee",        "Rupia morada",         GROUP_CONSUMABLE,   ImVec4(150,  50, 255, 255), false, true, true),
+    COSMETIC_OPTION("Consumable_GoldRupee",          "Rupia dorada",           GROUP_CONSUMABLE,   ImVec4(255, 190,  55, 255), false, true, true),
+    COSMETIC_OPTION("Consumable_SilverRupee",        "Rupia plateada",         GROUP_CONSUMABLE,   ImVec4(255, 255, 255, 255), false, true, true),
 
-    COSMETIC_OPTION("Hud_AButton",                   "A Button",             GROUP_HUD,          ImVec4( 90,  90, 255, 255), false, true, false),
-    COSMETIC_OPTION("Hud_BButton",                   "B Button",             GROUP_HUD,          ImVec4(  0, 150,   0, 255), false, true, false),
-    COSMETIC_OPTION("Hud_CButtons",                  "C Buttons",            GROUP_HUD,          ImVec4(255, 160,   0, 255), false, true, false),
-    COSMETIC_OPTION("Hud_CUpButton",                 "C Up Button",          GROUP_HUD,          ImVec4(255, 160,   0, 255), false, true, true),
-    COSMETIC_OPTION("Hud_CDownButton",               "C Down Button",        GROUP_HUD,          ImVec4(255, 160,   0, 255), false, true, true),
-    COSMETIC_OPTION("Hud_CLeftButton",               "C Left Button",        GROUP_HUD,          ImVec4(255, 160,   0, 255), false, true, true),
-    COSMETIC_OPTION("Hud_CRightButton",              "C Right Button",       GROUP_HUD,          ImVec4(255, 160,   0, 255), false, true, true),
-    COSMETIC_OPTION("Hud_StartButton",               "Start Button",         GROUP_HUD,          ImVec4(200,   0,   0, 255), false, true, false),
-    COSMETIC_OPTION("Hud_Dpad",                      "Dpad",                 GROUP_HUD,          ImVec4(255, 255, 255, 255), false, true, false),
-    COSMETIC_OPTION("Hud_KeyCount",                  "Key Count",            GROUP_HUD,          ImVec4(200, 230, 255, 255), false, true, true),
-    COSMETIC_OPTION("Hud_StoneOfAgony",              "Stone of Agony",       GROUP_HUD,          ImVec4(255, 255, 255, 255), false, true, true),
-    COSMETIC_OPTION("Hud_Minimap",                   "Minimap",              GROUP_HUD,          ImVec4(  0, 255, 255, 255), false, true, false),
-    COSMETIC_OPTION("Hud_MinimapPosition",           "Minimap Position",     GROUP_HUD,          ImVec4(200, 255,   0, 255), false, true, true),
-    COSMETIC_OPTION("Hud_MinimapEntrance",           "Minimap Entrance",     GROUP_HUD,          ImVec4(200,   0,   0, 255), false, true, true),
+    COSMETIC_OPTION("Hud_AButton",                   "Botón A",             GROUP_HUD,          ImVec4( 90,  90, 255, 255), false, true, false),
+    COSMETIC_OPTION("Hud_BButton",                   "Botón B",             GROUP_HUD,          ImVec4(  0, 150,   0, 255), false, true, false),
+    COSMETIC_OPTION("Hud_CButtons",                  "Botones C",            GROUP_HUD,          ImVec4(255, 160,   0, 255), false, true, false),
+    COSMETIC_OPTION("Hud_CUpButton",                 "Botón C arriba",          GROUP_HUD,          ImVec4(255, 160,   0, 255), false, true, true),
+    COSMETIC_OPTION("Hud_CDownButton",               "Botón C abajo",        GROUP_HUD,          ImVec4(255, 160,   0, 255), false, true, true),
+    COSMETIC_OPTION("Hud_CLeftButton",               "Botón C izquierda",        GROUP_HUD,          ImVec4(255, 160,   0, 255), false, true, true),
+    COSMETIC_OPTION("Hud_CRightButton",              "Botón C derecha",       GROUP_HUD,          ImVec4(255, 160,   0, 255), false, true, true),
+    COSMETIC_OPTION("Hud_StartButton",               "Botón Start",         GROUP_HUD,          ImVec4(200,   0,   0, 255), false, true, false),
+    COSMETIC_OPTION("Hud_Dpad",                      "Cruceta",                 GROUP_HUD,          ImVec4(255, 255, 255, 255), false, true, false),
+    COSMETIC_OPTION("Hud_KeyCount",                  "Contador de llaves",            GROUP_HUD,          ImVec4(200, 230, 255, 255), false, true, true),
+    COSMETIC_OPTION("Hud_StoneOfAgony",              "Piedra de la Agonía",       GROUP_HUD,          ImVec4(255, 255, 255, 255), false, true, true),
+    COSMETIC_OPTION("Hud_Minimap",                   "Minimapa",              GROUP_HUD,          ImVec4(  0, 255, 255, 255), false, true, false),
+    COSMETIC_OPTION("Hud_MinimapPosition",           "Posición minimapa",     GROUP_HUD,          ImVec4(200, 255,   0, 255), false, true, true),
+    COSMETIC_OPTION("Hud_MinimapEntrance",           "Entrada minimapa",     GROUP_HUD,          ImVec4(200,   0,   0, 255), false, true, true),
 
-    COSMETIC_OPTION("Title_FileChoose",              "File Choose",          GROUP_TITLE,        ImVec4(100, 150, 255, 255), false, true, false),
-    COSMETIC_OPTION("Title_NintendoLogo",            "Nintendo Logo",        GROUP_TITLE,        ImVec4(  0,   0, 255, 255), false, true, true),
-    COSMETIC_OPTION("Title_N64LogoRed",              "N64 Red",              GROUP_TITLE,        ImVec4(150,   0,   0, 255), false, true, true),
-    COSMETIC_OPTION("Title_N64LogoBlue",             "N64 Blue",             GROUP_TITLE,        ImVec4(  0,  50, 150, 255), false, true, true),
-    COSMETIC_OPTION("Title_N64LogoGreen",            "N64 Green",            GROUP_TITLE,        ImVec4( 50, 100,   0, 255), false, true, true),
-    COSMETIC_OPTION("Title_N64LogoYellow",           "N64 Yellow",           GROUP_TITLE,        ImVec4(200, 150,   0, 255), false, true, true),
+    COSMETIC_OPTION("Title_FileChoose",              "Selec. de archivo",          GROUP_TITLE,        ImVec4(100, 150, 255, 255), false, true, false),
+    COSMETIC_OPTION("Title_NintendoLogo",            "Logo de Nintendo",        GROUP_TITLE,        ImVec4(  0,   0, 255, 255), false, true, true),
+    COSMETIC_OPTION("Title_N64LogoRed",              "N64 rojo",              GROUP_TITLE,        ImVec4(150,   0,   0, 255), false, true, true),
+    COSMETIC_OPTION("Title_N64LogoBlue",             "N64 azul",             GROUP_TITLE,        ImVec4(  0,  50, 150, 255), false, true, true),
+    COSMETIC_OPTION("Title_N64LogoGreen",            "N64 verde",            GROUP_TITLE,        ImVec4( 50, 100,   0, 255), false, true, true),
+    COSMETIC_OPTION("Title_N64LogoYellow",           "N64 amarillo",           GROUP_TITLE,        ImVec4(200, 150,   0, 255), false, true, true),
     // COSMETIC_OPTION("Title_FirePrimary",             "Title Fire Primary",   GROUP_TITLE,        ImVec4(255, 255, 170, 255), false, true, false), // Todo (Cosmetics): Kinda complicated
     // COSMETIC_OPTION("Title_FireSecondary",           "Title Fire Secondary", GROUP_TITLE,        ImVec4(255, 100,   0, 255), false, true, true), // Todo (Cosmetics): Kinda complicated
 
-    COSMETIC_OPTION("Arrows_NormalPrimary",          "Normal Primary",       GROUP_ARROWS,       ImVec4(  0, 150,   0,   0), false, true, false),
-    COSMETIC_OPTION("Arrows_NormalSecondary",        "Normal Secondary",     GROUP_ARROWS,       ImVec4(255, 255, 170, 255), false, true, true),
-    COSMETIC_OPTION("Arrows_FirePrimary",            "Fire Primary",         GROUP_ARROWS,       ImVec4(255, 200,   0,   0), false, true, false),
-    COSMETIC_OPTION("Arrows_FireSecondary",          "Fire Secondary",       GROUP_ARROWS,       ImVec4(255,   0,   0, 255), false, true, true),
-    COSMETIC_OPTION("Arrows_IcePrimary",             "Ice Primary",          GROUP_ARROWS,       ImVec4(  0,   0, 255, 255), false, true, false),
-    COSMETIC_OPTION("Arrows_IceSecondary",           "Ice Secondary",        GROUP_ARROWS,       ImVec4(255, 255, 255, 255), false, true, true),
-    COSMETIC_OPTION("Arrows_LightPrimary",           "Light Primary",        GROUP_ARROWS,       ImVec4(255, 255,   0, 255), false, true, false),
-    COSMETIC_OPTION("Arrows_LightSecondary",         "Light Secondary",      GROUP_ARROWS,       ImVec4(255, 255, 170,   0), false, true, true),
+    COSMETIC_OPTION("Arrows_NormalPrimary",          "Normal primario",       GROUP_ARROWS,       ImVec4(  0, 150,   0,   0), false, true, false),
+    COSMETIC_OPTION("Arrows_NormalSecondary",        "Normal secundario",     GROUP_ARROWS,       ImVec4(255, 255, 170, 255), false, true, true),
+    COSMETIC_OPTION("Arrows_FirePrimary",            "Fuego primario",         GROUP_ARROWS,       ImVec4(255, 200,   0,   0), false, true, false),
+    COSMETIC_OPTION("Arrows_FireSecondary",          "Fuego secundario",       GROUP_ARROWS,       ImVec4(255,   0,   0, 255), false, true, true),
+    COSMETIC_OPTION("Arrows_IcePrimary",             "Hielo primario",          GROUP_ARROWS,       ImVec4(  0,   0, 255, 255), false, true, false),
+    COSMETIC_OPTION("Arrows_IceSecondary",           "Hielo secundario",        GROUP_ARROWS,       ImVec4(255, 255, 255, 255), false, true, true),
+    COSMETIC_OPTION("Arrows_LightPrimary",           "Luz primaria",        GROUP_ARROWS,       ImVec4(255, 255,   0, 255), false, true, false),
+    COSMETIC_OPTION("Arrows_LightSecondary",         "Luz secundaria",      GROUP_ARROWS,       ImVec4(255, 255, 170,   0), false, true, true),
 
     // COSMETIC_OPTION("Magic_DinsPrimary",             "Din's Primary",        GROUP_MAGIC,        ImVec4(255, 255, 255, 255), false, true, false), // Todo (Cosmetics): Replace gDF_Col
     // COSMETIC_OPTION("Magic_DinsSecondary",           "Din's Secondary",      GROUP_MAGIC,        ImVec4(255, 255, 255, 255), false, true, true), // Todo (Cosmetics): Replace gDF_Env
@@ -276,44 +276,44 @@ static std::map<std::string, CosmeticOption> cosmeticOptions = {
     // COSMETIC_OPTION("Magic_NayrusPrimary",           "Nayru's Primary",      GROUP_MAGIC,        ImVec4(255, 255, 255, 255), false, true, false), // Todo (Cosmetics): Replace gNL_Diamond_Col / gNL_Orb_Col
     // COSMETIC_OPTION("Magic_NayrusSecondary",         "Nayru's Secondary",    GROUP_MAGIC,        ImVec4(255, 255, 255, 255), false, true, true), // Todo (Cosmetics): Replace gNL_Diamond_Env / gNL_Orb_Env
 
-    COSMETIC_OPTION("SpinAttack_Level1Primary",      "Level 1 Primary",      GROUP_SPIN_ATTACK,  ImVec4(170, 255, 255, 255), false, true, true),
-    COSMETIC_OPTION("SpinAttack_Level1Secondary",    "Level 1 Secondary",    GROUP_SPIN_ATTACK,  ImVec4(  0, 100, 255, 255), false, true, false),
-    COSMETIC_OPTION("SpinAttack_Level2Primary",      "Level 2 Primary",      GROUP_SPIN_ATTACK,  ImVec4(255, 255, 170, 255), false, true, true),
-    COSMETIC_OPTION("SpinAttack_Level2Secondary",    "Level 2 Secondary",    GROUP_SPIN_ATTACK,  ImVec4(255, 100,   0, 255), false, true, false),
+    COSMETIC_OPTION("SpinAttack_Level1Primary",      "Nivel 1 primario",      GROUP_SPIN_ATTACK,  ImVec4(170, 255, 255, 255), false, true, true),
+    COSMETIC_OPTION("SpinAttack_Level1Secondary",    "Nivel 1 secundario",    GROUP_SPIN_ATTACK,  ImVec4(  0, 100, 255, 255), false, true, false),
+    COSMETIC_OPTION("SpinAttack_Level2Primary",      "Nivel 2 primario",      GROUP_SPIN_ATTACK,  ImVec4(255, 255, 170, 255), false, true, true),
+    COSMETIC_OPTION("SpinAttack_Level2Secondary",    "Nivel 2 secundario",    GROUP_SPIN_ATTACK,  ImVec4(255, 100,   0, 255), false, true, false),
 
-    COSMETIC_OPTION("Trails_Bombchu",                "Bombchu",              GROUP_TRAILS,       ImVec4(250,   0,   0, 255), false, true, true),
-    COSMETIC_OPTION("Trails_Boomerang",              "Boomerang",            GROUP_TRAILS,       ImVec4(255, 255, 100, 255), false, true, true),
-    COSMETIC_OPTION("Trails_KokiriSword",            "Kokiri Sword",         GROUP_TRAILS,       ImVec4(255, 255, 255, 255), false, true, false),
-    COSMETIC_OPTION("Trails_MasterSword",            "Master Sword",         GROUP_TRAILS,       ImVec4(255, 255, 255, 255), false, true, false),
-    COSMETIC_OPTION("Trails_BiggoronSword",          "Biggoron Sword",       GROUP_TRAILS,       ImVec4(255, 255, 255, 255), false, true, true),
-    COSMETIC_OPTION("Trails_Stick",                  "Stick",                GROUP_TRAILS,       ImVec4(255, 255, 255, 255), false, true, true),
-    COSMETIC_OPTION("Trails_Hammer",                 "Hammer",               GROUP_TRAILS,       ImVec4(255, 255, 255, 255), false, true, true),
+    COSMETIC_OPTION("Trails_Bombchu",                "Bombuchu",              GROUP_TRAILS,       ImVec4(250,   0,   0, 255), false, true, true),
+    COSMETIC_OPTION("Trails_Boomerang",              "Bumerán",            GROUP_TRAILS,       ImVec4(255, 255, 100, 255), false, true, true),
+    COSMETIC_OPTION("Trails_KokiriSword",            "Espada Kokiri",         GROUP_TRAILS,       ImVec4(255, 255, 255, 255), false, true, false),
+    COSMETIC_OPTION("Trails_MasterSword",            "Espada Maestra",         GROUP_TRAILS,       ImVec4(255, 255, 255, 255), false, true, false),
+    COSMETIC_OPTION("Trails_BiggoronSword",          "Espada Biggoron",       GROUP_TRAILS,       ImVec4(255, 255, 255, 255), false, true, true),
+    COSMETIC_OPTION("Trails_Stick",                  "Palo deku",                GROUP_TRAILS,       ImVec4(255, 255, 255, 255), false, true, true),
+    COSMETIC_OPTION("Trails_Hammer",                 "Martillo",               GROUP_TRAILS,       ImVec4(255, 255, 255, 255), false, true, true),
 
-    COSMETIC_OPTION("World_BlockOfTime",             "Block of Time",        GROUP_WORLD,        ImVec4(255, 255, 255, 255), false, true, true),
-    COSMETIC_OPTION("World_Moon",                    "Moon",                 GROUP_WORLD,        ImVec4(240, 255, 180, 255), false, true, true),
-    COSMETIC_OPTION("World_GossipStone",             "Gossip Stone",         GROUP_WORLD,        ImVec4(200, 200, 200, 255), false, true, true),
-    COSMETIC_OPTION("World_RedIce",                  "Red Ice",              GROUP_WORLD,        ImVec4(255,   0,   0, 255), false, true, false),
+    COSMETIC_OPTION("World_BlockOfTime",             "Bloque del Tiempo",        GROUP_WORLD,        ImVec4(255, 255, 255, 255), false, true, true),
+    COSMETIC_OPTION("World_Moon",                    "Luna",                 GROUP_WORLD,        ImVec4(240, 255, 180, 255), false, true, true),
+    COSMETIC_OPTION("World_GossipStone",             "Piedra chismosa",         GROUP_WORLD,        ImVec4(200, 200, 200, 255), false, true, true),
+    COSMETIC_OPTION("World_RedIce",                  "Hielo rojo",              GROUP_WORLD,        ImVec4(255,   0,   0, 255), false, true, false),
 
-    COSMETIC_OPTION("Navi_IdlePrimary",              "Idle Primary",         GROUP_NAVI,         ImVec4(255, 255, 255, 255), false, true, false),
-    COSMETIC_OPTION("Navi_IdleSecondary",            "Idle Secondary",       GROUP_NAVI,         ImVec4(  0,   0, 255,   0), false, true, true),
-    COSMETIC_OPTION("Navi_NPCPrimary",               "NPC Primary",          GROUP_NAVI,         ImVec4(150, 150, 255, 255), false, true, false),
-    COSMETIC_OPTION("Navi_NPCSecondary",             "NPC Secondary",        GROUP_NAVI,         ImVec4(150, 150, 255,   0), false, true, true),
-    COSMETIC_OPTION("Navi_EnemyPrimary",             "Enemy Primary",        GROUP_NAVI,         ImVec4(255, 255,   0, 255), false, true, false),
-    COSMETIC_OPTION("Navi_EnemySecondary",           "Enemy Secondary",      GROUP_NAVI,         ImVec4(200, 155,   0,   0), false, true, true),
-    COSMETIC_OPTION("Navi_PropsPrimary",             "Props Primary",        GROUP_NAVI,         ImVec4(  0, 255,   0, 255), false, true, false),
-    COSMETIC_OPTION("Navi_PropsSecondary",           "Props Secondary",      GROUP_NAVI,         ImVec4(  0, 255,   0,   0), false, true, true),
+    COSMETIC_OPTION("Navi_IdlePrimary",              "Reposo primario",         GROUP_NAVI,         ImVec4(255, 255, 255, 255), false, true, false),
+    COSMETIC_OPTION("Navi_IdleSecondary",            "Reposo secundario",       GROUP_NAVI,         ImVec4(  0,   0, 255,   0), false, true, true),
+    COSMETIC_OPTION("Navi_NPCPrimary",               "PNJ primario",          GROUP_NAVI,         ImVec4(150, 150, 255, 255), false, true, false),
+    COSMETIC_OPTION("Navi_NPCSecondary",             "PNJ secundario",        GROUP_NAVI,         ImVec4(150, 150, 255,   0), false, true, true),
+    COSMETIC_OPTION("Navi_EnemyPrimary",             "Enemigo primario",        GROUP_NAVI,         ImVec4(255, 255,   0, 255), false, true, false),
+    COSMETIC_OPTION("Navi_EnemySecondary",           "Enemigo secundario",      GROUP_NAVI,         ImVec4(200, 155,   0,   0), false, true, true),
+    COSMETIC_OPTION("Navi_PropsPrimary",             "Entorno primario",        GROUP_NAVI,         ImVec4(  0, 255,   0, 255), false, true, false),
+    COSMETIC_OPTION("Navi_PropsSecondary",           "Entorno secundario",      GROUP_NAVI,         ImVec4(  0, 255,   0,   0), false, true, true),
 
-    COSMETIC_OPTION("NPC_FireKeesePrimary",          "Fire Keese Primary",   GROUP_NPC,          ImVec4(255, 255, 255, 255), false, true, false),
-    COSMETIC_OPTION("NPC_FireKeeseSecondary",        "Fire Keese Secondary", GROUP_NPC,          ImVec4(255, 255, 255, 255), false, true, true),
-    COSMETIC_OPTION("NPC_IceKeesePrimary",           "Ice Keese Primary",    GROUP_NPC,          ImVec4(255, 255, 255, 255), false, true, false),
-    COSMETIC_OPTION("NPC_IceKeeseSecondary",         "Ice Keese Secondary",  GROUP_NPC,          ImVec4(255, 255, 255, 255), false, true, true),
+    COSMETIC_OPTION("NPC_FireKeesePrimary",          "Keese fuego primario",   GROUP_NPC,          ImVec4(255, 255, 255, 255), false, true, false),
+    COSMETIC_OPTION("NPC_FireKeeseSecondary",        "Keese fuego secundario", GROUP_NPC,          ImVec4(255, 255, 255, 255), false, true, true),
+    COSMETIC_OPTION("NPC_IceKeesePrimary",           "Keese hielo primario",    GROUP_NPC,          ImVec4(255, 255, 255, 255), false, true, false),
+    COSMETIC_OPTION("NPC_IceKeeseSecondary",         "Keese hielo secundario",  GROUP_NPC,          ImVec4(255, 255, 255, 255), false, true, true),
     // Todo (Cosmetics): Health fairy
-    COSMETIC_OPTION("NPC_Dog1",                      "Dog 1",                GROUP_NPC,          ImVec4(255, 255, 200, 255), false, true, true),
-    COSMETIC_OPTION("NPC_Dog2",                      "Dog 2",                GROUP_NPC,          ImVec4(150, 100,  50, 255), false, true, true),
-    COSMETIC_OPTION("NPC_GoldenSkulltula",           "Golden Skulltula",     GROUP_NPC,          ImVec4(255, 255, 255, 255), false, true, false),
+    COSMETIC_OPTION("NPC_Dog1",                      "Perro 1",                GROUP_NPC,          ImVec4(255, 255, 200, 255), false, true, true),
+    COSMETIC_OPTION("NPC_Dog2",                      "Perro 2",                GROUP_NPC,          ImVec4(150, 100,  50, 255), false, true, true),
+    COSMETIC_OPTION("NPC_GoldenSkulltula",           "Skulltula dorada",     GROUP_NPC,          ImVec4(255, 255, 255, 255), false, true, false),
     COSMETIC_OPTION("NPC_Kokiri",                    "Kokiri",               GROUP_NPC,          ImVec4(  0, 130,  70, 255), false, true, false),
     COSMETIC_OPTION("NPC_Gerudo",                    "Gerudo",               GROUP_NPC,          ImVec4( 90,   0, 140, 255), false, true, false),
-    COSMETIC_OPTION("NPC_MetalTrap",                 "Metal Trap",           GROUP_NPC,          ImVec4(255, 255, 255, 255), false, true, true),
+    COSMETIC_OPTION("NPC_MetalTrap",                 "Trampa metálica",           GROUP_NPC,          ImVec4(255, 255, 255, 255), false, true, true),
     COSMETIC_OPTION("NPC_IronKnuckles",              "Iron Knuckles",        GROUP_NPC,          ImVec4(245, 255, 205, 255), false, true, false),
 };
 
@@ -368,7 +368,7 @@ void SetMarginAll(const char* ButtonName, bool SetActivated) {
     }
 }
 void ResetPositionAll() {
-    if (ImGui::Button("Reset all positions")) {
+    if (ImGui::Button("Restablecer posiciones")) {
         u8 arrayLength = sizeof(MarginCvarList) / sizeof(*MarginCvarList);
         for (u8 s = 0; s < arrayLength; s++) {
             std::string cvarName = MarginCvarList[s];
@@ -1068,34 +1068,34 @@ void Table_InitHeader(bool has_header = true) {
 }
 void DrawUseMarginsSlider(const std::string ElementName, const std::string CvarName){
     std::string CvarLabel = CvarName + "UseMargins";
-    std::string Label = ElementName + " use margins";
+    std::string Label = ElementName + " (usar márgenes)";
     UIWidgets::EnhancementCheckbox(Label.c_str(), CvarLabel.c_str());
-    UIWidgets::Tooltip("Using this allow you move the element with General margins sliders");
+    UIWidgets::Tooltip("Permite mover el elemento con los deslizadores de márgenes generales");
 }
 void DrawPositionsRadioBoxes(const std::string CvarName, bool NoAnchorEnabled = true){
     std::string CvarLabel = CvarName + "PosType";
-    UIWidgets::EnhancementRadioButton("Original position", CvarLabel.c_str(), 0);
-    UIWidgets::Tooltip("This will use original intended elements position");
-    UIWidgets::EnhancementRadioButton("Anchor to the left", CvarLabel.c_str(), 1);
-    UIWidgets::Tooltip("This will make your elements follow the left side of your game window");
-    UIWidgets::EnhancementRadioButton("Anchor to the right", CvarLabel.c_str(), 2);
-    UIWidgets::Tooltip("This will make your elements follow the right side of your game window");
+    UIWidgets::EnhancementRadioButton("Posición original", CvarLabel.c_str(), 0);
+    UIWidgets::Tooltip("Usa la posición original prevista de los elementos");
+    UIWidgets::EnhancementRadioButton("Anclar a la izquierda", CvarLabel.c_str(), 1);
+    UIWidgets::Tooltip("Los elementos seguirán el lado izquierdo de la ventana del juego");
+    UIWidgets::EnhancementRadioButton("Anclar a la derecha", CvarLabel.c_str(), 2);
+    UIWidgets::Tooltip("Los elementos seguirán el lado derecho de la ventana del juego");
     if (NoAnchorEnabled) {
-        UIWidgets::EnhancementRadioButton("No anchors", CvarLabel.c_str(), 3);
-        UIWidgets::Tooltip("This will make your elements to not follow any side\nBetter used for center elements");
+        UIWidgets::EnhancementRadioButton("Sin anclaje", CvarLabel.c_str(), 3);
+        UIWidgets::Tooltip("Los elementos no seguirán ningún lado\nMejor para elementos centrales");
     }
-    UIWidgets::EnhancementRadioButton("Hidden", CvarLabel.c_str(), 4);
-    UIWidgets::Tooltip("This will make your elements hidden");
+    UIWidgets::EnhancementRadioButton("Oculto", CvarLabel.c_str(), 4);
+    UIWidgets::Tooltip("Oculta los elementos");
 }
 void DrawPositionSlider(const std::string CvarName, int MinY, int MaxY, int MinX, int MaxX){
     std::string PosXCvar = CvarName+"PosX";
     std::string PosYCvar = CvarName+"PosY";
     std::string InvisibleLabelX = "##"+PosXCvar;
     std::string InvisibleLabelY = "##"+PosYCvar;
-    UIWidgets::EnhancementSliderInt("Up <-> Down : %d", InvisibleLabelY.c_str(), PosYCvar.c_str(), MinY, MaxY, "", 0, true);
-    UIWidgets::Tooltip("This slider is used to move Up and Down your elements.");
-    UIWidgets::EnhancementSliderInt("Left <-> Right : %d", InvisibleLabelX.c_str(), PosXCvar.c_str(), MinX, MaxX, "", 0, true);
-    UIWidgets::Tooltip("This slider is used to move Left and Right your elements.");
+    UIWidgets::EnhancementSliderInt("Arriba <-> Abajo : %d", InvisibleLabelY.c_str(), PosYCvar.c_str(), MinY, MaxY, "", 0, true);
+    UIWidgets::Tooltip("Este deslizador mueve los elementos hacia arriba y abajo.");
+    UIWidgets::EnhancementSliderInt("Izq. <-> Der. : %d", InvisibleLabelX.c_str(), PosXCvar.c_str(), MinX, MaxX, "", 0, true);
+    UIWidgets::Tooltip("Este deslizador mueve los elementos a izquierda y derecha.");
 }
 void DrawScaleSlider(const std::string CvarName,float DefaultValue){
     std::string InvisibleLabel = "##"+CvarName;
@@ -1105,56 +1105,56 @@ void DrawScaleSlider(const std::string CvarName,float DefaultValue){
 }
 void Draw_Placements(){
     if (ImGui::BeginTable("tableMargins", 1, FlagsTable)) {
-        ImGui::TableSetupColumn("General margins settings", FlagsCell, TablesCellsWidth);
+        ImGui::TableSetupColumn("Ajustes de márgenes generales", FlagsCell, TablesCellsWidth);
         Table_InitHeader();
-        UIWidgets::EnhancementSliderInt("Top : %dx", "##UIMARGINT", "gHUDMargin_T", (ImGui::GetWindowViewport()->Size.y/2)*-1, 25, "", 0, true);
-        UIWidgets::EnhancementSliderInt("Left: %dx", "##UIMARGINL", "gHUDMargin_L", -25, ImGui::GetWindowViewport()->Size.x, "", 0, true);
-        UIWidgets::EnhancementSliderInt("Right: %dx", "##UIMARGINR", "gHUDMargin_R", (ImGui::GetWindowViewport()->Size.x)*-1, 25, "", 0, true);
-        UIWidgets::EnhancementSliderInt("Bottom: %dx", "##UIMARGINB", "gHUDMargin_B", (ImGui::GetWindowViewport()->Size.y/2)*-1, 25, "", 0, true);
-        SetMarginAll("All margins on",true);
-        UIWidgets::Tooltip("Set most of the element to use margin\nSome elements with default position will not be affected\nElements without Archor or Hidden will not be turned on");
+        UIWidgets::EnhancementSliderInt("Arriba : %dx", "##UIMARGINT", "gHUDMargin_T", (ImGui::GetWindowViewport()->Size.y/2)*-1, 25, "", 0, true);
+        UIWidgets::EnhancementSliderInt("Izquierda: %dx", "##UIMARGINL", "gHUDMargin_L", -25, ImGui::GetWindowViewport()->Size.x, "", 0, true);
+        UIWidgets::EnhancementSliderInt("Derecha: %dx", "##UIMARGINR", "gHUDMargin_R", (ImGui::GetWindowViewport()->Size.x)*-1, 25, "", 0, true);
+        UIWidgets::EnhancementSliderInt("Abajo: %dx", "##UIMARGINB", "gHUDMargin_B", (ImGui::GetWindowViewport()->Size.y/2)*-1, 25, "", 0, true);
+        SetMarginAll("Márgenes: todos sí",true);
+        UIWidgets::Tooltip("Hace que casi todos los elementos usen margen\nLos elementos con posición original no se verán afectados\nLos elementos sin anclaje u ocultos no se activarán");
         ImGui::SameLine();
-        SetMarginAll("All margins off",false);
-        UIWidgets::Tooltip("Set all of the element to not use margin");
+        SetMarginAll("Márgenes: todos no",false);
+        UIWidgets::Tooltip("Hace que ningún elemento use margen");
         ImGui::SameLine();
         ResetPositionAll();
-        UIWidgets::Tooltip("Revert every element to use their original position and no margins");
+        UIWidgets::Tooltip("Devuelve todos los elementos a su posición original y sin márgenes");
         ImGui::NewLine();
         ImGui::EndTable();
     }
-    if (ImGui::CollapsingHeader("Hearts count position")) {
+    if (ImGui::CollapsingHeader("Posición del contador de corazones")) {
         if (ImGui::BeginTable("tableHeartsCounts", 1, FlagsTable)) {
-            ImGui::TableSetupColumn("Hearts counts settings", FlagsCell, TablesCellsWidth);
+            ImGui::TableSetupColumn("Ajustes del contador de corazones", FlagsCell, TablesCellsWidth);
             Table_InitHeader(false);
-            DrawUseMarginsSlider("Hearts counts", "gHearts");
+            DrawUseMarginsSlider("Contador de corazones", "gHearts");
             DrawPositionsRadioBoxes("gHeartsCount");
             DrawPositionSlider("gHeartsCount",-22,ImGui::GetWindowViewport()->Size.y,-125,ImGui::GetWindowViewport()->Size.x);
             DrawScaleSlider("gHeartsCount",0.7f);
-            UIWidgets::EnhancementSliderInt("Heart line length : %d", "##HeartLineLength", "gHeartsLineLength", 0, 20, "", 10, true);
-            UIWidgets::Tooltip("This will set the length of a row of hearts. Set to 0 for unlimited length.");
+            UIWidgets::EnhancementSliderInt("Corazones por fila : %d", "##HeartLineLength", "gHeartsLineLength", 0, 20, "", 10, true);
+            UIWidgets::Tooltip("Define cuántos corazones tiene cada fila. Con 0 no hay límite.");
             ImGui::NewLine();
             ImGui::EndTable();
         }
     }
-    if (ImGui::CollapsingHeader("Magic Meter position")) {
+    if (ImGui::CollapsingHeader("Posición del medidor de magia")) {
         if (ImGui::BeginTable("tablemmpos", 1, FlagsTable)) {
-            ImGui::TableSetupColumn("Magic meter settings", FlagsCell, TablesCellsWidth);
+            ImGui::TableSetupColumn("Ajustes del medidor de magia", FlagsCell, TablesCellsWidth);
             Table_InitHeader(false);
-            DrawUseMarginsSlider("Magic meter", "gMagicBar");
+            DrawUseMarginsSlider("Medidor de magia", "gMagicBar");
             DrawPositionsRadioBoxes("gMagicBar");
-            UIWidgets::EnhancementRadioButton("Anchor to life bar", "gMagicBarPosType", 5);
-            UIWidgets::Tooltip("This will make your elements follow the bottom of the life meter");
+            UIWidgets::EnhancementRadioButton("Anclar a la barra de vida", "gMagicBarPosType", 5);
+            UIWidgets::Tooltip("Los elementos seguirán la parte inferior de la barra de vida");
             DrawPositionSlider("gMagicBar", 0, ImGui::GetWindowViewport()->Size.y/2, -5, ImGui::GetWindowViewport()->Size.x/2);
             DrawScaleSlider("gMagicBar",1.0f);
             ImGui::NewLine();
             ImGui::EndTable();
         }
     }
-    if (CVarGetInteger("gVisualAgony",0) && ImGui::CollapsingHeader("Visual stone of agony position")) {
+    if (CVarGetInteger("gVisualAgony",0) && ImGui::CollapsingHeader("Posición del aviso de la Piedra de la Agonía")) {
         if (ImGui::BeginTable("tabledvisualstoneofagony", 1, FlagsTable)) {
-            ImGui::TableSetupColumn("Visual stone of agony settings", FlagsCell, TablesCellsWidth);
+            ImGui::TableSetupColumn("Ajustes del aviso de la Piedra de la Agonía", FlagsCell, TablesCellsWidth);
             Table_InitHeader(false);
-            DrawUseMarginsSlider("Visual stone of agony", "gVSOA");
+            DrawUseMarginsSlider("Aviso de Piedra de la Agonía", "gVSOA");
             DrawPositionsRadioBoxes("gVSOA");
             s16 Min_X_VSOA = 0;
             s16 Max_X_VSOA = ImGui::GetWindowViewport()->Size.x/2;
@@ -1169,11 +1169,11 @@ void Draw_Placements(){
             ImGui::EndTable();
         }
     }
-    if (ImGui::CollapsingHeader("B Button position")) {
+    if (ImGui::CollapsingHeader("Posición del botón B")) {
         if (ImGui::BeginTable("tablebbtn", 1, FlagsTable)) {
-            ImGui::TableSetupColumn("B Button settings", FlagsCell, TablesCellsWidth);
+            ImGui::TableSetupColumn("Ajustes del botón B", FlagsCell, TablesCellsWidth);
             Table_InitHeader(false);
-            DrawUseMarginsSlider("B Button", "gBBtn");
+            DrawUseMarginsSlider("Botón B", "gBBtn");
             DrawPositionsRadioBoxes("gBBtn");
             DrawPositionSlider("gBBtn", 0, ImGui::GetWindowViewport()->Size.y/4+50, -1, ImGui::GetWindowViewport()->Size.x-50);
             DrawScaleSlider("gBBtn",0.95f);
@@ -1181,11 +1181,11 @@ void Draw_Placements(){
             ImGui::EndTable();
         }
     }
-    if (ImGui::CollapsingHeader("A Button position")) {
+    if (ImGui::CollapsingHeader("Posición del botón A")) {
         if (ImGui::BeginTable("tableabtn", 1, FlagsTable)) {
-            ImGui::TableSetupColumn("A Button settings", FlagsCell, TablesCellsWidth);
+            ImGui::TableSetupColumn("Ajustes del botón A", FlagsCell, TablesCellsWidth);
             Table_InitHeader(false);
-            DrawUseMarginsSlider("A Button", "gABtn");
+            DrawUseMarginsSlider("Botón A", "gABtn");
             DrawPositionsRadioBoxes("gABtn");
             DrawPositionSlider("gABtn", -10, ImGui::GetWindowViewport()->Size.y/4+50, -20, ImGui::GetWindowViewport()->Size.x-50);
             DrawScaleSlider("gABtn",0.95f);
@@ -1193,11 +1193,11 @@ void Draw_Placements(){
             ImGui::EndTable();
         }
     }
-    if (ImGui::CollapsingHeader("Start Button position")) {
+    if (ImGui::CollapsingHeader("Posición del botón Start")) {
         if (ImGui::BeginTable("tablestartbtn", 1, FlagsTable)) {
-            ImGui::TableSetupColumn("Start Button settings", FlagsCell, TablesCellsWidth);
+            ImGui::TableSetupColumn("Ajustes del botón Start", FlagsCell, TablesCellsWidth);
             Table_InitHeader(false);
-            DrawUseMarginsSlider("Start Button", "gStartBtn");
+            DrawUseMarginsSlider("Botón Start", "gStartBtn");
             DrawPositionsRadioBoxes("gStartBtn");
             DrawPositionSlider("gStartBtn", 0, ImGui::GetWindowViewport()->Size.y/2, 0, ImGui::GetWindowViewport()->Size.x/2+70);
             DrawScaleSlider("gStartBtn",0.75f);
@@ -1205,11 +1205,11 @@ void Draw_Placements(){
             ImGui::EndTable();
         }
     }
-    if (ImGui::CollapsingHeader("C Button Up position")) {
+    if (ImGui::CollapsingHeader("Posición del botón C arriba")) {
         if (ImGui::BeginTable("tablecubtn", 1, FlagsTable)) {
-            ImGui::TableSetupColumn("C Button Up settings", FlagsCell, TablesCellsWidth);
+            ImGui::TableSetupColumn("Ajustes del botón C arriba", FlagsCell, TablesCellsWidth);
             Table_InitHeader(false);
-            DrawUseMarginsSlider("C Button Up", "gCBtnU");
+            DrawUseMarginsSlider("C arriba", "gCBtnU");
             DrawPositionsRadioBoxes("gCBtnU");
             s16 Min_X_CU = 0;
             s16 Max_X_CU = ImGui::GetWindowViewport()->Size.x/2;
@@ -1226,11 +1226,11 @@ void Draw_Placements(){
             ImGui::EndTable();
         }
     }
-    if (ImGui::CollapsingHeader("C Button Down position")) {
+    if (ImGui::CollapsingHeader("Posición del botón C abajo")) {
         if (ImGui::BeginTable("tablecdbtn", 1, FlagsTable)) {
-            ImGui::TableSetupColumn("C Button Down settings", FlagsCell, TablesCellsWidth);
+            ImGui::TableSetupColumn("Ajustes del botón C abajo", FlagsCell, TablesCellsWidth);
             Table_InitHeader(false);
-            DrawUseMarginsSlider("C Button Down", "gCBtnD");
+            DrawUseMarginsSlider("C abajo", "gCBtnD");
             DrawPositionsRadioBoxes("gCBtnD");
             s16 Min_X_CD = 0;
             s16 Max_X_CD = ImGui::GetWindowViewport()->Size.x/2;
@@ -1247,11 +1247,11 @@ void Draw_Placements(){
             ImGui::EndTable();
         }
     }
-    if (ImGui::CollapsingHeader("C Button Left position")) {
+    if (ImGui::CollapsingHeader("Posición del botón C izquierda")) {
         if (ImGui::BeginTable("tableclbtn", 1, FlagsTable)) {
-            ImGui::TableSetupColumn("C Button Left settings", FlagsCell, TablesCellsWidth);
+            ImGui::TableSetupColumn("Ajustes del botón C izquierda", FlagsCell, TablesCellsWidth);
             Table_InitHeader(false);
-            DrawUseMarginsSlider("C Button Left", "gCBtnL");
+            DrawUseMarginsSlider("C izquierda", "gCBtnL");
             DrawPositionsRadioBoxes("gCBtnL");
             s16 Min_X_CL = 0;
             s16 Max_X_CL = ImGui::GetWindowViewport()->Size.x/2;
@@ -1268,11 +1268,11 @@ void Draw_Placements(){
             ImGui::EndTable();
         }
     }
-    if (ImGui::CollapsingHeader("C Button Right position")) {
+    if (ImGui::CollapsingHeader("Posición del botón C derecha")) {
         if (ImGui::BeginTable("tablecrnbtn", 1, FlagsTable)) {
-            ImGui::TableSetupColumn("C Button Right settings", FlagsCell, TablesCellsWidth);
+            ImGui::TableSetupColumn("Ajustes del botón C derecha", FlagsCell, TablesCellsWidth);
             Table_InitHeader(false);
-            DrawUseMarginsSlider("C Button Right", "gCBtnR");
+            DrawUseMarginsSlider("C derecha", "gCBtnR");
             DrawPositionsRadioBoxes("gCBtnR");
             s16 Min_X_CR = 0;
             s16 Max_X_CR = ImGui::GetWindowViewport()->Size.x/2;
@@ -1289,11 +1289,11 @@ void Draw_Placements(){
             ImGui::EndTable();
         }
     }
-    if (CVarGetInteger("gDpadEquips",0) && ImGui::CollapsingHeader("DPad items position")) {
+    if (CVarGetInteger("gDpadEquips",0) && ImGui::CollapsingHeader("Posición de objetos de la cruceta")) {
         if (ImGui::BeginTable("tabledpaditems", 1, FlagsTable)) {
-            ImGui::TableSetupColumn("DPad items settings", FlagsCell, TablesCellsWidth);
+            ImGui::TableSetupColumn("Ajustes de objetos de la cruceta", FlagsCell, TablesCellsWidth);
             Table_InitHeader(false);
-            DrawUseMarginsSlider("DPad items", "gDPad");
+            DrawUseMarginsSlider("Objetos de la cruceta", "gDPad");
             DrawPositionsRadioBoxes("gDPad");
             s16 Min_X_Dpad = 0;
             s16 Max_X_Dpad = ImGui::GetWindowViewport()->Size.x/2;
@@ -1308,11 +1308,11 @@ void Draw_Placements(){
             ImGui::EndTable();
         }
     }
-    if (ImGui::CollapsingHeader("Minimaps position")) {
+    if (ImGui::CollapsingHeader("Posición de minimapas")) {
         if (ImGui::BeginTable("tableminimapspos", 1, FlagsTable)) {
-            ImGui::TableSetupColumn("minimaps settings", FlagsCell, TablesCellsWidth);
+            ImGui::TableSetupColumn("Ajustes de minimapas", FlagsCell, TablesCellsWidth);
             Table_InitHeader(false);
-            DrawUseMarginsSlider("Minimap", "gMinimap");
+            DrawUseMarginsSlider("Minimapa", "gMinimap");
             DrawPositionsRadioBoxes("gMinimap", false);
             DrawPositionSlider("gMinimap", (ImGui::GetWindowViewport()->Size.y/3)*-1, ImGui::GetWindowViewport()->Size.y/3, ImGui::GetWindowViewport()->Size.x*-1, ImGui::GetWindowViewport()->Size.x/2);
             DrawScaleSlider("gMinimap",1.0f);
@@ -1320,11 +1320,11 @@ void Draw_Placements(){
             ImGui::EndTable();
         }
     }
-    if (ImGui::CollapsingHeader("Small Keys counter position")) {
+    if (ImGui::CollapsingHeader("Posición del contador de llaves")) {
         if (ImGui::BeginTable("tablesmolekeys", 1, FlagsTable)) {
-            ImGui::TableSetupColumn("Small Keys counter settings", FlagsCell, TablesCellsWidth);
+            ImGui::TableSetupColumn("Ajustes del contador de llaves", FlagsCell, TablesCellsWidth);
             Table_InitHeader(false);
-            DrawUseMarginsSlider("Small Keys counter", "gSKC");
+            DrawUseMarginsSlider("Contador de llaves pequeñas", "gSKC");
             DrawPositionsRadioBoxes("gSKC");
             DrawPositionSlider("gSKC", 0, ImGui::GetWindowViewport()->Size.y/3, -1, ImGui::GetWindowViewport()->Size.x/2);
             DrawScaleSlider("gSKC",1.0f);
@@ -1332,11 +1332,11 @@ void Draw_Placements(){
             ImGui::EndTable();
         }
     }
-    if (ImGui::CollapsingHeader("Rupee counter position")) {
+    if (ImGui::CollapsingHeader("Posición del contador de rupias")) {
         if (ImGui::BeginTable("tablerupeecount", 1, FlagsTable)) {
-            ImGui::TableSetupColumn("Rupee counter settings", FlagsCell, TablesCellsWidth);
+            ImGui::TableSetupColumn("Ajustes del contador de rupias", FlagsCell, TablesCellsWidth);
             Table_InitHeader(false);
-            DrawUseMarginsSlider("Rupee counter", "gRC");
+            DrawUseMarginsSlider("Contador de rupias", "gRC");
             DrawPositionsRadioBoxes("gRC");
             DrawPositionSlider("gRC", -2, ImGui::GetWindowViewport()->Size.y/3, -3, ImGui::GetWindowViewport()->Size.x/2);
             DrawScaleSlider("gRC",1.0f);
@@ -1344,11 +1344,11 @@ void Draw_Placements(){
             ImGui::EndTable();
         }
     }
-    if (ImGui::CollapsingHeader("Carrots position")) {
+    if (ImGui::CollapsingHeader("Posición de las zanahorias")) {
         if (ImGui::BeginTable("tableCarrots", 1, FlagsTable)) {
-            ImGui::TableSetupColumn("Carrots settings", FlagsCell, TablesCellsWidth);
+            ImGui::TableSetupColumn("Ajustes de las zanahorias", FlagsCell, TablesCellsWidth);
             Table_InitHeader(false);
-            DrawUseMarginsSlider("Carrots", "gCarrots");
+            DrawUseMarginsSlider("Zanahorias", "gCarrots");
             DrawPositionsRadioBoxes("gCarrots");
             DrawPositionSlider("gCarrots", 0, ImGui::GetWindowViewport()->Size.y/2, -50, ImGui::GetWindowViewport()->Size.x/2+25);
             DrawScaleSlider("gCarrots",1.0f);
@@ -1356,11 +1356,11 @@ void Draw_Placements(){
             ImGui::EndTable();
         }
     }
-    if (ImGui::CollapsingHeader("Timers position")) {
+    if (ImGui::CollapsingHeader("Posición de los cronómetros")) {
         if (ImGui::BeginTable("tabletimers", 1, FlagsTable)) {
-            ImGui::TableSetupColumn("Timers settings", FlagsCell, TablesCellsWidth);
+            ImGui::TableSetupColumn("Ajustes de los cronómetros", FlagsCell, TablesCellsWidth);
             Table_InitHeader(false);
-            DrawUseMarginsSlider("Timers", "gTimers");
+            DrawUseMarginsSlider("Cronómetros", "gTimers");
             DrawPositionsRadioBoxes("gTimers");
             DrawPositionSlider("gTimers", 0, ImGui::GetWindowViewport()->Size.y/2, -50, ImGui::GetWindowViewport()->Size.x/2-50);
             DrawScaleSlider("gTimers",1.0f);
@@ -1368,11 +1368,11 @@ void Draw_Placements(){
             ImGui::EndTable();
         }
     }
-    if (ImGui::CollapsingHeader("Archery Scores position")) {
+    if (ImGui::CollapsingHeader("Posición de puntuación de tiro con arco")) {
         if (ImGui::BeginTable("tablearchery", 1, FlagsTable)) {
-            ImGui::TableSetupColumn("Archery Scores settings", FlagsCell, TablesCellsWidth);
+            ImGui::TableSetupColumn("Ajustes de puntuación de tiro con arco", FlagsCell, TablesCellsWidth);
             Table_InitHeader(false);
-            DrawUseMarginsSlider("Archery scores", "gAS");
+            DrawUseMarginsSlider("Puntuación de tiro con arco", "gAS");
             DrawPositionsRadioBoxes("gAS", false);
             DrawPositionSlider("gAS", 0, ImGui::GetWindowViewport()->Size.y/2, -50, ImGui::GetWindowViewport()->Size.x/2-50);
             DrawScaleSlider("gAS",1.0f);
@@ -1380,11 +1380,11 @@ void Draw_Placements(){
             ImGui::EndTable();
         }
     }
-    if (ImGui::CollapsingHeader("Title cards (Maps) position")) {
+    if (ImGui::CollapsingHeader("Posición de carteles de lugar")) {
         if (ImGui::BeginTable("tabletcmaps", 1, FlagsTable)) {
-            ImGui::TableSetupColumn("Titlecard maps settings", FlagsCell, TablesCellsWidth);
+            ImGui::TableSetupColumn("Ajustes de carteles de lugar", FlagsCell, TablesCellsWidth);
             Table_InitHeader(false);
-            DrawUseMarginsSlider("Title cards (overworld)", "gTCM");
+            DrawUseMarginsSlider("Carteles (exterior)", "gTCM");
             DrawPositionsRadioBoxes("gTCM");
             DrawPositionSlider("gTCM", 0, ImGui::GetWindowViewport()->Size.y/2, -50, ImGui::GetWindowViewport()->Size.x/2+10);
             DrawScaleSlider("gTCM",1.0f);
@@ -1392,11 +1392,11 @@ void Draw_Placements(){
             ImGui::EndTable();
         }
     }
-    if (ImGui::CollapsingHeader("Title cards (Bosses) position")) {
+    if (ImGui::CollapsingHeader("Posición de carteles de jefes")) {
         if (ImGui::BeginTable("tabletcbosses", 1, FlagsTable)) {
-            ImGui::TableSetupColumn("Title cards (Bosses) settings", FlagsCell, TablesCellsWidth);
+            ImGui::TableSetupColumn("Ajustes de carteles de jefes", FlagsCell, TablesCellsWidth);
             Table_InitHeader(false);
-            DrawUseMarginsSlider("Title cards (Bosses)", "gTCB");
+            DrawUseMarginsSlider("Carteles de jefes", "gTCB");
             DrawPositionsRadioBoxes("gTCB");
             DrawPositionSlider("gTCB", 0, ImGui::GetWindowViewport()->Size.y/2, -50, ImGui::GetWindowViewport()->Size.x/2+10);
             DrawScaleSlider("gTCB",1.0f);
@@ -1408,15 +1408,15 @@ void Draw_Placements(){
 
 void DrawSillyTab() {
     if (CVarGetInteger("gLetItSnow", 0)) {
-        if (UIWidgets::EnhancementCheckbox("Let It Snow", "gLetItSnow")) {
+        if (UIWidgets::EnhancementCheckbox("Que nieve", "gLetItSnow")) {
             SohImGui::RequestCvarSaveOnNextTick();
         }
     }
-    if (UIWidgets::EnhancementSliderFloat("Link Body Scale: %f", "##Link_BodyScale", "gCosmetics.Link_BodyScale.Value", 0.001f, 0.025f, "", 0.01f, false)) {
+    if (UIWidgets::EnhancementSliderFloat("Escala del cuerpo de Link: %f", "##Link_BodyScale", "gCosmetics.Link_BodyScale.Value", 0.001f, 0.025f, "", 0.01f, false)) {
         CVarSetInteger("gCosmetics.Link_BodyScale.Changed", 1);
     }
     ImGui::SameLine();
-    if (ImGui::Button("Reset##Link_BodyScale")) {
+    if (ImGui::Button("Restab.##Link_BodyScale")) {
         CVarClear("gCosmetics.Link_BodyScale.Value");
         CVarClear("gCosmetics.Link_BodyScale.Changed");
         SohImGui::RequestCvarSaveOnNextTick();
@@ -1425,66 +1425,66 @@ void DrawSillyTab() {
         player->actor.scale.y = 0.01f;
         player->actor.scale.z = 0.01f;
     }
-    if (UIWidgets::EnhancementSliderFloat("Link Head Scale: %f", "##Link_HeadScale", "gCosmetics.Link_HeadScale.Value", 0.4f, 4.0f, "", 1.0f, false)) {
+    if (UIWidgets::EnhancementSliderFloat("Escala de la cabeza de Link: %f", "##Link_HeadScale", "gCosmetics.Link_HeadScale.Value", 0.4f, 4.0f, "", 1.0f, false)) {
         CVarSetInteger("gCosmetics.Link_HeadScale.Changed", 1);
     }
     ImGui::SameLine();
-    if (ImGui::Button("Reset##Link_HeadScale")) {
+    if (ImGui::Button("Restab.##Link_HeadScale")) {
         CVarClear("gCosmetics.Link_HeadScale.Value");
         CVarClear("gCosmetics.Link_HeadScale.Changed");
         SohImGui::RequestCvarSaveOnNextTick();
     }
-    if (UIWidgets::EnhancementSliderFloat("Link Sword Scale: %f", "##Link_SwordScale", "gCosmetics.Link_SwordScale.Value", 1.0f, 2.5f, "", 1.0f, false)) {
+    if (UIWidgets::EnhancementSliderFloat("Escala de la espada de Link: %f", "##Link_SwordScale", "gCosmetics.Link_SwordScale.Value", 1.0f, 2.5f, "", 1.0f, false)) {
         CVarSetInteger("gCosmetics.Link_SwordScale.Changed", 1);
     }
     ImGui::SameLine();
-    if (ImGui::Button("Reset##Link_SwordScale")) {
+    if (ImGui::Button("Restab.##Link_SwordScale")) {
         CVarClear("gCosmetics.Link_SwordScale.Value");
         CVarClear("gCosmetics.Link_SwordScale.Changed");
         SohImGui::RequestCvarSaveOnNextTick();
     }
-    UIWidgets::EnhancementSliderFloat("Bunny Hood Length: %f", "##BunnyHood_EarLength", "gCosmetics.BunnyHood_EarLength", -300.0f, 1000.0f, "", 0.0f, false);
+    UIWidgets::EnhancementSliderFloat("Longitud de la capucha: %f", "##BunnyHood_EarLength", "gCosmetics.BunnyHood_EarLength", -300.0f, 1000.0f, "", 0.0f, false);
     ImGui::SameLine();
-    if (ImGui::Button("Reset##BunnyHood_EarLength")) {
+    if (ImGui::Button("Restab.##BunnyHood_EarLength")) {
         CVarClear("gCosmetics.BunnyHood_EarLength");
         SohImGui::RequestCvarSaveOnNextTick();
     }
-    UIWidgets::EnhancementSliderFloat("Bunny Hood Spread: %f", "##BunnyHood_EarSpread", "gCosmetics.BunnyHood_EarSpread", -300.0f, 500.0f, "", 0.0f, false);
+    UIWidgets::EnhancementSliderFloat("Apertura de la capucha: %f", "##BunnyHood_EarSpread", "gCosmetics.BunnyHood_EarSpread", -300.0f, 500.0f, "", 0.0f, false);
     ImGui::SameLine();
-    if (ImGui::Button("Reset##BunnyHood_EarSpread")) {
+    if (ImGui::Button("Restab.##BunnyHood_EarSpread")) {
         CVarClear("gCosmetics.BunnyHood_EarSpread");
         SohImGui::RequestCvarSaveOnNextTick();
     }
-    UIWidgets::EnhancementSliderFloat("Goron Neck Length: %f", "##Goron_NeckLength", "gCosmetics.Goron_NeckLength", 0.0f, 1000.0f, "", 0.0f, false);
+    UIWidgets::EnhancementSliderFloat("Cuello del goron: %f", "##Goron_NeckLength", "gCosmetics.Goron_NeckLength", 0.0f, 1000.0f, "", 0.0f, false);
     ImGui::SameLine();
-    if (ImGui::Button("Reset##Goron_NeckLength")) {
+    if (ImGui::Button("Restab.##Goron_NeckLength")) {
         CVarClear("gCosmetics.Goron_NeckLength");
         SohImGui::RequestCvarSaveOnNextTick();
     }
-    UIWidgets::EnhancementCheckbox("Unfix Goron Spin", "gUnfixGoronSpin");
-    UIWidgets::EnhancementSliderFloat("Fairies Size: %f", "##Fairies_Size", "gCosmetics.Fairies_Size", 0.25f, 5.0f, "", 1.0f, false);
+    UIWidgets::EnhancementCheckbox("Quitar corrección del goron rodando", "gUnfixGoronSpin");
+    UIWidgets::EnhancementSliderFloat("Tamaño de las hadas: %f", "##Fairies_Size", "gCosmetics.Fairies_Size", 0.25f, 5.0f, "", 1.0f, false);
     ImGui::SameLine();
-    if (ImGui::Button("Reset##Fairies_Size")) {
+    if (ImGui::Button("Restab.##Fairies_Size")) {
         CVarClear("gCosmetics.Fairies_Size");
         SohImGui::RequestCvarSaveOnNextTick();
     }
-    UIWidgets::EnhancementSliderFloat("N64 Logo Spin Speed: %f", "##N64Logo_SpinSpeed", "gCosmetics.N64Logo_SpinSpeed", 0.25f, 5.0f, "", 1.0f, false);
+    UIWidgets::EnhancementSliderFloat("Giro del logo N64: %f", "##N64Logo_SpinSpeed", "gCosmetics.N64Logo_SpinSpeed", 0.25f, 5.0f, "", 1.0f, false);
     ImGui::SameLine();
-    if (ImGui::Button("Reset##N64Logo_SpinSpeed")) {
+    if (ImGui::Button("Restab.##N64Logo_SpinSpeed")) {
         CVarClear("gCosmetics.N64Logo_SpinSpeed");
         SohImGui::RequestCvarSaveOnNextTick();
     }
-    UIWidgets::EnhancementSliderFloat("Moon Size: %f", "##Moon_Size", "gCosmetics.Moon_Size", 0.5f, 2.0f, "", 1.0f, false);
+    UIWidgets::EnhancementSliderFloat("Tamaño de la luna: %f", "##Moon_Size", "gCosmetics.Moon_Size", 0.5f, 2.0f, "", 1.0f, false);
     ImGui::SameLine();
-    if (ImGui::Button("Reset##Moon_Size")) {
+    if (ImGui::Button("Restab.##Moon_Size")) {
         CVarClear("gCosmetics.Moon_Size");
         SohImGui::RequestCvarSaveOnNextTick();
     }
-    if (UIWidgets::EnhancementSliderFloat("Kak Windmill Speed: %f", "##Kak_Windmill_Speed", "gCosmetics.Kak_Windmill_Speed.Value", 100.0f, 6000.0f, "", 100.0f, false)) {
+    if (UIWidgets::EnhancementSliderFloat("Velocidad molino Kakariko: %f", "##Kak_Windmill_Speed", "gCosmetics.Kak_Windmill_Speed.Value", 100.0f, 6000.0f, "", 100.0f, false)) {
         CVarSetInteger("gCosmetics.Kak_Windmill_Speed.Changed", 1);
     }
     ImGui::SameLine();
-    if (ImGui::Button("Reset##Kak_Windmill_Speed")) {
+    if (ImGui::Button("Restab.##Kak_Windmill_Speed")) {
         CVarClear("gCosmetics.Kak_Windmill_Speed.Value");
         CVarClear("gCosmetics.Kak_Windmill_Speed.Changed");
         SohImGui::RequestCvarSaveOnNextTick();
@@ -1528,21 +1528,21 @@ void RandomizeColor(CosmeticOption& cosmeticOption) {
 
     // This bit is kind of experimental, not sure how I feel about it yet, but it allows for
     // advanced cosmetic options to be changed based on a non-advanced option.
-    if (cosmeticOption.label == "Bow Body") {
+    if (cosmeticOption.label == "Cuerpo arco") {
         CopyMultipliedColor(cosmeticOption, cosmeticOptions.at("Equipment_BowTips"), 0.5f);
         CopyMultipliedColor(cosmeticOption, cosmeticOptions.at("Equipment_BowHandle"), 1.0f);
         CopyMultipliedColor(cosmeticOption, cosmeticOption, 4.0f);
-    } else if (cosmeticOption.label == "Idle Primary") {
+    } else if (cosmeticOption.label == "Reposo primario") {
         CopyMultipliedColor(cosmeticOption, cosmeticOptions.at("Navi_IdleSecondary"), 0.5f);
-    } else if (cosmeticOption.label == "Enemy Primary") {
+    } else if (cosmeticOption.label == "Enemigo primario") {
         CopyMultipliedColor(cosmeticOption, cosmeticOptions.at("Navi_EnemySecondary"), 0.5f);
-    } else if (cosmeticOption.label == "NPC Primary") {
+    } else if (cosmeticOption.label == "PNJ primario") {
         CopyMultipliedColor(cosmeticOption, cosmeticOptions.at("Navi_NPCSecondary"), 1.0f);
-    } else if (cosmeticOption.label == "Props Primary") {
+    } else if (cosmeticOption.label == "Entorno primario") {
         CopyMultipliedColor(cosmeticOption, cosmeticOptions.at("Navi_PropsSecondary"), 1.0f);
-    } else if (cosmeticOption.label == "Level 1 Secondary") {
+    } else if (cosmeticOption.label == "Nivel 1 secundario") {
         CopyMultipliedColor(cosmeticOption, cosmeticOptions.at("SpinAttack_Level1Primary"), 2.0f);
-    } else if (cosmeticOption.label == "Level 2 Secondary") {
+    } else if (cosmeticOption.label == "Nivel 2 secundario") {
         CopyMultipliedColor(cosmeticOption, cosmeticOptions.at("SpinAttack_Level2Primary"), 2.0f);
     }
 }
@@ -1565,20 +1565,20 @@ void ResetColor(CosmeticOption& cosmeticOption) {
     CVarClear((std::string(cosmeticOption.cvar) + ".Type").c_str());
 
     // This portion should match 1:1 the multiplied colors in `RandomizeColor()`
-    if (cosmeticOption.label == "Bow Body") {
+    if (cosmeticOption.label == "Cuerpo arco") {
         ResetColor(cosmeticOptions.at("Equipment_BowTips"));
         ResetColor(cosmeticOptions.at("Equipment_BowHandle"));
-    } else if (cosmeticOption.label == "Idle Primary") {
+    } else if (cosmeticOption.label == "Reposo primario") {
         ResetColor(cosmeticOptions.at("Navi_IdleSecondary"));
-    } else if (cosmeticOption.label == "Enemy Primary") {
+    } else if (cosmeticOption.label == "Enemigo primario") {
         ResetColor(cosmeticOptions.at("Navi_EnemySecondary"));
-    } else if (cosmeticOption.label == "NPC Primary") {
+    } else if (cosmeticOption.label == "PNJ primario") {
         ResetColor(cosmeticOptions.at("Navi_NPCSecondary"));
-    } else if (cosmeticOption.label == "Props Primary") {
+    } else if (cosmeticOption.label == "Entorno primario") {
         ResetColor(cosmeticOptions.at("Navi_PropsSecondary"));
-    } else if (cosmeticOption.label == "Level 1 Secondary") {
+    } else if (cosmeticOption.label == "Nivel 1 secundario") {
         ResetColor(cosmeticOptions.at("SpinAttack_Level1Primary"));
-    } else if (cosmeticOption.label == "Level 2 Secondary") {
+    } else if (cosmeticOption.label == "Nivel 2 secundario") {
         ResetColor(cosmeticOptions.at("SpinAttack_Level2Primary"));
     }
 }
@@ -1599,15 +1599,15 @@ void DrawCosmeticRow(CosmeticOption& cosmeticOption) {
     }
     ImGui::SameLine();
     ImGui::Text(cosmeticOption.label.c_str());
-    ImGui::SameLine((ImGui::CalcTextSize("Mirror Shield Mirror").x * 1.0f) + 60.0f);
-    if (ImGui::Button(("Random##" + cosmeticOption.label).c_str())) {
+    ImGui::SameLine((ImGui::CalcTextSize("Hoja de esp. Biggoron").x * 1.0f) + 60.0f);
+    if (ImGui::Button(("Azar##" + cosmeticOption.label).c_str())) {
         RandomizeColor(cosmeticOption);
         ApplyOrResetCustomGfxPatches();
         SohImGui::RequestCvarSaveOnNextTick();
     }
     ImGui::SameLine();
     bool isRainbow = (bool)CVarGetInteger((cosmeticOption.rainbowCvar), 0);
-    if (ImGui::Checkbox(("Rainbow##" + cosmeticOption.label).c_str(), &isRainbow)) {
+    if (ImGui::Checkbox(("Arcoíris##" + cosmeticOption.label).c_str(), &isRainbow)) {
         CVarSetInteger((cosmeticOption.rainbowCvar), isRainbow);
         CVarSetInteger((cosmeticOption.changedCvar), 1);
         ApplyOrResetCustomGfxPatches();
@@ -1615,13 +1615,13 @@ void DrawCosmeticRow(CosmeticOption& cosmeticOption) {
     }
     ImGui::SameLine();
     bool isLocked = (bool)CVarGetInteger((cosmeticOption.lockedCvar), 0);
-    if (ImGui::Checkbox(("Locked##" + cosmeticOption.label).c_str(), &isLocked)) {
+    if (ImGui::Checkbox(("Fijado##" + cosmeticOption.label).c_str(), &isLocked)) {
         CVarSetInteger((cosmeticOption.lockedCvar), isLocked);
         SohImGui::RequestCvarSaveOnNextTick();
     }
     if (CVarGetInteger((cosmeticOption.changedCvar), 0)) {
         ImGui::SameLine();
-        if (ImGui::Button(("Reset##" + cosmeticOption.label).c_str())) {
+        if (ImGui::Button(("Restab.##" + cosmeticOption.label).c_str())) {
             ResetColor(cosmeticOption);
             ApplyOrResetCustomGfxPatches();
             SohImGui::RequestCvarSaveOnNextTick();
@@ -1632,8 +1632,8 @@ void DrawCosmeticRow(CosmeticOption& cosmeticOption) {
 void DrawCosmeticGroup(CosmeticGroup cosmeticGroup) {
     std::string label = groupLabels.at(cosmeticGroup);
     ImGui::Text(label.c_str());
-    ImGui::SameLine((ImGui::CalcTextSize("Mirror Shield Mirror").x * 1.0f) + 60.0f);
-    if (ImGui::Button(("Random##" + label).c_str())) {
+    ImGui::SameLine((ImGui::CalcTextSize("Hoja de esp. Biggoron").x * 1.0f) + 60.0f);
+    if (ImGui::Button(("Azar##" + label).c_str())) {
         for (auto& [id, cosmeticOption] : cosmeticOptions) {
             if (cosmeticOption.group == cosmeticGroup && (!cosmeticOption.advancedOption || CVarGetInteger("gCosmetics.AdvancedMode", 0)) && !CVarGetInteger(cosmeticOption.lockedCvar, 0)) {
                 RandomizeColor(cosmeticOption);
@@ -1643,7 +1643,7 @@ void DrawCosmeticGroup(CosmeticGroup cosmeticGroup) {
         SohImGui::RequestCvarSaveOnNextTick();
     }
     ImGui::SameLine();
-    if (ImGui::Button(("Reset##" + label).c_str())) {
+    if (ImGui::Button(("Restab.##" + label).c_str())) {
         for (auto& [id, cosmeticOption] : cosmeticOptions) {
             if (cosmeticOption.group == cosmeticGroup && !CVarGetInteger(cosmeticOption.lockedCvar, 0)) {
                 ResetColor(cosmeticOption);
@@ -1661,7 +1661,7 @@ void DrawCosmeticGroup(CosmeticGroup cosmeticGroup) {
 
 const char* colorSchemes[2] = {
     "N64",
-    "Gamecube",
+    "GameCube",
 };
 
 void DrawCosmeticsEditor(bool& open) {
@@ -1671,17 +1671,17 @@ void DrawCosmeticsEditor(bool& open) {
     }
 
     ImGui::SetNextWindowSize(ImVec2(480, 520), ImGuiCond_FirstUseEver);
-    if (!ImGui::Begin("Cosmetics Editor", &open)) {
+    if (!ImGui::Begin("Editor de cosméticos", &open)) {
         ImGui::End();
         return;
     }
 
-    ImGui::Text("Color Scheme");
+    ImGui::Text("Esquema de color");
     ImGui::SameLine();
     UIWidgets::EnhancementCombobox("gCosmetics.DefaultColorScheme", colorSchemes, 2, 0);
-    UIWidgets::EnhancementCheckbox("Advanced Mode", "gCosmetics.AdvancedMode");
+    UIWidgets::EnhancementCheckbox("Modo avanzado", "gCosmetics.AdvancedMode");
     if (CVarGetInteger("gCosmetics.AdvancedMode", 0)) {
-        if (ImGui::Button("Lock All Advanced", ImVec2(ImGui::GetContentRegionAvail().x / 2, 30.0f))) {
+        if (ImGui::Button("Fijar avanzados", ImVec2(ImGui::GetContentRegionAvail().x / 2, 30.0f))) {
             for (auto& [id, cosmeticOption] : cosmeticOptions) {
                 if (cosmeticOption.advancedOption) {
                     CVarSetInteger(cosmeticOption.lockedCvar, 1);
@@ -1690,7 +1690,7 @@ void DrawCosmeticsEditor(bool& open) {
             SohImGui::RequestCvarSaveOnNextTick();
         }
         ImGui::SameLine();
-        if (ImGui::Button("Unlock All Advanced", ImVec2(ImGui::GetContentRegionAvail().x, 30.0f))) {
+        if (ImGui::Button("Liberar avanzados", ImVec2(ImGui::GetContentRegionAvail().x, 30.0f))) {
             for (auto& [id, cosmeticOption] : cosmeticOptions) {
                 if (cosmeticOption.advancedOption) {
                     CVarSetInteger(cosmeticOption.lockedCvar, 0);
@@ -1699,9 +1699,9 @@ void DrawCosmeticsEditor(bool& open) {
             SohImGui::RequestCvarSaveOnNextTick();
         }
     }
-    UIWidgets::EnhancementCheckbox("Sync Rainbow colors", "gCosmetics.RainbowSync");
-    UIWidgets::EnhancementSliderFloat("Rainbow Speed: %f", "##rainbowSpeed", "gCosmetics.RainbowSpeed", 0.03f, 1.0f, "", 0.6f, false);
-    if (ImGui::Button("Randomize All", ImVec2(ImGui::GetContentRegionAvail().x / 2, 30.0f))) {
+    UIWidgets::EnhancementCheckbox("Sincronizar arcoíris", "gCosmetics.RainbowSync");
+    UIWidgets::EnhancementSliderFloat("Velocidad arcoíris: %f", "##rainbowSpeed", "gCosmetics.RainbowSpeed", 0.03f, 1.0f, "", 0.6f, false);
+    if (ImGui::Button("Aleatorizar todo", ImVec2(ImGui::GetContentRegionAvail().x / 2, 30.0f))) {
         for (auto& [id, cosmeticOption] : cosmeticOptions) {
             if (!CVarGetInteger(cosmeticOption.lockedCvar, 0) && (!cosmeticOption.advancedOption || CVarGetInteger("gCosmetics.AdvancedMode", 0))) {
                 RandomizeColor(cosmeticOption);
@@ -1711,7 +1711,7 @@ void DrawCosmeticsEditor(bool& open) {
         SohImGui::RequestCvarSaveOnNextTick();
     }
     ImGui::SameLine();
-    if (ImGui::Button("Reset All", ImVec2(ImGui::GetContentRegionAvail().x, 30.0f))) {
+    if (ImGui::Button("Restablecer todo", ImVec2(ImGui::GetContentRegionAvail().x, 30.0f))) {
         for (auto& [id, cosmeticOption] : cosmeticOptions) {
             if (!CVarGetInteger(cosmeticOption.lockedCvar, 0)) {
                 ResetColor(cosmeticOption);
@@ -1721,7 +1721,7 @@ void DrawCosmeticsEditor(bool& open) {
         SohImGui::RequestCvarSaveOnNextTick();
     }
 
-    if (ImGui::Button("Lock All", ImVec2(ImGui::GetContentRegionAvail().x / 2, 30.0f))) {
+    if (ImGui::Button("Fijar todo", ImVec2(ImGui::GetContentRegionAvail().x / 2, 30.0f))) {
         for (auto& [id, cosmeticOption] : cosmeticOptions) {
             if (!cosmeticOption.advancedOption || CVarGetInteger("gCosmetics.AdvancedMode", 0)) {
                 CVarSetInteger(cosmeticOption.lockedCvar, 1);
@@ -1730,7 +1730,7 @@ void DrawCosmeticsEditor(bool& open) {
         SohImGui::RequestCvarSaveOnNextTick();
     }
     ImGui::SameLine();
-    if (ImGui::Button("Unlock All", ImVec2(ImGui::GetContentRegionAvail().x, 30.0f))) {
+    if (ImGui::Button("Liberar todo", ImVec2(ImGui::GetContentRegionAvail().x, 30.0f))) {
         for (auto& [id, cosmeticOption] : cosmeticOptions) {
             if (!cosmeticOption.advancedOption || CVarGetInteger("gCosmetics.AdvancedMode", 0)) {
                 CVarSetInteger(cosmeticOption.lockedCvar, 0);
@@ -1740,7 +1740,7 @@ void DrawCosmeticsEditor(bool& open) {
     }
 
     if (ImGui::BeginTabBar("CosmeticsContextTabBar", ImGuiTabBarFlags_NoCloseWithMiddleMouseButton)) {
-        if (ImGui::BeginTabItem("Link & Items")) {
+        if (ImGui::BeginTabItem("Link y objetos")) {
             DrawCosmeticGroup(GROUP_LINK);
             DrawCosmeticGroup(GROUP_GLOVES);
             DrawCosmeticGroup(GROUP_MIRRORSHIELD);
@@ -1749,38 +1749,38 @@ void DrawCosmeticsEditor(bool& open) {
             DrawCosmeticGroup(GROUP_CONSUMABLE);
             ImGui::EndTabItem();
         }
-        if (ImGui::BeginTabItem("Effects")) {
+        if (ImGui::BeginTabItem("Efectos")) {
             // DrawCosmeticGroup(GROUP_MAGIC); // Cosmetics TODO: Implement magic effect colors
             DrawCosmeticGroup(GROUP_ARROWS);
             DrawCosmeticGroup(GROUP_SPIN_ATTACK);
             DrawCosmeticGroup(GROUP_TRAILS);
-            if (UIWidgets::EnhancementSliderInt("Trails Duration: %d", "##Trails_Duration", "gCosmetics.Trails_Duration.Value", 2, 20, "", 4, false)) {
+            if (UIWidgets::EnhancementSliderInt("Duración de estelas: %d", "##Trails_Duration", "gCosmetics.Trails_Duration.Value", 2, 20, "", 4, false)) {
                 CVarSetInteger("gCosmetics.Trails_Duration.Changed", 1);
             }
             ImGui::SameLine();
-            if (ImGui::Button("Reset##Trails_Duration")) {
+            if (ImGui::Button("Restab.##Trails_Duration")) {
                 CVarClear("gCosmetics.Trails_Duration.Value");
                 CVarClear("gCosmetics.Trails_Duration.Changed");
                 SohImGui::RequestCvarSaveOnNextTick();
             }
             ImGui::EndTabItem();
         }
-        if (ImGui::BeginTabItem("World & NPCs")) {
+        if (ImGui::BeginTabItem("Mundo y PNJ")) {
             DrawCosmeticGroup(GROUP_WORLD);
             DrawCosmeticGroup(GROUP_NAVI);
             DrawCosmeticGroup(GROUP_NPC);
             ImGui::EndTabItem();
         }
-        if (ImGui::BeginTabItem("Silly")) {
+        if (ImGui::BeginTabItem("Tonterías")) {
             DrawSillyTab();
             ImGui::EndTabItem();
         }
-        if (ImGui::BeginTabItem("HUD")) {
+        if (ImGui::BeginTabItem("Interfaz")) {
             DrawCosmeticGroup(GROUP_HUD);
             DrawCosmeticGroup(GROUP_TITLE);
             ImGui::EndTabItem();
         }
-        if (ImGui::BeginTabItem("HUD Placement")) {
+        if (ImGui::BeginTabItem("Posición de interfaz")) {
             Draw_Placements();
             ImGui::EndTabItem();
         }

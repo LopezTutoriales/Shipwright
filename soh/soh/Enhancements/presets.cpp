@@ -39,7 +39,7 @@ void DrawPresetSelector(PresetType presetTypeId) {
         comboboxTooltip += std::string(iter->second.label) + " - " + std::string(iter->second.description);
     }
 
-    UIWidgets::PaddedText("Presets", false, true);
+    UIWidgets::PaddedText("Preajustes", false, true);
     if (ImGui::BeginCombo("##PresetsComboBox", selectedPresetDef.label)) {
         for ( auto iter = presetTypeDef.presets.begin(); iter != presetTypeDef.presets.end(); ++iter ) {
             if (ImGui::Selectable(iter->second.label, iter->first == selectedPresetId)) {
@@ -54,7 +54,7 @@ void DrawPresetSelector(PresetType presetTypeId) {
     UIWidgets::Spacer(0);
 
     ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(6.0f, 4.0f));
-    if (ImGui::Button(("Apply Preset##" + presetTypeCvar).c_str())) {
+    if (ImGui::Button(("Aplicar preajuste##" + presetTypeCvar).c_str())) {
         clearCvars(presetTypeDef.cvarsToClear);
         if (selectedPresetId != 0) {
             applyPreset(selectedPresetDef.entries);

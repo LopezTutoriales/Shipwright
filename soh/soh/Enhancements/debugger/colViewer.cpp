@@ -19,9 +19,9 @@ extern PlayState* gPlayState;
 enum class ColRenderSetting { Disabled, Solid, Transparent };
 
 std::vector<std::string> ColRenderSettingNames = {
-    "Disabled",
-    "Solid",
-    "Transparent",
+    "Desactivado",
+    "Sólido",
+    "Transparente",
 };
 
 ImVec4 scene_col;
@@ -58,42 +58,42 @@ void DrawColViewerWindow(bool& open) {
     }
 
     ImGui::SetNextWindowSize(ImVec2(520, 600), ImGuiCond_FirstUseEver);
-    if (!ImGui::Begin("Collision Viewer", &open, ImGuiWindowFlags_NoFocusOnAppearing)) {
+    if (!ImGui::Begin("Visor de colisiones", &open, ImGuiWindowFlags_NoFocusOnAppearing)) {
         ImGui::End();
         return;
     }
-    UIWidgets::EnhancementCheckbox("Enabled", "gColViewerEnabled");
+    UIWidgets::EnhancementCheckbox("Activado", "gColViewerEnabled");
 
-    UIWidgets::EnhancementCombo("Scene", "gColViewerScene", ColRenderSettingNames);
-    UIWidgets::EnhancementCombo("Bg Actors", "gColViewerBgActors", ColRenderSettingNames);
-    UIWidgets::EnhancementCombo("Col Check", "gColViewerColCheck", ColRenderSettingNames);
-    UIWidgets::EnhancementCombo("Waterbox", "gColViewerWaterbox", ColRenderSettingNames);
+    UIWidgets::EnhancementCombo("Escena", "gColViewerScene", ColRenderSettingNames);
+    UIWidgets::EnhancementCombo("Actores de fondo", "gColViewerBgActors", ColRenderSettingNames);
+    UIWidgets::EnhancementCombo("Col. Check", "gColViewerColCheck", ColRenderSettingNames);
+    UIWidgets::EnhancementCombo("Caja de agua", "gColViewerWaterbox", ColRenderSettingNames);
 
-    UIWidgets::EnhancementCheckbox("Apply as decal", "gColViewerDecal");
-    UIWidgets::InsertHelpHoverText("Applies the collision as a decal display. This can be useful if there is z-fighting occuring "
-                        "with the scene geometry, but can cause other artifacts.");
-    UIWidgets::EnhancementCheckbox("Shaded", "gColViewerShaded");
-    UIWidgets::InsertHelpHoverText("Applies the scene's shading to the collision display.");
+    UIWidgets::EnhancementCheckbox("Aplicar como calcomanía", "gColViewerDecal");
+    UIWidgets::InsertHelpHoverText("Muestra la colisión como una calcomanía. Es útil si hay z-fighting "
+                        "con la geometría de la escena, pero puede causar otros artefactos.");
+    UIWidgets::EnhancementCheckbox("Sombreado", "gColViewerShaded");
+    UIWidgets::InsertHelpHoverText("Aplica el sombreado de la escena a la colisión.");
 
     // This has to be duplicated in both code paths due to the nature of ImGui::IsItemHovered()
-    const std::string colorHelpText = "View and change the colors used for collision display.";
-    if (ImGui::TreeNode("Colors")) {
+    const std::string colorHelpText = "Permite ver y cambiar los colores de la colisión.";
+    if (ImGui::TreeNode("Colores")) {
         UIWidgets::InsertHelpHoverText(colorHelpText);
 
         UIWidgets::EnhancementColor("Normal", "gColViewerColorNormal", scene_col, ImVec4(255, 255, 255, 255), false);
-        UIWidgets::EnhancementColor("Hookshot", "gColViewerColorHookshot", hookshot_col, ImVec4(128, 128, 255, 255),
+        UIWidgets::EnhancementColor("Gancho", "gColViewerColorHookshot", hookshot_col, ImVec4(128, 128, 255, 255),
                                    false);
-        UIWidgets::EnhancementColor("Entrance", "gColViewerColorEntrance", entrance_col, ImVec4(0, 255, 0, 255), false);
-        UIWidgets::EnhancementColor("Special Surface (Grass/Sand/Etc)", "gColViewerColorSpecialSurface",
+        UIWidgets::EnhancementColor("Entrada", "gColViewerColorEntrance", entrance_col, ImVec4(0, 255, 0, 255), false);
+        UIWidgets::EnhancementColor("Superficie especial (hierba/arena/etc.)", "gColViewerColorSpecialSurface",
                                    specialSurface_col, ImVec4(192, 255, 192, 255), false);
-        UIWidgets::EnhancementColor("Interactable (Vines/Crawlspace/Etc)", "gColViewerColorInteractable",
+        UIWidgets::EnhancementColor("Interactuable (lianas/pasadizos/etc.)", "gColViewerColorInteractable",
                                    interactable_col, ImVec4(192, 0, 192, 255), false);
-        UIWidgets::EnhancementColor("Slope", "gColViewerColorSlope", slope_col, ImVec4(255, 255, 128, 255), false);
-        UIWidgets::EnhancementColor("Void", "gColViewerColorVoid", void_col, ImVec4(255, 0, 0, 255), false);
+        UIWidgets::EnhancementColor("Pendiente", "gColViewerColorSlope", slope_col, ImVec4(255, 255, 128, 255), false);
+        UIWidgets::EnhancementColor("Vacío", "gColViewerColorVoid", void_col, ImVec4(255, 0, 0, 255), false);
         UIWidgets::EnhancementColor("OC", "gColViewerColorOC", oc_col, ImVec4(255, 255, 255, 255), false);
         UIWidgets::EnhancementColor("AC", "gColViewerColorAC", ac_col, ImVec4(0, 0, 255, 255), false);
         UIWidgets::EnhancementColor("AT", "gColViewerColorAT", at_col, ImVec4(255, 0, 0, 255), false);
-        UIWidgets::EnhancementColor("Waterbox", "gColViewerColorWaterbox", waterbox_col, ImVec4(0, 0, 255, 255), false);
+        UIWidgets::EnhancementColor("Caja de agua", "gColViewerColorWaterbox", waterbox_col, ImVec4(0, 0, 255, 255), false);
 
         ImGui::TreePop();
     } else {
@@ -694,7 +694,7 @@ void DrawColViewer() {
 
     if ((vtxDl.size() > vtxDlCapacity) || (mtxDl.size() > mtxDlCapacity)) {
         // If the sizes somehow changed between the two draws, we can't continue because we may be using invalid data
-        printf("Error drawing collision, vertex/matrix sizes didn't settle.\n");
+        printf("Error al dibujar la colisión: los tamaños de vértices/matrices no se estabilizaron.\n");
         return;
     }
 

@@ -1175,7 +1175,7 @@ void HintTable_Init() {
 
     hintTable[MARKET_BOMBCHU_BOWLING] = HintText::Region({
         // obscure text
-        Text{ "the #Bombchu Bowling Alley#", /*french*/ "le #Bowling Teigneux#", /*spanish*/ "la Bolera Bombchu" },
+        Text{ "the #Bombchu Bowling Alley#", /*french*/ "le #Bowling Teigneux#", /*spanish*/ "la Bolera Bombuchu" },
     });
 
     hintTable[MARKET_POTION_SHOP] = HintText::Region({
@@ -1191,7 +1191,7 @@ void HintTable_Init() {
 
     hintTable[MARKET_BOMBCHU_SHOP] = HintText::Region({
         // obscure text
-        Text{ "the #Bombchu Shop#", /*french*/ "le #Magasin de Missiles#", /*spanish*/ "la Tienda Bombchu" },
+        Text{ "the #Bombchu Shop#", /*french*/ "le #Magasin de Missiles#", /*spanish*/ "la Tienda Bombuchu" },
     });
 
     hintTable[MARKET_MAN_IN_GREEN_HOUSE] = HintText::Region({
@@ -2079,391 +2079,391 @@ void HintTable_Init() {
 
     hintTable[JUNK78] = HintText::Junk({
         //obscure text
-        Text{"They say blarg...^...or at least briaguya does.", /*french*/"Tout ce que j'ai à dire, c'est blarg...^... 'fin c'est plutôt ce que briaguya dirait.", /*spanish*/"blarg"},
+        Text{"They say blarg...^...or at least briaguya does.", /*french*/"Tout ce que j'ai à dire, c'est blarg...^... 'fin c'est plutôt ce que briaguya dirait.", /*spanish*/"Según dicen, blarg...^...o al menos eso dice briaguya."},
     });
 
     hintTable[JUNK79] = HintText::Junk({
         //obscure text
-        Text{"They say this peace is what all true warriors strive for.", /*french*/"Selon moi, cette paix est ce pour quoi luttent tous les vrais guerriers.", /*spanish*/"blarg"},
+        Text{"They say this peace is what all true warriors strive for.", /*french*/"Selon moi, cette paix est ce pour quoi luttent tous les vrais guerriers.", /*spanish*/"Según dicen, esta paz es lo que todo verdadero guerrero anhela."},
     });
 
     hintTable[JUNK80] = HintText::Junk({
         //obscure text
-        Text{"They say this ship is what all true gamers strive for.", /*french*/"Selon moi, cette version du port est ce pour quoi luttent tous les vrais gamers.", /*spanish*/"blarg"},
+        Text{"They say this ship is what all true gamers strive for.", /*french*/"Selon moi, cette version du port est ce pour quoi luttent tous les vrais gamers.", /*spanish*/"Según dicen, este barco es lo que todo verdadero jugón anhela."},
     });
 
     hintTable[JUNK81] = HintText::Junk({
         //obscure text
-        Text{"They say that Glowsticks can be found in the Raveyard.", /*french*/"On peut trouver des Bâtons Lumineux sur le dancefloor du cimetière.", /*spanish*/"blarg"},
+        Text{"They say that Glowsticks can be found in the Raveyard.", /*french*/"On peut trouver des Bâtons Lumineux sur le dancefloor du cimetière.", /*spanish*/"Según dicen, en el Cementerio de fiesta se pueden encontrar barras luminosas."},
     });
 
     hintTable[JUNK_WTC_1] = HintText::Junk({
-        Text{ "They say %rthere are no more than 18&people on this island.", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say %rthere are no more than 18&people on this island.", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, %rno hay más de 18&personas en esta isla." },
     });
 
     hintTable[JUNK_WTC_2] = HintText::Junk({
-        Text{ "They say I am one yet many", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say I am one yet many", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, soy uno y a la vez muchos" },
     });
 
     hintTable[JUNK_WTC_3] = HintText::Junk({
         Text{ "They say its all in the name of guiding&humanity down the right path.", HINT_TEXT_NEEDS_TRANSLATION_FR,
-              "blarg" },
+              "Según dicen, todo es por guiar&a la humanidad por el buen camino." },
     });
 
     hintTable[JUNK_WTC_4] = HintText::Junk({
-        Text{ "They say \"Repetition requested\"", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say \"Repetition requested\"", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, \"Se solicita repetición\"" },
     });
 
     hintTable[JUNK_WTC_5] = HintText::Junk({
-        Text{ "They say %rThe red tells only the truth!", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say %rThe red tells only the truth!", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, %r¡Lo rojo solo dice la verdad!" },
     });
 
     hintTable[JUNK_WTC_6] = HintText::Junk({
-        Text{ "They say good tidings to you^my traitorous @", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say good tidings to you^my traitorous @", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, buenas nuevas para ti^mi traicionero @" },
     });
 
     hintTable[JUNK_WTC_7] = HintText::Junk({
-        Text{ "They say when the seagulls cried,&none were left alive.", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say when the seagulls cried,&none were left alive.", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, cuando las gaviotas gritaron,&no quedó nadie con vida." },
     });
 
     hintTable[JUNK_WTC_7] = HintText::Junk({
-        Text{ "They say when the seagulls cried,&none were left alive.", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say when the seagulls cried,&none were left alive.", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, cuando las gaviotas gritaron,&no quedó nadie con vida." },
     });
 
     hintTable[JUNK_WTC_8] = HintText::Junk({
-        Text{ "They say she is lying with the red letters!", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say she is lying with the red letters!", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, ¡ella miente con las letras rojas!" },
     });
 
     hintTable[JUNK_WTC_9] = HintText::Junk({
-        Text{ "They say we'll meet again,&when something else cries.", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say we'll meet again,&when something else cries.", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, nos veremos de nuevo&cuando otra cosa grite." },
     });
 
     hintTable[JUNK_WTC_10] = HintText::Junk({
         Text{ "They say \"Forgive me, but-^Your script will not be used.&....After all...^The one writing the rest of "
               "the script...&will be me.\"",
-              HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+              HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, \"Perdóname, pero...^Tu guion no se usará.&....Después de todo...^Quien escriba el resto del guion...&seré yo.\"" },
     });
 
     hintTable[JUNK_WTC_11] = HintText::Junk({
-        Text{ "They say tea is best enjoyed...^\"\"With your fellow monsters.\"\"", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say tea is best enjoyed...^\"\"With your fellow monsters.\"\"", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, el té se disfruta mejor...^\"\"Con tus compañeros monstruos.\"\"" },
     });
 
     hintTable[JUNK_WTC_12] = HintText::Junk({
         Text{ "They say I shall make you some black tea. With my own hands, not magic.", HINT_TEXT_NEEDS_TRANSLATION_FR,
-              "blarg" },
+              "Según dicen, te prepararé un té negro. Con mis propias manos, sin magia." },
     });
 
     hintTable[JUNK_SEI_1] = HintText::Junk({
         Text{ "They say you know I've kiboshed before...^and I will kibosh again.", HINT_TEXT_NEEDS_TRANSLATION_FR,
-              "blarg" },
+              "Según dicen, sabes que ya lo he echado a perder antes...^y lo volveré a echar a perder." },
     });
 
     hintTable[JUNK_SEI_2] = HintText::Junk({
         Text{ "They say if relationship @ walks through that door,^they will KILL independent @.",
-              HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+              HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, si @ de pareja cruza esa puerta,^MATARÁ a @ independiente." },
     });
 
     hintTable[JUNK_SEI_3] = HintText::Junk({
-        Text{ "They say you gotta have the BIG Salad.", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say you gotta have the BIG Salad.", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, tienes que pedir la ENSALADA GRANDE." },
     });
 
     hintTable[JUNK_SEI_4] = HintText::Junk({
-        Text{ "They say it's a festivus miracle", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say it's a festivus miracle", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, es un milagro de Festivus" },
     });
 
     hintTable[JUNK_SEI_5] = HintText::Junk({
-        Text{ "They say there are no houses in Tuscany to rent.", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say there are no houses in Tuscany to rent.", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, no hay casas en alquiler en la Toscana." },
     });
 
     hintTable[JUNK_SEI_6] = HintText::Junk({
         Text{ "They say my last boyfriend had a real&Kroner comprehension problem.", HINT_TEXT_NEEDS_TRANSLATION_FR,
-              "blarg" },
+              "Según dicen, mi último novio tenía un problema serio&para entender a Kroner." },
     });
 
     hintTable[JUNK_SEI_7] = HintText::Junk({
-        Text{ "They say it's a festivus miracle.", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say it's a festivus miracle.", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, es un milagro de Festivus." },
     });
 
     hintTable[JUNK_SEI_8] = HintText::Junk({
-        Text{ "They say Louis quit the importing&to focus on the exporting.", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say Louis quit the importing&to focus on the exporting.", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, Louis dejó de importar&para centrarse en exportar." },
     });
 
     hintTable[JUNK_SEI_9] = HintText::Junk({
-        Text{ "They say no thanks, I can't drink coffee&late at night, it keeps me up.", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say no thanks, I can't drink coffee&late at night, it keeps me up.", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, no, gracias, no puedo tomar café&tarde por la noche, me desvela." },
     });
     
     hintTable[JUNK_SEI_10] = HintText::Junk({
-        Text{ "They say it's not a lie if you believe it.", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say it's not a lie if you believe it.", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, no es mentira si te lo crees." },
     });
 
     hintTable[JUNK_SEI_11] = HintText::Junk({
-        Text{ "They say there was a second spitter.", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say there was a second spitter.", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, había un segundo escupidor." },
     });
 
     hintTable[JUNK_SEI_12] = HintText::Junk({
-        Text{ "They say there was a second spitter.", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say there was a second spitter.", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, había un segundo escupidor." },
     });
 
     hintTable[JUNK_SEI_13] = HintText::Junk({
-        Text{ "They say the jerk store called,^they're running out of YOU.", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say the jerk store called,^they're running out of YOU.", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, llamó la tienda de idiotas,^y se están quedando sin TI." },
     });
     
     hintTable[JUNK_SEI_14] = HintText::Junk({
-        Text{ "They say when you look annoyed all the time,&people thing you are busy.", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say when you look annoyed all the time,&people thing you are busy.", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, si siempre pareces molesto,&la gente cree que estás ocupado." },
     });
 
     hintTable[JUNK_SEI_15] = HintText::Junk({
         Text{ "They say when you look annoyed all the time,&people think you are busy.", HINT_TEXT_NEEDS_TRANSLATION_FR,
-              "blarg" },
+              "Según dicen, si siempre pareces molesto,&la gente cree que estás ocupado." },
     });
 
     hintTable[JUNK_SEI_16] = HintText::Junk({
-        Text{ "They say he fires people like its a bodily function.", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say he fires people like its a bodily function.", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, despide a la gente como quien hace una función corporal." },
     });
 
     hintTable[JUNK_SEI_17] = HintText::Junk({
-        Text{ "They say he threatened to move the ship to New Jersey&just to upset people.", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say he threatened to move the ship to New Jersey&just to upset people.", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, amenazó con llevar el barco a Nueva Jersey&solo para molestar a la gente." },
     });
 
     hintTable[JUNK_SEI_18] = HintText::Junk({
-        Text{ "They say there was significant shrinkage.", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say there was significant shrinkage.", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, hubo un encogimiento considerable." },
     });
 
     hintTable[JUNK_SEI_19] = HintText::Junk({
-        Text{ "They say if it wasn't for the toilet there'd be no books.", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say if it wasn't for the toilet there'd be no books.", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, sin el inodoro no habría libros." },
     });
 
     hintTable[JUNK_SEI_20] = HintText::Junk({
-        Text{ "They say if it wasn't for the toilet there'd be no books.", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say if it wasn't for the toilet there'd be no books.", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, sin el inodoro no habría libros." },
     });
 
     hintTable[JUNK_SEI_21] = HintText::Junk({
-        Text{ "They say don't trust men in capes.", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say don't trust men in capes.", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, no te fíes de los hombres con capa." },
     });
     
     hintTable[JUNK_SEI_22] = HintText::Junk({
-        Text{ "They say @'s uncle works for Nintendo.", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say @'s uncle works for Nintendo.", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, el tío de @ trabaja en Nintendo." },
     });
 
     hintTable[JUNK_SEI_23] = HintText::Junk({
-        Text{ "They say @'s stole the marble rye.", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say @'s stole the marble rye.", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, @ robó el pan de centeno jaspeado." },
     });
 
     hintTable[JUNK_SEI_24] = HintText::Junk({
-        Text{ "They say there is no better harmony&than the black and white cookie.", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say there is no better harmony&than the black and white cookie.", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, no hay mejor armonía&que la galleta blanca y negra." },
     });
 
     hintTable[JUNK_SEI_25] = HintText::Junk({
-        Text{ "They say @ hasn't vomited since 1983.", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say @ hasn't vomited since 1983.", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, @ no vomita desde 1983." },
     });
 
     hintTable[JUNK_SEI_26] = HintText::Junk({
-        Text{ "They say you gotta have the early bird special.", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say you gotta have the early bird special.", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, tienes que pedir el menú madrugador." },
     });
 
     hintTable[JUNK_SEI_27] = HintText::Junk({
-        Text{ "They say a donation has been made in your name&to the human fund.", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say a donation has been made in your name&to the human fund.", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, se ha hecho una donación a tu nombre&al Fondo Humano." },
     });
 
     hintTable[JUNK_SEI_28] = HintText::Junk({
-        Text{ "They say you want to be my latex salesman.", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say you want to be my latex salesman.", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, quieres ser mi vendedor de látex." },
     });
 
     hintTable[JUNK_SEI_29] = HintText::Junk({
-        Text{ "They say if every instinct you have is wrong...^... then the opposite would have to be right.", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say if every instinct you have is wrong...^... then the opposite would have to be right.", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, si todos tus instintos fallan...^... lo contrario tendría que ser lo correcto." },
     });
 
     hintTable[JUNK_OTR_MEANS_1] = HintText::Junk({
-        Text{ "They say OTR stands for&Over the Rainbow", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say OTR stands for&Over the Rainbow", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, OTR significa&Más allá del arcoíris" },
     });
     hintTable[JUNK_OTR_MEANS_2] = HintText::Junk({
-        Text{ "They say that OTR stands for&Onions, Tomatoes, and Radishes", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say that OTR stands for&Onions, Tomatoes, and Radishes", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, OTR significa&Cebollas, Tomates y Rábanos" },
     });
     hintTable[JUNK_OTR_MEANS_3] = HintText::Junk({
-        Text{ "They say that OTR stands for&Ocarina of Time Resources", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say that OTR stands for&Ocarina of Time Resources", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, OTR significa&Recursos de Ocarina of Time" },
     });
     hintTable[JUNK_OTR_MEANS_4] = HintText::Junk({
-        Text{ "They say that OTR stands for&Over the Road", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say that OTR stands for&Over the Road", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, OTR significa&Por carretera" },
     });
     hintTable[JUNK_OTR_MEANS_5] = HintText::Junk({
-        Text{ "They say that OTR stands for&Off the Record", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say that OTR stands for&Off the Record", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, OTR significa&Extraoficial" },
     });
     hintTable[JUNK_OTR_MEANS_6] = HintText::Junk({
-        Text{ "They say that OTR stands for&Office of Tax and Revenue", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say that OTR stands for&Office of Tax and Revenue", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, OTR significa&Oficina de Impuestos y Rentas" },
     });
     hintTable[JUNK_OTR_MEANS_7] = HintText::Junk({
-        Text{ "They say OTR stands for&Over the Rainbow", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say OTR stands for&Over the Rainbow", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, OTR significa&Más allá del arcoíris" },
     });
     hintTable[JUNK_OTR_MEANS_8] = HintText::Junk({
-        Text{ "They say that OTR stands for&Office of Trade Relations", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say that OTR stands for&Office of Trade Relations", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, OTR significa&Oficina de Relaciones Comerciales" },
     });
     hintTable[JUNK_OTR_MEANS_9] = HintText::Junk({
-        Text{ "They say that OTR stands for&Original Theatrical Release", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say that OTR stands for&Original Theatrical Release", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, OTR significa&Estreno original en cines" },
     });
     hintTable[JUNK_OTR_MEANS_10] = HintText::Junk({
-        Text{ "They say that OTR stands for&Operational Test Requirement", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say that OTR stands for&Operational Test Requirement", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, OTR significa&Requisito de prueba operativa" },
     });
     hintTable[JUNK_OTR_MEANS_11] = HintText::Junk({
-        Text{ "They say that OTR stands for&Operational Trouble Report", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say that OTR stands for&Operational Trouble Report", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, OTR significa&Informe de problemas operativos" },
     });
     hintTable[JUNK_OTR_MEANS_12] = HintText::Junk({
-        Text{ "They say that OTR stands for&Oxygen Transmission Rate", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say that OTR stands for&Oxygen Transmission Rate", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, OTR significa&Tasa de transmisión de oxígeno" },
     });
     hintTable[JUNK_OTR_MEANS_13] = HintText::Junk({
-        Text{ "They say that OTR stands for&One Touch Recording", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say that OTR stands for&One Touch Recording", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, OTR significa&Grabación con un toque" },
     });
     hintTable[JUNK_OTR_MEANS_14] = HintText::Junk({
-        Text{ "They say that OTR stands for&Olympic Torch Relay", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say that OTR stands for&Olympic Torch Relay", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, OTR significa&Relevo de la antorcha olímpica" },
     });
     hintTable[JUNK_OTR_MEANS_15] = HintText::Junk({
-        Text{ "They say that OTR stands for&Off the Rack", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say that OTR stands for&Off the Rack", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, OTR significa&De confección" },
     });
     hintTable[JUNK_OTR_MEANS_16] = HintText::Junk({
-        Text{ "They say that OTR stands for&Overhead Transfer Rate", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say that OTR stands for&Overhead Transfer Rate", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, OTR significa&Tasa de transferencia de sobrecarga" },
     });
     hintTable[JUNK_OTR_MEANS_17] = HintText::Junk({
-        Text{ "They say that OTR stands for&Operational TurnaRound", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say that OTR stands for&Operational TurnaRound", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, OTR significa&Rotación operativa" },
     });
     hintTable[JUNK_OTR_MEANS_18] = HintText::Junk({
-        Text{ "They say that OTR stands for&Opportunity to Recall", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say that OTR stands for&Opportunity to Recall", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, OTR significa&Oportunidad de recordar" },
     });
     hintTable[JUNK_OTR_MEANS_19] = HintText::Junk({
-        Text{ "They say that OTR stands for&Operability Test Report", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say that OTR stands for&Operability Test Report", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, OTR significa&Informe de prueba de operatividad" },
     });
     hintTable[JUNK_OTR_MEANS_20] = HintText::Junk({
-        Text{ "They say that OTR stands for&Overall Tuning Range", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say that OTR stands for&Overall Tuning Range", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, OTR significa&Rango total de sintonización" },
     });
     hintTable[JUNK_OTR_MEANS_21] = HintText::Junk({
-        Text{ "They say that OTR stands for&One Time Requisition", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say that OTR stands for&One Time Requisition", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, OTR significa&Requisición única" },
     });
     hintTable[JUNK_OTR_MEANS_22] = HintText::Junk({
-        Text{ "They say that OTR stands for&Oblivious to Reality", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say that OTR stands for&Oblivious to Reality", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, OTR significa&Ajeno a la realidad" },
     });
     hintTable[JUNK_OTR_MEANS_23] = HintText::Junk({
-        Text{ "They say that OTR stands for&On the Run", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say that OTR stands for&On the Run", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, OTR significa&A la fuga" },
     });
     hintTable[JUNK_OTR_MEANS_24] = HintText::Junk({
-        Text{ "They say that OTR stands for&On Time Reporting", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say that OTR stands for&On Time Reporting", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, OTR significa&Informe puntual" },
     });
     hintTable[JUNK_OTR_MEANS_25] = HintText::Junk({
-        Text{ "They say that OTR stands for&Order to Receipt", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say that OTR stands for&Order to Receipt", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, OTR significa&Del pedido a la recepción" },
     });
     hintTable[JUNK_OTR_MEANS_26] = HintText::Junk({
-        Text{ "They say that OTR stands for&Other Terrestrial Radio", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say that OTR stands for&Other Terrestrial Radio", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, OTR significa&Otra radio terrestre" },
     });
     hintTable[JUNK_OTR_MEANS_27] = HintText::Junk({
-        Text{ "They say that OTR stands for&On Target Reports", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say that OTR stands for&On Target Reports", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, OTR significa&Informes certeros" },
     });
     hintTable[JUNK_OTR_MEANS_28] = HintText::Junk({
-        Text{ "They say that OTR stands for&One Time Repair", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say that OTR stands for&One Time Repair", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, OTR significa&Reparación única" },
     });
     hintTable[JUNK_OTR_MEANS_29] = HintText::Junk({
-        Text{ "They say that OTR stands for&Own the Room", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say that OTR stands for&Own the Room", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, OTR significa&Dominar la sala" },
     });
     hintTable[JUNK_OTR_MEANS_30] = HintText::Junk({
-        Text{ "They say that OTR stands for&Online Text Repository", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say that OTR stands for&Online Text Repository", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, OTR significa&Repositorio de texto en línea" },
     });
 
     hintTable[JUNK_MISC_1] = HintText::Junk({
-        Text{ "They say %gKenix%w isn't a developer...^...Just a PR guy", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say %gKenix%w isn't a developer...^...Just a PR guy", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, %gKenix%w no es desarrollador...^...solo un tipo de relaciones públicas" },
     });
 
     hintTable[JUNK_MISC_2] = HintText::Junk({
-        Text {"They say... No", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg"},
+        Text {"They say... No", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen... No"},
      });
 
     hintTable[JUNK_MISC_3] = HintText::Junk({ 
-        Text{ "They say BIG RIGS: OTR", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" } 
+        Text{ "They say BIG RIGS: OTR", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, BIG RIGS: OTR" } 
     });
 
     hintTable[JUNK_MISC_4] = HintText::Junk({
-        Text{ "They say you wanted to see me %pMr. Kenix%w?", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say you wanted to see me %pMr. Kenix%w?", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, ¿querías verme, %pSr. Kenix%w?" },
     });
 
     hintTable[JUNK_MISC_5] = HintText::Junk({
-        Text{ "They say Louis once saw an&equals not get set equals", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say Louis once saw an&equals not get set equals", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, Louis vio una vez&un igual que no se volvió asignación" },
     });
 
     hintTable[JUNK_MISC_6] = HintText::Junk({
-        Text{ "They say only you can find your rom.", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say only you can find your rom.", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, solo tú puedes encontrar tu ROM." },
     });
 
     hintTable[JUNK_MISC_7] = HintText::Junk({
-        Text{ "They say ZAPD is good software.", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say ZAPD is good software.", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, ZAPD es un buen software." },
     });
 
     hintTable[JUNK_MISC_8] = HintText::Junk({
-        Text{ "They say you can encounter&a parascode in tall grass.", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say you can encounter&a parascode in tall grass.", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, puedes encontrar&un parascode en la hierba alta." },
     });
 
     hintTable[JUNK_MISC_9] = HintText::Junk({
-        Text{ "They say the ship sails on March 32nd.", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say the ship sails on March 32nd.", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, el barco zarpa el 32 de marzo." },
     });
 
     hintTable[JUNK_MISC_10] = HintText::Junk({
-        Text{ "They say bombing dodongos is fun.", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say bombing dodongos is fun.", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, bombardear dodongos es divertido." },
     });
 
     hintTable[JUNK_MISC_11] = HintText::Junk({
-        Text{ "They say shopkeepers don't give credits.", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say shopkeepers don't give credits.", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, los tenderos no fían." },
     });
 
     hintTable[JUNK_MISC_12] = HintText::Junk({
-        Text{ "They say shopkeepers don't give credits.", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say shopkeepers don't give credits.", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, los tenderos no fían." },
     });
 
     hintTable[JUNK_MISC_13] = HintText::Junk({
-        Text{ "They say Malon is glitched.", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say Malon is glitched.", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, Malon tiene un glitch." },
     });
 
     hintTable[JUNK_MISC_14] = HintText::Junk({
-        Text{ "They say do I look like I know&what a DList is?", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say do I look like I know&what a DList is?", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, ¿tengo pinta de saber&qué es una DList?" },
     });
 
     hintTable[JUNK_MISC_15] = HintText::Junk({
-        Text{ "They say do I look like I know&what an AList is?", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say do I look like I know&what an AList is?", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, ¿tengo pinta de saber&qué es una AList?" },
     });
 
     hintTable[JUNK_MISC_16] = HintText::Junk({
-        Text{ "They say the king drinks enthusiastically", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say the king drinks enthusiastically", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, el rey bebe con entusiasmo" },
     });
 
     hintTable[JUNK_MISC_17] = HintText::Junk({
-        Text{ "They say Rubies are on the path to&Lamp Oil, Rope, and Bombs", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say Rubies are on the path to&Lamp Oil, Rope, and Bombs", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, los rubíes son el camino hacia&aceite de lámpara, cuerda y bombas" },
     });
 
     hintTable[JUNK_SG_1] = HintText::Junk({
-        Text{ "They say %rError. Human is dead, mismatch.", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say %rError. Human is dead, mismatch.", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, %rError. El humano ha muerto, discrepancia." },
     });
 
     hintTable[JUNK_SG_2] = HintText::Junk({
-        Text{ "They say this is the choice of the&steins gate.", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say this is the choice of the&steins gate.", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, esta es la elección de&Steins Gate." },
     });
 
     hintTable[JUNK_SG_3] = HintText::Junk({
-        Text{ "They say el psy kongroo.", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say el psy kongroo.", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, el psy kongroo." },
     });
 
     hintTable[JUNK_SG_4] = HintText::Junk({
-        Text{ "They say tutturu~.", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say tutturu~.", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, tutturu~." },
     });
 
 
     hintTable[JUNK_SG_5] = HintText::Junk({
-        Text{ "They say im not Christina!.", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say im not Christina!.", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, ¡no soy Christina!." },
     });
 
     hintTable[JUNK_SG_6] = HintText::Junk({
-        Text{ "They say you know where to find an IBN5100.", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say you know where to find an IBN5100.", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, sabes dónde encontrar un IBN5100." },
     });
 
     hintTable[JUNK_SG_7] = HintText::Junk({
-        Text{ "They say when you're on a chicken bender&grab a box of chicken tenders.", HINT_TEXT_NEEDS_TRANSLATION_FR, "blarg" },
+        Text{ "They say when you're on a chicken bender&grab a box of chicken tenders.", HINT_TEXT_NEEDS_TRANSLATION_FR, "Según dicen, si te da por el pollo,&coge una caja de tiras de pollo." },
     });
 
     hintTable[JUNK_SG_8] = HintText::Junk({
         Text{ "Juicy Chicken #1! Wow!.", HINT_TEXT_NEEDS_TRANSLATION_FR,
-              "blarg" },
+              "¡Pollo jugoso, el número 1! ¡Guau!." },
     });
 
     /*--------------------------
@@ -2718,7 +2718,7 @@ void HintTable_Init() {
         // obscure text
         Text{ "The awakened ones will await&for the Hero to find %gGreg%w.",
               /*french*/ "The awakened ones will await&for the Hero to find %gGreg%w.",
-              /*spanish*/ "The awakened ones will await&for the Hero to find %gGreg%w." },
+              /*spanish*/ "Los sabios aguardarán&a que el héroe encuentre a %gGreg%w." },
     });
 
     /*--------------------------

@@ -24,6 +24,7 @@
 #include <sstream>
 #include <tuple>
 #include <functional>
+#include <unordered_map>
 #include "draw.h"
 #include "rando_hash.h"
 #include <boost_custom/container_hash/hash_32.hpp>
@@ -3075,6 +3076,73 @@ bool GenerateRandomizer(std::string seed /*= ""*/) {
     return false;
 }
 
+// Display-only Spanish labels for the randomizer settings. The English names are intentionally left
+// untouched in the settings definitions because they are used as keys in the spoiler log files.
+static const std::string& RandoSettingLabel(const std::string& englishName) {
+    static const std::unordered_map<std::string, std::string> kLabels = {
+        { "Forest", "Bosque" },
+        { "Kakariko Gate", "Puerta de Kakariko" },
+        { "Door of Time", "Puerta del Tiempo" },
+        { "Zora's Fountain", "Fuente Zora" },
+        { "Starting Age", "Edad inicial" },
+        { "Shuffle Songs", "Mezclar canciones" },
+        { "Tokensanity", "Símbolos de Skulltula" },
+        { "Shuffle Kokiri Sword", "Mezclar Espada Kokiri" },
+        { "Shuffle Ocarinas", "Mezclar ocarinas" },
+        { "Shuffle Weird Egg", "Mezclar Huevo extraño" },
+        { "Shuffle Gerudo Card", "Mezclar pase gerudo" },
+        { "Shopsanity", "Shopsanity (tiendas)" },
+        { "Shopsanity Prices", "Precios de tiendas" },
+        { "Affordable Prices", "Precios asequibles" },
+        { "Scrub Shuffle", "Mezclar deku mercaderes" },
+        { "Shuffle Cows", "Mezclar vacas" },
+        { "Shuffle Magic Beans", "Mezclar judías mágicas" },
+        { "Shuffle Merchants", "Mezclar mercaderes" },
+        { "Shuffle Frog Song Rupees", "Mezclar rupias de ranas" },
+        { "Shuffle Adult Trade", "Mezclar trueque adulto" },
+        { "Shuffle 100 GS Reward", "Mezclar premio 100 GS" },
+        { "Shuffle Dungeon Rewards", "Mezclar recompensas" },
+        { "Maps/Compasses", "Mapas/brújulas" },
+        { "Small Keys", "Llaves pequeñas" },
+        { "Key Rings", "Llaveros" },
+        { "Gerudo Fortress Keys", "Llaves de la fortaleza" },
+        { "Boss Keys", "Grandes llaves" },
+        { "Ganon's Boss Key", "Gran llave de Ganon" },
+        { "Skip Child Stealth", "Omitir sigilo infantil" },
+        { "Skip Epona Race", "Omitir carrera de Epona" },
+        { "Skip Tower Escape", "Omitir huida de la torre" },
+        { "Complete Mask Quest", "Misión de máscaras completa" },
+        { "Skip Scarecrow's Song", "Omitir Son del espantapájaros" },
+        { "Item Pool", "Grupo de objetos" },
+        { "Ice Traps", "Trampas de hielo" },
+        { "Gossip Stone Hints", "Pistas de piedras chismosas" },
+        { "Hint Clarity", "Claridad de pistas" },
+        { "Hint Distribution", "Distribución de pistas" },
+        { "Bombchus in Logic", "Bombuchus en la lógica" },
+        { "All Locations Reachable", "Todos los lugares accesibles" },
+        { "Enable Glitch-Useful Cutscenes", "Activar escenas útiles para glitches" },
+        { "Link's Pocket", "Bolsillo de Link" },
+        { "Start with Kokiri Sword", "Empezar con Espada Kokiri" },
+        { "Start with Deku Shield", "Empezar con Escudo deku" },
+        { "Start with Fairy Ocarina", "Empezar con ocarina" },
+        { "Start with Consumables", "Empezar con consumibles" },
+        { "Start with Zelda's Lullaby", "Empezar con Nana de Zelda" },
+        { "Start with Epona's Song", "Empezar con Canción de Epona" },
+        { "Start with Saria's Song", "Empezar con Canción de Saria" },
+        { "Start with Sun's Song", "Empezar con Canción del Sol" },
+        { "Start with Song of Time", "Empezar con Canción del tiempo" },
+        { "Start with Song of Storms", "Empezar con Canción de la tormenta" },
+        { "Start with Minuet of Forest", "Empezar con Minueto del bosque" },
+        { "Start with Bolero of Fire", "Empezar con Bolero del fuego" },
+        { "Start with Serenade of Water", "Empezar con Serenata del agua" },
+        { "Start with Requiem of Spirit", "Empezar con Réquiem del espíritu" },
+        { "Start with Nocturne of Shadow", "Empezar con Nocturno de la sombra" },
+        { "Start with Prelude of Light", "Empezar con Preludio de la luz" }
+    };
+    auto it = kLabels.find(englishName);
+    return it != kLabels.end() ? it->second : englishName;
+}
+
 void DrawRandoEditor(bool& open) {
     if (generated) {
         generated = 0;
@@ -3092,66 +3160,66 @@ void DrawRandoEditor(bool& open) {
 
     // Randomizer settings
     // Logic Settings
-    static const char* randoLogicRules[2] = { "Glitchless", "No logic" };
+    static const char* randoLogicRules[2] = { "Sin glitches", "Sin lógica" };
 
     // Open Settings
-    static const char* randoForest[3] = { "Closed", "Closed Deku", "Open" };
-    static const char* randoKakarikoGate[2] = { "Closed", "Open" };
-    static const char* randoDoorOfTime[3] = { "Closed", "Song only", "Open" };
-    static const char* randoZorasFountain[3] = { "Closed", "Closed as child", "Open" };
-    static const char* randoGerudoFortress[3] = { "Normal", "Fast", "Open" };
-    static const char* randoRainbowBridge[8] = { "Vanilla",         "Always open", "Stones", "Medallions",
-                                          "Dungeon rewards", "Dungeons",    "Tokens", "Greg" };
-    static const char* randoGanonsTrial[3] = { "Skip", "Set Number", "Random Number" };
-    static const char* randoMqDungeons[3] = { "None", "Set Number", "Random Number" };
+    static const char* randoForest[3] = { "Cerrado", "Deku cerrado", "Abierto" };
+    static const char* randoKakarikoGate[2] = { "Cerrado", "Abierto" };
+    static const char* randoDoorOfTime[3] = { "Cerrado", "Solo canción", "Abierto" };
+    static const char* randoZorasFountain[3] = { "Cerrado", "Cerrado de niño", "Abierto" };
+    static const char* randoGerudoFortress[3] = { "Normal", "Rápido", "Abierto" };
+    static const char* randoRainbowBridge[8] = { "Original",         "Siempre abierto", "Piedras", "Medallones",
+                                          "Recompensas", "Mazmorras",    "Símbolos", "Greg" };
+    static const char* randoGanonsTrial[3] = { "Omitir", "Número fijo", "Número al azar" };
+    static const char* randoMqDungeons[3] = { "Ninguna", "Número fijo", "Número al azar" };
 
     // World Settings
-    static const char* randoStartingAge[3] = { "Child", "Adult", "Random" };
-    static const char* randoShuffleDungeonsEntrances[3] = { "Off", "On", "On + Ganon" };
-    static const char* randoShuffleBossEntrances[3] = { "Off", "Age Restricted", "Full" };
-    static const char* randoShuffleInteriorsEntrances[3] = { "Off", "Simple", "All" };
-    static const char* randoBombchusInLogic[2] = { "Off", "On" };
-    static const char* randoAmmoDrops[3] = { "On + Bombchu", "Off", "On" };
-    static const char* randoHeartDropsAndRefills[4] = { "On", "No Drop", "No Refill", "Off" };
+    static const char* randoStartingAge[3] = { "Niño", "Adulto", "Al azar" };
+    static const char* randoShuffleDungeonsEntrances[3] = { "No", "Sí", "Sí + Ganon" };
+    static const char* randoShuffleBossEntrances[3] = { "No", "Según la edad", "Completo" };
+    static const char* randoShuffleInteriorsEntrances[3] = { "No", "Simple", "Todo" };
+    static const char* randoBombchusInLogic[2] = { "No", "Sí" };
+    static const char* randoAmmoDrops[3] = { "Sí + Bombuchu", "No", "Sí" };
+    static const char* randoHeartDropsAndRefills[4] = { "Sí", "Sin botín", "Sin recarga", "No" };
 
     // Shuffle Settings
-    static const char* randoShuffleDungeonRewards[4] = { "End of dungeons", "Any dungeon", "Overworld", "Anywhere" };
-    static const char* randoLinksPocket[4] = { "Dungeon Reward", "Advancement", "Anything", "Nothing" };
-    static const char* randoShuffleSongs[3] = { "Song Locations", "Dungeon Rewards", "Anywhere" };
-    static const char* randoShopsanity[7] = { "Off", "0 Items", "1 Item", "2 Items", "3 Items", "4 Items", "Random" };
-    static const char* randoShopsanityPrices[5] = { "Balanced", "Starter Wallet", "Adult Wallet", "Giant's Wallet", "Tycoon's Wallet" };
-    static const char* randoTokensanity[4] = { "Off", "Dungeons", "Overworld", "All Tokens" };
-    static const char* randoShuffleScrubs[4] = { "Off", "Affordable", "Expensive", "Random Prices" };
-    static const char* randoShuffleMerchants[3] = { "Off", "On (no hints)", "On (with hints)" };
+    static const char* randoShuffleDungeonRewards[4] = { "Al final de mazmorras", "Cualquier mazmorra", "Exterior", "Cualquier lugar" };
+    static const char* randoLinksPocket[4] = { "Recompensa de mazmorra", "Progreso", "Lo que sea", "Nada" };
+    static const char* randoShuffleSongs[3] = { "Lugares de canciones", "Recompensas de mazmorra", "Cualquier lugar" };
+    static const char* randoShopsanity[7] = { "No", "0 objetos", "1 objeto", "2 objetos", "3 objetos", "4 objetos", "Al azar" };
+    static const char* randoShopsanityPrices[5] = { "Equilibrado", "Bolsa inicial", "Bolsa de adulto", "Bolsa gigante", "Bolsa de magnate" };
+    static const char* randoTokensanity[4] = { "No", "Mazmorras", "Exterior", "Todos los símbolos" };
+    static const char* randoShuffleScrubs[4] = { "No", "Asequibles", "Caros", "Precios al azar" };
+    static const char* randoShuffleMerchants[3] = { "No", "Sí (sin pistas)", "Sí (con pistas)" };
 
     // Shuffle Dungeon Items Settings
-    static const char* randoShuffleMapsAndCompasses[6] = { "Start With",  "Vanilla",   "Own Dungeon",
-                                                    "Any Dungeon", "Overworld", "Anywhere" };
-    static const char* randoShuffleSmallKeys[6] = { "Start With",  "Vanilla",   "Own Dungeon",
-                                             "Any Dungeon", "Overworld", "Anywhere" };
-    static const char* randoShuffleGerudoFortressKeys[4] = { "Vanilla", "Any Dungeon", "Overworld", "Anywhere" };
-    static const char* randoShuffleBossKeys[6] = { "Start With",  "Vanilla",   "Own Dungeon",
-                                            "Any Dungeon", "Overworld", "Anywhere" };
-    static const char* randoShuffleGanonsBossKey[13] = {"Vanilla", "Own dungeon", "Start with", 
-                                                "Any Dungeon", "Overworld", "Anywhere", 
-                                                "LACS-Vanilla", "LACS-Medallions", "LACS-Stones", 
-                                                "LACS-Rewards", "LACS-Dungeons", "LACS-Tokens",
-                                                "100 GS Reward"};
-    static const char* randoShuffleKeyRings[4] = { "Off", "Random", "Count", "Selection" };
+    static const char* randoShuffleMapsAndCompasses[6] = { "Empezar con",  "Original",   "Su mazmorra",
+                                                    "Cualquier mazmorra", "Exterior", "Cualquier lugar" };
+    static const char* randoShuffleSmallKeys[6] = { "Empezar con",  "Original",   "Su mazmorra",
+                                             "Cualquier mazmorra", "Exterior", "Cualquier lugar" };
+    static const char* randoShuffleGerudoFortressKeys[4] = { "Original", "Cualquier mazmorra", "Exterior", "Cualquier lugar" };
+    static const char* randoShuffleBossKeys[6] = { "Empezar con",  "Original",   "Su mazmorra",
+                                            "Cualquier mazmorra", "Exterior", "Cualquier lugar" };
+    static const char* randoShuffleGanonsBossKey[13] = {"Original", "Su mazmorra", "Empezar con", 
+                                                "Cualquier mazmorra", "Exterior", "Cualquier lugar", 
+                                                "LACS-Original", "LACS-Medallones", "LACS-Piedras", 
+                                                "LACS-Recompensas", "LACS-Mazmorras", "LACS-Símbolos",
+                                                "Premio 100 GS"};
+    static const char* randoShuffleKeyRings[4] = { "No", "Al azar", "Cantidad", "Selección" };
 
     // Misc Settings
-    static const char* randoGossipStoneHints[4] = { "No Hints", "Need Nothing", "Mask of Truth", "Stone of Agony" };
-    static const char* randoHintClarity[3] = { "Obscure", "Ambiguous", "Clear" };
-    static const char* randoHintDistribution[4] = { "Useless", "Balanced", "Strong", "Very Strong" };
-    static const char* randoStartingTime[2] = { "Day", "Night" };
-    static const char* randoRandomTrapDamage[3] = { "Basic", "Advanced", "Off" };
+    static const char* randoGossipStoneHints[4] = { "Sin pistas", "Sin requisitos", "Máscara de la Verdad", "Piedra de la Agonía" };
+    static const char* randoHintClarity[3] = { "Oscuras", "Ambiguas", "Claras" };
+    static const char* randoHintDistribution[4] = { "Inútiles", "Equilibrado", "Fuertes", "Muy fuertes" };
+    static const char* randoStartingTime[2] = { "Día", "Noche" };
+    static const char* randoRandomTrapDamage[3] = { "Básico", "Avanzado", "No" };
 
     // Item Pool Settings
-    static const char* randoItemPool[4] = { "Plentiful", "Balanced", "Scarce", "Minimal" };
-    static const char* randoIceTraps[5] = { "Off", "Normal", "Extra", "Mayhem", "Onslaught" };
+    static const char* randoItemPool[4] = { "Abundante", "Equilibrado", "Escaso", "Mínimo" };
+    static const char* randoIceTraps[5] = { "No", "Normal", "Extra", "Caos", "Aluvión" };
 
     ImGui::SetNextWindowSize(ImVec2(920, 600), ImGuiCond_FirstUseEver);
-    if (!ImGui::Begin("Randomizer Editor", &open, ImGuiWindowFlags_NoFocusOnAppearing)) {
+    if (!ImGui::Begin("Editor del Randomizer", &open, ImGuiWindowFlags_NoFocusOnAppearing)) {
         ImGui::End();
         return;
     }
@@ -3163,33 +3231,33 @@ void DrawRandoEditor(bool& open) {
     DrawPresetSelector(PRESET_TYPE_RANDOMIZER);
 
     UIWidgets::Spacer(0);
-    UIWidgets::EnhancementCheckbox("Manual seed entry", "gRandoManualSeedEntry", false, "");
+    UIWidgets::EnhancementCheckbox("Introducir seed a mano", "gRandoManualSeedEntry", false, "");
     if (CVarGetInteger("gRandoManualSeedEntry", 0)) {
         ImGui::Text("Seed");
         ImGui::InputText("##RandomizerSeed", seedString, MAX_SEED_STRING_SIZE, ImGuiInputTextFlags_CallbackCharFilter, UIWidgets::TextFilters::FilterAlphaNum);
         UIWidgets::Tooltip(
-            "Characters from a-z, A-Z, and 0-9 are supported.\n"
-            "Character limit is 1023, after which the seed will be truncated.\n"
+            "Se admiten caracteres de la a a la z, de la A a la Z y del 0 al 9.\n"
+            "El límite es de 1023 caracteres; a partir de ahí la seed se recorta.\n"
         );
         ImGui::SameLine();
-        if (ImGui::Button("New Seed")) {
+        if (ImGui::Button("Nueva seed")) {
             strncpy(seedString, std::to_string(rand() & 0xFFFFFFFF).c_str(), MAX_SEED_STRING_SIZE);
         }
-        UIWidgets::Tooltip("Creates a new random seed value to be used when generating a randomizer");
+        UIWidgets::Tooltip("Crea un valor de seed aleatorio nuevo para usar al generar un randomizer");
         ImGui::SameLine();
-        if (ImGui::Button("Clear Seed")) {
+        if (ImGui::Button("Borrar seed")) {
             memset(seedString, 0, MAX_SEED_STRING_SIZE);
         }
     }
 
     UIWidgets::Spacer(0);
-    if (ImGui::Button("Generate Randomizer")) {        
+    if (ImGui::Button("Generar Randomizer")) {        
         GenerateRandomizer(CVarGetInteger("gRandoManualSeedEntry", 0) ? seedString : std::to_string(rand() & 0xFFFFFFFF).c_str());
     }
 
     UIWidgets::Spacer(0);
     std::string spoilerfilepath = CVarGetString("gSpoilerLog", "");
-    ImGui::Text("Spoiler File: %s", spoilerfilepath.c_str());
+    ImGui::Text("Archivo de spoiler: %s", spoilerfilepath.c_str());
 
     // RANDOTODO settings presets
     // std::string presetfilepath = CVarGetString("gLoadedPreset", "");
@@ -3200,13 +3268,13 @@ void DrawRandoEditor(bool& open) {
     ImGuiWindow* window = ImGui::GetCurrentWindow();
     static ImVec2 cellPadding(8.0f, 8.0f);
 
-    if (ImGui::BeginTabBar("Randomizer Settings", ImGuiTabBarFlags_NoCloseWithMiddleMouseButton)) {
-        if (ImGui::BeginTabItem("World")) {
+    if (ImGui::BeginTabBar("Ajustes del Randomizer", ImGuiTabBarFlags_NoCloseWithMiddleMouseButton)) {
+        if (ImGui::BeginTabItem("Mundo")) {
             ImGui::PushStyleVar(ImGuiStyleVar_CellPadding, cellPadding);
             if (ImGui::BeginTable("tableRandoWorld", 3, ImGuiTableFlags_BordersH | ImGuiTableFlags_BordersV)) {
-                ImGui::TableSetupColumn("Area Access", ImGuiTableColumnFlags_WidthStretch, 200.0f);
-                ImGui::TableSetupColumn("World Settings", ImGuiTableColumnFlags_WidthStretch, 200.0f);
-                ImGui::TableSetupColumn("Shuffle Entrances", ImGuiTableColumnFlags_WidthStretch, 200.0f);
+                ImGui::TableSetupColumn("Acceso a zonas", ImGuiTableColumnFlags_WidthStretch, 200.0f);
+                ImGui::TableSetupColumn("Ajustes del mundo", ImGuiTableColumnFlags_WidthStretch, 200.0f);
+                ImGui::TableSetupColumn("Mezclar entradas", ImGuiTableColumnFlags_WidthStretch, 200.0f);
                 ImGui::PushItemFlag(ImGuiItemFlags_Disabled, true);
                 ImGui::TableHeadersRow();
                 ImGui::PopItemFlag();
@@ -3219,63 +3287,63 @@ void DrawRandoEditor(bool& open) {
                 ImGui::PushItemWidth(-FLT_MIN);
 
                 // Forest
-                ImGui::Text(Settings::OpenForest.GetName().c_str());
+                ImGui::Text(RandoSettingLabel(Settings::OpenForest.GetName()).c_str());
                 UIWidgets::InsertHelpHoverText(
-                    "Closed - Kokiri sword & shield are required to access "
-                    "the Deku Tree, and completing the Deku Tree is required to "
-                    "access the Hyrule Field exit.\n"
+                    "Cerrado: hacen falta la espada y el escudo Kokiri para acceder a "
+                    "el Gran Árbol Deku, y hay que completarlo para "
+                    "poder salir a la Llanura de Hyrule.\n"
                     "\n"
-                    "Closed Deku - Kokiri boy no longer blocks the path to Hyrule "
-                    "Field but Mido still requires the Kokiri sword and Deku shield "
-                    "to access the tree.\n"
+                    "Deku cerrado: el niño Kokiri ya no bloquea el camino a la Llanura de "
+                    "Hyrule, pero Mido sigue exigiendo la espada Kokiri y el escudo deku "
+                    "para entrar en el árbol.\n"
                     "\n"
-                    "Open - Mido no longer blocks the path to the Deku Tree. Kokiri "
-                    "boy no longer blocks the path out of the forest."
+                    "Abierto: Mido ya no bloquea el camino al Gran Árbol Deku. El niño "
+                    "Kokiri ya no bloquea la salida del bosque."
                 );
                 UIWidgets::EnhancementCombobox("gRandomizeForest", randoForest, RO_FOREST_MAX, RO_FOREST_CLOSED);
 
                 UIWidgets::PaddedSeparator();
 
                 // Kakariko Gate
-                ImGui::Text(Settings::OpenKakariko.GetName().c_str());
+                ImGui::Text(RandoSettingLabel(Settings::OpenKakariko.GetName()).c_str());
                 UIWidgets::InsertHelpHoverText(
-                    "Closed - The gate will remain closed until Zelda's letter "
-                    "is shown to the guard.\n"
+                    "Cerrado: la puerta seguirá cerrada hasta que enseñes la carta de Zelda "
+                    "al guardia.\n"
                     "\n"
-                    "Open - The gate is always open. The happy mask shop "
-                    "will open immediately after obtaining Zelda's letter."
+                    "Abierto: la puerta está siempre abierta. La tienda de máscaras "
+                    "se abrirá nada más conseguir la carta de Zelda."
                 );
                 UIWidgets::EnhancementCombobox("gRandomizeKakarikoGate", randoKakarikoGate, RO_KAK_GATE_MAX, RO_KAK_GATE_CLOSED);
 
                 UIWidgets::PaddedSeparator();
 
                 // Door of Time
-                ImGui::Text(Settings::OpenDoorOfTime.GetName().c_str());
+                ImGui::Text(RandoSettingLabel(Settings::OpenDoorOfTime.GetName()).c_str());
                 UIWidgets::InsertHelpHoverText(
-                    "Closed - The Ocarina of Time, the Song of Time and all "
-                    "three spiritual stones are required to open the Door of Time.\n"
+                    "Cerrado: hacen falta la Ocarina del Tiempo, la Canción del tiempo y las "
+                    "tres piedras espirituales para abrir la Puerta del Tiempo.\n"
                     "\n"
-                    "Song only - Play the Song of Time in front of the Door of "
-                    "Time to open it.\n"
+                    "Solo canción: toca la Canción del tiempo ante la Puerta del "
+                    "Tiempo para abrirla.\n"
                     "\n"
-                    "Open - The Door of Time is permanently open with no requirements."
+                    "Abierto: la Puerta del Tiempo está siempre abierta, sin requisitos."
                 );
                 UIWidgets::EnhancementCombobox("gRandomizeDoorOfTime", randoDoorOfTime, RO_DOOROFTIME_MAX, RO_DOOROFTIME_CLOSED);
 
                 UIWidgets::PaddedSeparator();
 
                 // Zora's Fountain
-                ImGui::Text(Settings::ZorasFountain.GetName().c_str());
+                ImGui::Text(RandoSettingLabel(Settings::ZorasFountain.GetName()).c_str());
                 UIWidgets::InsertHelpHoverText(
-                    "Closed - King Zora obstructs the way to Zora's Fountain. "
-                    "Ruto's letter must be shown as child Link in order to move "
-                    "him in both time periods.\n"
+                    "Cerrado: el Rey Zora bloquea el camino a la Fuente Zora. "
+                    "Hay que enseñar la carta de Ruto como Link niño para apartarlo "
+                    "en ambas épocas.\n"
                     "\n"
-                    "Closed as child - Ruto's Letter is only required to move King Zora "
-                    "as child Link. Zora's Fountain starts open as adult.\n"
+                    "Cerrado de niño: la carta de Ruto solo hace falta para mover al Rey Zora "
+                    "como Link niño. La Fuente Zora empieza abierta como adulto.\n"
                     "\n"
-                    "Open - King Zora has already mweeped out of the way in both "
-                    "time periods. Ruto's Letter is removed from the item pool."
+                    "Abierto: el Rey Zora ya se ha apartado en ambas "
+                    "épocas. La carta de Ruto se quita del grupo de objetos."
                 );
                 UIWidgets::EnhancementCombobox("gRandomizeZorasFountain", randoZorasFountain, RO_ZF_MAX, RO_ZF_CLOSED);
 
@@ -3295,56 +3363,56 @@ void DrawRandoEditor(bool& open) {
                     ((CVarGetInteger("gRandomizeDoorOfTime", RO_DOOROFTIME_CLOSED) == RO_DOOROFTIME_CLOSED) &&
                     (CVarGetInteger("gRandomizeShuffleOcarinas", RO_GENERIC_OFF) == RO_GENERIC_OFF)); // closed door of time with ocarina shuffle off
 
-                static const char* disableRandoStartingAgeText = "This option is disabled due to other options making the game unbeatable.";
-                ImGui::Text(Settings::StartingAge.GetName().c_str());
+                static const char* disableRandoStartingAgeText = "Esta opción está desactivada porque otras opciones harían el juego imposible de completar.";
+                ImGui::Text(RandoSettingLabel(Settings::StartingAge.GetName()).c_str());
                 UIWidgets::InsertHelpHoverText(
-                    "Choose which age Link will start as.\n\n"
-                    "Starting as adult means you start with the Master Sword in your inventory.\n"
-                    "The child option is forcefully set if it would conflict with other options."
+                    "Elige con qué edad empieza Link.\n\n"
+                    "Empezar de adulto significa que empiezas con la Espada Maestra en el inventario.\n"
+                    "La opción de niño se fuerza si la de adulto chocara con otras opciones."
                 );
                 UIWidgets::EnhancementCombobox("gRandomizeStartingAge", randoStartingAge, RO_AGE_MAX, RO_AGE_CHILD, disableRandoStartingAge, disableRandoStartingAgeText, RO_AGE_CHILD);
 
                 UIWidgets::PaddedSeparator();
 
                 // Gerudo Fortress
-                ImGui::Text("Gerudo Fortress Carpenters");
+                ImGui::Text("Carpinteros de la fortaleza gerudo");
                 UIWidgets::InsertHelpHoverText(
-                    "Sets the amount of carpenters required to repair the bridge "
-                    "in Gerudo Valley.\n"
+                    "Define cuántos carpinteros hay que rescatar para reparar el puente "
+                    "del Valle Gerudo.\n"
                     "\n"
-                    "Normal - All 4 carpenters are required to be saved.\n"
+                    "Normal: hay que salvar a los 4 carpinteros.\n"
                     "\n"
-                    "Fast - Only the bottom left carpenter requires rescuing.\n"
+                    "Rápido: solo hay que rescatar al carpintero de abajo a la izquierda.\n"
                     "\n"
-                    "Open - The bridge is repaired from the start."
+                    "Abierto: el puente está reparado desde el principio."
                 );
                 UIWidgets::EnhancementCombobox("gRandomizeGerudoFortress", randoGerudoFortress, RO_GF_MAX, RO_GF_NORMAL);
 
                 UIWidgets::PaddedSeparator();
 
                 // Rainbow Bridge
-                ImGui::Text("Rainbow Bridge Requirements");
+                ImGui::Text("Requisitos del puente arcoíris");
                 UIWidgets::InsertHelpHoverText(
-                    "Alters the requirements to open the bridge to Ganon's Castle.\n"
+                    "Cambia los requisitos para abrir el puente al castillo de Ganon.\n"
                     "\n"
-                    "Vanilla - Obtain the Shadow Medallion, Spirit Medallion and Light Arrows.\n"
+                    "Original: consigue el Medallón de la Sombra, el del Espíritu y las flechas de luz.\n"
                     "\n"
-                    "Always open - No requirements.\n"
+                    "Siempre abierto: sin requisitos.\n"
                     "\n"
-                    "Stones - Obtain the specified amount of spiritual stones.\n"
+                    "Piedras: consigue la cantidad indicada de piedras espirituales.\n"
                     "\n"
-                    "Medallions - Obtain the specified amount of medallions.\n"
+                    "Medallones: consigue la cantidad indicada de medallones.\n"
                     "\n"
-                    "Dungeon rewards - Obtain the specified total sum of spiritual "
-                    "stones or medallions.\n"
+                    "Recompensas: consigue la suma total indicada de piedras "
+                    "espirituales o medallones.\n"
                     "\n"
-                    "Dungeons - Complete the specified amount of dungeons. Dungeons "
-                    "are considered complete after stepping in to the blue warp after "
-                    "the boss.\n"
+                    "Mazmorras: completa la cantidad indicada de mazmorras. Se consideran "
+                    "completadas al pisar el portal azul que aparece tras "
+                    "el jefe.\n"
                     "\n"
-                    "Tokens - Obtain the specified amount of Skulltula tokens.\n"
+                    "Símbolos: consigue la cantidad indicada de símbolos de Skulltula.\n"
                     "\n"
-                    "Greg - Find Greg the Green Rupee."
+                    "Greg: encuentra a Greg, la rupia verde."
                 );
 
                 UIWidgets::EnhancementCombobox("gRandomizeRainbowBridge", randoRainbowBridge, RO_BRIDGE_MAX, RO_BRIDGE_VANILLA);
@@ -3356,27 +3424,27 @@ void DrawRandoEditor(bool& open) {
                         break;
                     case RO_BRIDGE_STONES:
                         ImGui::Dummy(ImVec2(0.0f, 0.0f));
-                        UIWidgets::EnhancementSliderInt("Stone Count: %d", "##RandoStoneCount",
+                        UIWidgets::EnhancementSliderInt("Piedras: %d", "##RandoStoneCount",
                                                         "gRandomizeStoneCount", 1, 3, "", 3, true);
                         break;
                     case RO_BRIDGE_MEDALLIONS:
                         ImGui::Dummy(ImVec2(0.0f, 0.0f));
-                        UIWidgets::EnhancementSliderInt("Medallion Count: %d", "##RandoMedallionCount",
+                        UIWidgets::EnhancementSliderInt("Medallones: %d", "##RandoMedallionCount",
                                                         "gRandomizeMedallionCount", 1, 6, "", 6, true);
                         break;
                     case RO_BRIDGE_DUNGEON_REWARDS:
                         ImGui::Dummy(ImVec2(0.0f, 0.0f));
-                        UIWidgets::EnhancementSliderInt("Reward Count: %d", "##RandoRewardCount",
+                        UIWidgets::EnhancementSliderInt("Recompensas: %d", "##RandoRewardCount",
                                                         "gRandomizeRewardCount", 1, 9, "", 9, true);
                         break;
                     case RO_BRIDGE_DUNGEONS:
                         ImGui::Dummy(ImVec2(0.0f, 0.0f));
-                        UIWidgets::EnhancementSliderInt("Dungeon Count: %d", "##RandoDungeonCount",
+                        UIWidgets::EnhancementSliderInt("Mazmorras: %d", "##RandoDungeonCount",
                                                         "gRandomizeDungeonCount", 1, 8, "", 8, true);
                         break;
                     case RO_BRIDGE_TOKENS:
                         ImGui::Dummy(ImVec2(0.0f, 0.0f));
-                        UIWidgets::EnhancementSliderInt("Token Count: %d", "##RandoTokenCount",
+                        UIWidgets::EnhancementSliderInt("Símbolos: %d", "##RandoTokenCount",
                                                         "gRandomizeTokenCount", 1, 100, "", 100, true);
                         break;
                     case RO_BRIDGE_GREG:
@@ -3387,46 +3455,46 @@ void DrawRandoEditor(bool& open) {
 
                 // Ganon's Trials
                 ImGui::PushItemWidth(-FLT_MIN);
-                ImGui::Text("Ganon's Trials");
+                ImGui::Text("Pruebas de Ganon");
                 UIWidgets::InsertHelpHoverText(
-                    "Sets the number of Ganon's Trials required to dispel the barrier.\n"
+                    "Define cuántas pruebas de Ganon hacen falta para disipar la barrera.\n"
                     "\n"
-                    "Skip - No Trials are required and the barrier is already dispelled.\n"
+                    "Omitir: no hace falta ninguna prueba y la barrera ya está disipada.\n"
                     "\n"
-                    "Set Number - Select a number of trials that will be required from the"
-                    "slider below. Which specific trials you need to complete will be random.\n"
+                    "Número fijo: elige con el deslizador de abajo cuántas pruebas harán falta. "
+                    "Qué pruebas concretas hay que completar será al azar.\n"
                     "\n"
-                    "Random Number - A Random number and set of trials will be required."
+                    "Número al azar: harán falta un número y un conjunto de pruebas al azar."
                 );
                 UIWidgets::EnhancementCombobox("gRandomizeGanonTrial", randoGanonsTrial, RO_GANONS_TRIALS_MAX, RO_GANONS_TRIALS_SET_NUMBER);
                 ImGui::PopItemWidth();
                 if (CVarGetInteger("gRandomizeGanonTrial", RO_GANONS_TRIALS_SET_NUMBER) == RO_GANONS_TRIALS_SET_NUMBER) {
                     ImGui::Dummy(ImVec2(0.0f, 0.0f));
-                    UIWidgets::EnhancementSliderInt("Ganon's Trial Count: %d", "##RandoTrialCount",
+                    UIWidgets::EnhancementSliderInt("Pruebas de Ganon: %d", "##RandoTrialCount",
                                                     "gRandomizeGanonTrialCount", 1, 6, "", 6, true);
-                    UIWidgets::InsertHelpHoverText("Set the number of trials required to enter Ganon's Tower.");
+                    UIWidgets::InsertHelpHoverText("Define cuántas pruebas hacen falta para entrar en la torre de Ganon.");
                 }
 
                 UIWidgets::PaddedSeparator();
 
                 if (OTRGlobals::Instance->HasMasterQuest() && OTRGlobals::Instance->HasOriginal()) {
                     ImGui::PushItemWidth(-FLT_MIN);
-                    ImGui::Text("Master Quest Dungeons");
+                    ImGui::Text("Mazmorras Master Quest");
                     UIWidgets::InsertHelpHoverText(
-                        "Sets the number of Master Quest Dungeons that are shuffled into the pool.\n"
+                        "Define cuántas mazmorras Master Quest se mezclan en el grupo.\n"
                         "\n"
-                        "None - All Dungeons will be their Vanilla versions.\n"
+                        "Ninguna: todas las mazmorras serán sus versiones originales.\n"
                         "\n"
-                        "Set Number - Select a number of dungeons that will be their Master Quest versions "
-                        "using the slider below. Which dungeons are set to be the Master Quest variety will be random.\n"
+                        "Número fijo: elige con el deslizador de abajo cuántas mazmorras serán su versión Master Quest. "
+                        "Cuáles serán de Master Quest se decidirá al azar.\n"
                         "\n"
-                        "Random Number - A Random number and set of dungeons will be their Master Quest varieties."
+                        "Número al azar: un número y un conjunto de mazmorras al azar serán de Master Quest."
                     );
                     UIWidgets::EnhancementCombobox("gRandomizeMqDungeons", randoMqDungeons, RO_MQ_DUNGEONS_MAX, RO_MQ_DUNGEONS_NONE);
                     ImGui::PopItemWidth();
                     if (CVarGetInteger("gRandomizeMqDungeons", RO_MQ_DUNGEONS_NONE) == RO_MQ_DUNGEONS_SET_NUMBER) {
                         ImGui::Dummy(ImVec2(0.0f, 0.0f));
-                        UIWidgets::EnhancementSliderInt("Master Quest Dungeon Count: %d", "##RandoMqDungeonCount",
+                        UIWidgets::EnhancementSliderInt("Mazmorras Master Quest: %d", "##RandoMqDungeonCount",
                             "gRandomizeMqDungeonCount", 1, 12, "", CVarGetInteger("gRandomizeMqDungeonCount", 12), true);
                     }
                 }
@@ -3440,148 +3508,148 @@ void DrawRandoEditor(bool& open) {
                 ImGui::PushItemWidth(-FLT_MIN);
 
                 // Shuffle Dungeon Entrances
-                ImGui::Text("Shuffle Dungeon Entrances");
+                ImGui::Text("Mezclar entradas de mazmorras");
                 UIWidgets::InsertHelpHoverText(
-                    "Shuffle the pool of dungeon entrances, including Bottom of the Well, Ice Cavern and Gerudo Training Grounds.\n"
+                    "Mezcla las entradas de mazmorras, incluidas el Pozo de Kakariko, la Caverna de hielo y el Centro de Instrucción Gerudo.\n"
                     "\n"
-                    "Shuffling Ganon's Castle can be enabled separately.\n"
+                    "El castillo de Ganon se puede mezclar aparte.\n"
                     "\n"
-                    "Additionally, the entrances of Deku Tree, Fire Temple, Bottom of the Well and Gerudo Training Ground are opened for both child and adult.\n"
+                    "Además, las entradas del Gran Árbol Deku, el Templo del Fuego, el Pozo de Kakariko y el Centro de Instrucción Gerudo se abren tanto para el Link niño como para el adulto.\n"
                     "\n"
-                    "- Deku Tree will be open for adult after Mido has seen child Link with a sword and shield.\n"
-                    "- Bottom of the Well will be open for adult after playing Song of Storms to the Windmill guy as child.\n"
-                    "- Gerudo Training Ground will be open for child after adult has paid to open the gate once."
+                    "- El Gran Árbol Deku estará abierto para el adulto tras haber visto Mido al Link niño con espada y escudo.\n"
+                    "- El Pozo de Kakariko estará abierto para el adulto tras tocar la Canción de la tormenta al hombre del molino de niño.\n"
+                    "- El Centro de Instrucción Gerudo estará abierto para el niño tras haber pagado el adulto para abrir la puerta una vez."
                 );
                 UIWidgets::EnhancementCombobox("gRandomizeShuffleDungeonsEntrances", randoShuffleDungeonsEntrances, RO_DUNGEON_ENTRANCE_SHUFFLE_MAX, RO_DUNGEON_ENTRANCE_SHUFFLE_OFF);
 
                 UIWidgets::PaddedSeparator();
 
                 // Shuffle Boss Entrances
-                ImGui::Text("Shuffle Boss Entrances");
+                ImGui::Text("Mezclar entradas de jefes");
                 UIWidgets::InsertHelpHoverText(
-                    "Shuffle the pool of dungeon boss entrances. This affects the boss rooms of all stone and medallion dungeons.\n"
+                    "Mezcla las entradas de las salas de jefe. Afecta a las salas de jefe de todas las mazmorras de piedras y medallones.\n"
                     "\n"
-                    "Age Restricted - Shuffle the entrances of child and adult boss rooms separately.\n"
+                    "Según la edad: mezcla por separado las salas de jefe del niño y del adulto.\n"
                     "\n"
-                    "Full - Shuffle the entrances of all boss rooms together. Child may be expected to defeat Phantom Ganon and/or Bongo Bongo."
+                    "Completo: mezcla todas las salas de jefe juntas. Puede que el niño tenga que derrotar a Ganon fantasma y/o a Bongo Bongo."
                 );
                 UIWidgets::EnhancementCombobox("gRandomizeShuffleBossEntrances", randoShuffleBossEntrances, RO_BOSS_ROOM_ENTRANCE_SHUFFLE_MAX, RO_BOSS_ROOM_ENTRANCE_SHUFFLE_OFF);
 
                 UIWidgets::PaddedSeparator();
 
                 // Shuffle Overworld Entrances
-                UIWidgets::EnhancementCheckbox("Shuffle Overworld Entrances", "gRandomizeShuffleOverworldEntrances");
+                UIWidgets::EnhancementCheckbox("Mezclar entradas del exterior", "gRandomizeShuffleOverworldEntrances");
                 UIWidgets::InsertHelpHoverText(
-                    "Shuffle the pool of Overworld entrances, which corresponds to almost all loading zones between overworld areas.\n"
+                    "Mezcla las entradas del exterior, que corresponden a casi todas las zonas de carga entre zonas del exterior.\n"
                     "\n"
-                    "Some entrances are unshuffled to avoid issues:\n"
-                    "- Hyrule Castle Courtyard and Garden entrance\n"
-                    "- Both Market Back Alley entrances\n"
-                    "- Gerudo Valley to Lake Hylia (unless entrances are decoupled)"
+                    "Algunas entradas no se mezclan para evitar problemas:\n"
+                    "- Entrada al jardín y al patio del castillo de Hyrule\n"
+                    "- Las dos entradas del callejón de la plaza del mercado\n"
+                    "- Del Valle Gerudo al Lago Hylia (salvo que las entradas estén desacopladas)"
                 );
 
                 UIWidgets::PaddedSeparator();
 
                 // Shuffle Interior Entrances
-                ImGui::Text("Shuffle Interior Entrances");
+                ImGui::Text("Mezclar entradas de interiores");
                 UIWidgets::InsertHelpHoverText(
-                    "Shuffle the pool of interior entrances which contains most Houses and all Great Fairies.\n"
+                    "Mezcla las entradas de interiores, que incluyen la mayoría de casas y todas las Grandes hadas.\n"
                     "\n"
-                    "All - An extended version of 'Simple' with some extra places:\n"
-                    "- Windmill\n"
-                    "- Link's House\n"
-                    "- Temple of Time\n"
-                    "- Kakariko Potion Shop"
+                    "Todo: versión ampliada de 'Simple' con algunos sitios extra:\n"
+                    "- Molino\n"
+                    "- Casa de Link\n"
+                    "- Templo del Tiempo\n"
+                    "- Tienda de pociones de Kakariko"
                 );
                 UIWidgets::EnhancementCombobox("gRandomizeShuffleInteriorsEntrances", randoShuffleInteriorsEntrances, RO_INTERIOR_ENTRANCE_SHUFFLE_MAX, RO_INTERIOR_ENTRANCE_SHUFFLE_OFF);
 
                 UIWidgets::PaddedSeparator();
 
                 // Shuffle Grotto Entrances
-                UIWidgets::EnhancementCheckbox("Shuffle Grotto Entrances", "gRandomizeShuffleGrottosEntrances");
+                UIWidgets::EnhancementCheckbox("Mezclar entradas de grutas", "gRandomizeShuffleGrottosEntrances");
                 UIWidgets::InsertHelpHoverText(
-                    "Shuffle the pool of grotto entrances, including all graves, small Fairy fountains and the Deku Theatre."
+                    "Mezcla las entradas de grutas, incluidas todas las tumbas, las fuentes de hadas pequeñas y el teatro deku."
                 );
 
                 UIWidgets::PaddedSeparator();
 
                 // Shuffle Owl Drops
-                UIWidgets::EnhancementCheckbox("Shuffle Owl Drops", "gRandomizeShuffleOwlDrops");
+                UIWidgets::EnhancementCheckbox("Mezclar destinos del búho", "gRandomizeShuffleOwlDrops");
                 UIWidgets::InsertHelpHoverText(
-                    "Randomize where Kaepora Gaebora (the Owl) drops you at when you talk "
-                    "to him at Lake Hylia or at the top of Death Mountain Trail."
+                    "Aleatoriza dónde te deja Kaepora Gaebora (el búho) cuando hablas "
+                    "con él en el Lago Hylia o en lo alto del sendero de la Montaña de la Muerte."
                 );
 
                 UIWidgets::PaddedSeparator();
 
                 // Shuffle Warp Songs
-                UIWidgets::EnhancementCheckbox("Shuffle Warp Songs", "gRandomizeShuffleWarpSongs");
+                UIWidgets::EnhancementCheckbox("Mezclar canciones de teletransporte", "gRandomizeShuffleWarpSongs");
                 UIWidgets::InsertHelpHoverText(
-                    "Randomize where each of the 6 warp songs leads to."
+                    "Aleatoriza adónde lleva cada una de las 6 canciones de teletransporte."
                 );
 
                 UIWidgets::PaddedSeparator();
 
                 // Shuffle Overworld Spawns
-                UIWidgets::EnhancementCheckbox("Shuffle Overworld Spawns", "gRandomizeShuffleOverworldSpawns");
+                UIWidgets::EnhancementCheckbox("Mezclar puntos de inicio", "gRandomizeShuffleOverworldSpawns");
                 UIWidgets::InsertHelpHoverText(
-                    "Randomize where you start as Child or Adult when loading a save in the Overworld. This "
-                    "means you may not necessarily spawn inside Link's House or Temple of Time.\n"
+                    "Aleatoriza dónde apareces como niño o adulto al cargar una partida en el exterior. Esto "
+                    "significa que puede que no aparezcas dentro de la Casa de Link ni del Templo del Tiempo.\n"
                     "\n"
-                    "This stays consistent after saving and loading the game again.\n"
+                    "Se mantiene igual tras guardar y volver a cargar la partida.\n"
                     "\n"
-                    "Keep in mind you may need to temporarily disable the \"Remember Save Location\" time saver to "
-                    "be able use the spawn positions, especially if they are the only logical way to get to certain areas."
+                    "Ten en cuenta que quizá debas desactivar temporalmente la mejora \"Recordar lugar de guardado\" para  "
+                    "poder usar los puntos de inicio, sobre todo si son la única forma lógica de llegar a ciertas zonas."
                 );
 
                 UIWidgets::PaddedSeparator();
 
                 // Decouple Entrances
-                UIWidgets::EnhancementCheckbox("Decouple Entrances", "gRandomizeDecoupleEntrances");
+                UIWidgets::EnhancementCheckbox("Desacoplar entradas", "gRandomizeDecoupleEntrances");
                 UIWidgets::InsertHelpHoverText(
-                    "Decouple entrances when shuffling them. This means you are no longer guaranteed "
-                    "to end up back where you came from when you go back through an entrance.\n"
+                    "Desacopla las entradas al mezclarlas. Esto significa que ya no se garantiza "
+                    "que vuelvas al sitio de donde venías al cruzar una entrada de vuelta.\n"
                     "\n"
-                    "This also adds the one-way entrance from Gerudo Valley to Lake Hylia in the pool of "
-                    "overworld entrances when they are shuffled."
+                    "También añade al grupo de entradas del exterior la entrada de sentido único del Valle Gerudo al Lago Hylia "
+                    "cuando estas se mezclan."
                 );
 
                 UIWidgets::PaddedSeparator();
 
                 // Mixed Entrance Pools
-                UIWidgets::EnhancementCheckbox("Mixed Entrance Pools", "gRandomizeMixedEntrances");
+                UIWidgets::EnhancementCheckbox("Grupos de entradas mixtos", "gRandomizeMixedEntrances");
                 UIWidgets::InsertHelpHoverText(
-                    "Shuffle entrances into a mixed pool instead of separate ones.\n"
+                    "Mezcla las entradas en un grupo mixto en lugar de grupos separados.\n"
                     "\n"
-                    "For example, enabling the settings to shuffle grotto, dungeon, and overworld entrances and "
-                    "selecting grotto and dungeon entrances here will allow a dungeon to be inside a grotto or "
-                    "vice versa, while overworld entrances are shuffled in their own separate pool and indoors stay vanilla."
+                    "Por ejemplo, si activas mezclar entradas de grutas, mazmorras y exterior y "
+                    "eliges aquí las de grutas y mazmorras, una mazmorra podrá estar dentro de una gruta o "
+                    "al revés, mientras que las del exterior se mezclan en su propio grupo y los interiores se quedan como en el original."
                 );
 
                 if (CVarGetInteger("gRandomizeMixedEntrances", RO_GENERIC_OFF)) {
                     if (CVarGetInteger("gRandomizeShuffleDungeonsEntrances", RO_GENERIC_OFF)) {
                         UIWidgets::Spacer(0);
                         ImGui::SetCursorPosX(20);
-                        UIWidgets::EnhancementCheckbox("Mix Dungeons", "gRandomizeMixDungeons");
-                        UIWidgets::InsertHelpHoverText("Dungeon entrances will be part of the mixed pool");
+                        UIWidgets::EnhancementCheckbox("Mezclar mazmorras", "gRandomizeMixDungeons");
+                        UIWidgets::InsertHelpHoverText("Las entradas de mazmorras formarán parte del grupo mixto");
                     }
                     if (CVarGetInteger("gRandomizeShuffleOverworldEntrances", RO_GENERIC_OFF)) {
                         UIWidgets::Spacer(0);
                         ImGui::SetCursorPosX(20);
-                        UIWidgets::EnhancementCheckbox("Mix Overworld", "gRandomizeMixOverworld");
-                        UIWidgets::InsertHelpHoverText("Overworld entrances will be part of the mixed pool");
+                        UIWidgets::EnhancementCheckbox("Mezclar exterior", "gRandomizeMixOverworld");
+                        UIWidgets::InsertHelpHoverText("Las entradas del exterior formarán parte del grupo mixto");
                     }
                     if (CVarGetInteger("gRandomizeShuffleInteriorsEntrances", RO_GENERIC_OFF)) {
                         UIWidgets::Spacer(0);
                         ImGui::SetCursorPosX(20);
-                        UIWidgets::EnhancementCheckbox("Mix Interiors", "gRandomizeMixInteriors");
-                        UIWidgets::InsertHelpHoverText("Interior entrances will be part of the mixed pool");
+                        UIWidgets::EnhancementCheckbox("Mezclar interiores", "gRandomizeMixInteriors");
+                        UIWidgets::InsertHelpHoverText("Las entradas de interiores formarán parte del grupo mixto");
                     }
                     if (CVarGetInteger("gRandomizeShuffleGrottosEntrances", RO_GENERIC_OFF)) {
                         UIWidgets::Spacer(0);
                         ImGui::SetCursorPosX(20);
-                        UIWidgets::EnhancementCheckbox("Mix Grottos", "gRandomizeMixGrottos");
-                        UIWidgets::InsertHelpHoverText("Grotto entrances will be part of the mixed pool");
+                        UIWidgets::EnhancementCheckbox("Mezclar grutas", "gRandomizeMixGrottos");
+                        UIWidgets::InsertHelpHoverText("Las entradas de grutas formarán parte del grupo mixto");
                     }
                 }
 
@@ -3593,13 +3661,13 @@ void DrawRandoEditor(bool& open) {
             ImGui::EndTabItem();
         }
 
-        if (ImGui::BeginTabItem("Items")) {
+        if (ImGui::BeginTabItem("Objetos")) {
             ImGui::PushStyleVar(ImGuiStyleVar_CellPadding, cellPadding);
             if (ImGui::BeginTable("tableRandoStartingInventory", 3,
                                   ImGuiTableFlags_BordersH | ImGuiTableFlags_BordersV)) {
-                ImGui::TableSetupColumn("Shuffle Items", ImGuiTableColumnFlags_WidthStretch, 200.0f);
-                ImGui::TableSetupColumn("Shuffle NPCs & Merchants", ImGuiTableColumnFlags_WidthStretch, 200.0f);
-                ImGui::TableSetupColumn("Shuffle Dungeon Items", ImGuiTableColumnFlags_WidthStretch, 200.0f);
+                ImGui::TableSetupColumn("Mezclar objetos", ImGuiTableColumnFlags_WidthStretch, 200.0f);
+                ImGui::TableSetupColumn("Mezclar PNJ y mercaderes", ImGuiTableColumnFlags_WidthStretch, 200.0f);
+                ImGui::TableSetupColumn("Mezclar objetos de mazmorra", ImGuiTableColumnFlags_WidthStretch, 200.0f);
                 ImGui::PushItemFlag(ImGuiItemFlags_Disabled, true);
                 ImGui::TableHeadersRow();
                 ImGui::PopItemFlag();
@@ -3612,45 +3680,45 @@ void DrawRandoEditor(bool& open) {
                 ImGui::PushItemWidth(-FLT_MIN);
 
                 // Shuffle Songs
-                ImGui::Text(Settings::ShuffleSongs.GetName().c_str());
+                ImGui::Text(RandoSettingLabel(Settings::ShuffleSongs.GetName()).c_str());
                 UIWidgets::InsertHelpHoverText(
-                    "Song locations - Songs will only appear at locations that normally teach songs.\n"
+                    "Lugares de canciones: las canciones solo aparecerán en sitios donde normalmente se enseñan canciones.\n"
                     "\n"
-                    "Dungeon rewards - Songs appear after beating a major dungeon boss.\n"
-                    "The 4 remaining songs are located at:\n"
-                    "  - Zelda's lullaby location\n"
-                    "  - Ice Cavern's Serenade of Water location\n"
-                    "  - Bottom of the Well Lens of Truth location\n"
-                    "  - Gerudo Training Ground's Ice Arrows location\n"
+                    "Recompensas: las canciones aparecen tras derrotar al jefe de una mazmorra importante.\n"
+                    "Las 4 canciones restantes están en:\n"
+                    "- Donde se aprende la Nana de Zelda\n"
+                    "- Donde se aprende la Serenata del agua (Caverna de hielo)\n"
+                    "- Donde está la Lupa de la Verdad (Pozo de Kakariko)\n"
+                    "- Donde están las flechas de hielo (Centro de Instrucción Gerudo)\n"
                     "\n"
-                    "Anywhere - Songs can appear at any location."
+                    "Cualquier lugar: las canciones pueden aparecer en cualquier sitio."
                 );
                 UIWidgets::EnhancementCombobox("gRandomizeShuffleSongs", randoShuffleSongs, RO_SONG_SHUFFLE_MAX, RO_SONG_SHUFFLE_SONG_LOCATIONS);
 
                 UIWidgets::PaddedSeparator();
 
                 // Shuffle Tokens
-                ImGui::Text(Settings::Tokensanity.GetName().c_str());
+                ImGui::Text(RandoSettingLabel(Settings::Tokensanity.GetName()).c_str());
                 UIWidgets::InsertHelpHoverText(
-                    "Shuffles Golden Skulltula Tokens into the item pool. This means "
-                    "Golden Skulltulas can contain other items as well.\n"
+                    "Mezcla los símbolos de Skulltula dorada en el grupo de objetos. Esto significa que "
+                    "las Skulltulas doradas también pueden contener otros objetos.\n"
                     "\n"
-                    "Off - GS tokens will not be shuffled.\n"
+                    "No: los símbolos GS no se mezclan.\n"
                     "\n"
-                    "Dungeons - Only shuffle GS tokens that are within dungeons.\n"
+                    "Mazmorras: solo se mezclan los símbolos GS que están dentro de mazmorras.\n"
                     "\n"
-                    "Overworld - Only shuffle GS tokens that are outside of dungeons.\n"
+                    "Exterior: solo se mezclan los símbolos GS que están fuera de mazmorras.\n"
                     "\n"
-                    "All Tokens - Shuffle all 100 GS tokens."
+                    "Todos los símbolos: se mezclan los 100 símbolos GS."
                 );
                 UIWidgets::EnhancementCombobox("gRandomizeShuffleTokens", randoTokensanity, RO_TOKENSANITY_MAX, RO_TOKENSANITY_OFF);
 
                 ImGui::Dummy(ImVec2(0,0));
 
-                UIWidgets::EnhancementCheckbox("Nighttime GS expect Sun's Song", "gRandomizeGsExpectSunsSong");
+                UIWidgets::EnhancementCheckbox("GS nocturnas requieren Canción del Sol", "gRandomizeGsExpectSunsSong");
                 UIWidgets::InsertHelpHoverText(
-                    "All Golden Skulltulas that require nighttime to appear will only be "
-                    "expected to be collected after getting Sun's Song."
+                    "Todas las Skulltulas doradas que solo aparecen de noche se darán por "
+                    "alcanzables tras conseguir la Canción del Sol."
                 );
 
                 UIWidgets::PaddedSeparator();
@@ -3658,13 +3726,13 @@ void DrawRandoEditor(bool& open) {
                 // Shuffle Kokiri Sword
                 // Disabled when Start with Kokiri Sword is active
                 bool disableShuffleKokiriSword = CVarGetInteger("gRandomizeStartingKokiriSword", 0);
-                static const char* disableShuffleKokiriSwordText = "This option is disabled because \"Start with Kokiri Sword\" is enabled.";
-                UIWidgets::EnhancementCheckbox(Settings::ShuffleKokiriSword.GetName().c_str(), "gRandomizeShuffleKokiriSword",
+                static const char* disableShuffleKokiriSwordText = "Esta opción está desactivada porque \"Empezar con Espada Kokiri\" está activado.";
+                UIWidgets::EnhancementCheckbox(RandoSettingLabel(Settings::ShuffleKokiriSword.GetName()).c_str(), "gRandomizeShuffleKokiriSword",
                                                 disableShuffleKokiriSword, disableShuffleKokiriSwordText);
                 UIWidgets::InsertHelpHoverText(
-                    "Shuffles the Kokiri Sword into the item pool.\n"
+                    "Mezcla la Espada Kokiri en el grupo de objetos.\n"
                     "\n"
-                    "This will require the use of sticks until the Kokiri Sword is found."
+                    "Tendrás que usar palos deku hasta encontrar la Espada Kokiri."
                 );
 
                 UIWidgets::PaddedSeparator();
@@ -3672,13 +3740,13 @@ void DrawRandoEditor(bool& open) {
                 // Shuffle Ocarinas
                 // Disabled when Start with Ocarina is active
                 bool disableShuffleOcarinas = CVarGetInteger("gRandomizeStartingOcarina", 0);
-                static const char* disableShuffleOcarinasText = "This option is disabled because \"Start with Fairy Ocarina\" is enabled.";
-                UIWidgets::EnhancementCheckbox(Settings::ShuffleOcarinas.GetName().c_str(), "gRandomizeShuffleOcarinas",
+                static const char* disableShuffleOcarinasText = "Esta opción está desactivada porque \"Empezar con ocarina\" está activado.";
+                UIWidgets::EnhancementCheckbox(RandoSettingLabel(Settings::ShuffleOcarinas.GetName()).c_str(), "gRandomizeShuffleOcarinas",
                                               disableShuffleOcarinas, disableShuffleOcarinasText);
                 UIWidgets::InsertHelpHoverText(
-                    "Enabling this shuffles the Fairy Ocarina and the Ocarina of Time into the item pool.\n"
+                    "Al activarlo, la Ocarina de las Hadas y la Ocarina del Tiempo se mezclan en el grupo de objetos.\n"
                     "\n"
-                    "This will require finding an Ocarina before being able to play songs."
+                    "Tendrás que encontrar una ocarina antes de poder tocar canciones."
                 );
 
                 UIWidgets::PaddedSeparator();
@@ -3686,31 +3754,31 @@ void DrawRandoEditor(bool& open) {
                 // Shuffle Weird Egg
                 // Disabled when Skip Child Zelda is active
                 bool disableShuffleWeirdEgg = CVarGetInteger("gRandomizeSkipChildZelda", 0);
-                static const char* disableShuffleWeirdEggText = "This option is disabled because \"Skip Child Zelda\" is enabled.";
-                UIWidgets::EnhancementCheckbox(Settings::ShuffleWeirdEgg.GetName().c_str(), "gRandomizeShuffleWeirdEgg",
+                static const char* disableShuffleWeirdEggText = "Esta opción está desactivada porque \"Omitir a Zelda niña\" está activado.";
+                UIWidgets::EnhancementCheckbox(RandoSettingLabel(Settings::ShuffleWeirdEgg.GetName()).c_str(), "gRandomizeShuffleWeirdEgg",
                                               disableShuffleWeirdEgg, disableShuffleWeirdEggText);
                 UIWidgets::InsertHelpHoverText(
-                    "Shuffles the Weird Egg from Malon in to the item pool. Enabling "
-                    "\"Skip Child Zelda\" disables this feature.\n"
+                    "Mezcla el Huevo extraño de Malon en el grupo de objetos. Activar "
+                    "\"Omitir a Zelda niña\" desactiva esta función.\n"
                     "\n"
-                    "The Weird Egg is required to unlock several events:\n"
-                    "  - Zelda's Lullaby from Impa\n"
-                    "  - Saria's song in Sacred Forest Meadow\n"
-                    "  - Epona's song and chicken minigame at Lon Lon Ranch\n"
-                    "  - Zelda's letter for Kakariko gate (if set to closed)\n"
-                    "  - Happy Mask Shop sidequest\n"
+                    "El Huevo extraño hace falta para desbloquear varios eventos:\n"
+                    "- La Nana de Zelda (de Impa)\n"
+                    "- La Canción de Saria (Pradera sagrada del bosque)\n"
+                    "- La Canción de Epona y el minijuego de los cucos (Rancho Lon Lon)\n"
+                    "- La carta de Zelda para la puerta de Kakariko (si está cerrada)\n"
+                    "- La misión secundaria de la tienda de máscaras\n"
                 );
 
                 UIWidgets::PaddedSeparator();
 
                 // Shuffle Gerudo Membership Card
-                UIWidgets::EnhancementCheckbox(Settings::ShuffleGerudoToken.GetName().c_str(),
+                UIWidgets::EnhancementCheckbox(RandoSettingLabel(Settings::ShuffleGerudoToken.GetName()).c_str(),
                                                 "gRandomizeShuffleGerudoToken");
                 UIWidgets::InsertHelpHoverText(
-                    "Shuffles the Gerudo Membership Card into the item pool.\n"
+                    "Mezcla el pase de socio gerudo en el grupo de objetos.\n"
                     "\n"
-                    "The Gerudo Card is required to enter the Gerudo Training Grounds, opening "
-                    "the gate to Haunted Wasteland and the Horseback Archery minigame."
+                    "El pase gerudo hace falta para entrar en el Centro de Instrucción Gerudo, abrir "
+                    "la puerta del desierto encantado y jugar al tiro con arco a caballo."
                 );
 
                 UIWidgets::PaddedSeparator();
@@ -3725,15 +3793,15 @@ void DrawRandoEditor(bool& open) {
                 ImGui::PushItemWidth(-FLT_MIN);
 
                 // Shopsanity
-                ImGui::Text(Settings::Shopsanity.GetName().c_str());
+                ImGui::Text(RandoSettingLabel(Settings::Shopsanity.GetName()).c_str());
                 UIWidgets::InsertHelpHoverText(
-                    "Off - All shop items will be the same as vanilla.\n"
+                    "No: todos los objetos de las tiendas serán como en el original.\n"
                     "\n"
-                    "0 Items - Vanilla shop items will be shuffled among different shops.\n"
+                    "0 objetos: los objetos originales de las tiendas se mezclan entre distintas tiendas.\n"
                     "\n"
-                    "1-4 Items - Vanilla shop items will be shuffled among different shops, and each shop will contain 1-4 non-vanilla shop items.\n"
+                    "1-4 objetos: los objetos originales se mezclan entre tiendas y cada tienda tendrá de 1 a 4 objetos que no son de tienda originales.\n"
                     "\n"
-                    "Random - Vanilla shop items will be shuffled among different shops, and each shop will contain a random number(1-4) of non-vanilla shop items.\n"
+                    "Al azar: los objetos originales se mezclan entre tiendas y cada tienda tendrá un número al azar (1-4) de objetos que no son de tienda originales.\n"
                 );
                 UIWidgets::EnhancementCombobox("gRandomizeShopsanity", randoShopsanity, RO_SHOPSANITY_MAX, RO_SHOPSANITY_OFF);
 
@@ -3743,90 +3811,90 @@ void DrawRandoEditor(bool& open) {
                     case RO_SHOPSANITY_ZERO_ITEMS: // no need to show it if there aren't shop slots in the pool
                         break;
                     default:
-                        ImGui::Text(Settings::ShopsanityPrices.GetName().c_str());
+                        ImGui::Text(RandoSettingLabel(Settings::ShopsanityPrices.GetName()).c_str());
                         UIWidgets::InsertHelpHoverText(
-                            "Balanced - The default randomization. Shop prices for shopsanity items will range between 0 to 300 rupees, "
-                            "with a bias towards values slightly below the middle of the range, in multiples of 5.\n "
+                            "Equilibrado: la aleatorización por defecto. Los precios de los objetos de shopsanity irán de 0 a 300 rupias, "
+                            "con tendencia a valores algo por debajo de la mitad del rango, en múltiplos de 5.\n "
                             "\n"
-                            "X Wallet - Randomized between 5 and the wallet's max size, in multiples of 5"
+                            "Bolsa X: aleatorio entre 5 y el tamaño máximo de la bolsa, en múltiplos de 5"
                         );
                         UIWidgets::EnhancementCombobox("gRandomizeShopsanityPrices", randoShopsanityPrices, RO_SHOPSANITY_PRICE_MAX, RO_SHOPSANITY_PRICE_BALANCED);
-                        UIWidgets::EnhancementCheckbox(Settings::ShopsanityPricesAffordable.GetName().c_str(), "gRandomizeShopsanityPricesAffordable",
+                        UIWidgets::EnhancementCheckbox(RandoSettingLabel(Settings::ShopsanityPricesAffordable.GetName()).c_str(), "gRandomizeShopsanityPricesAffordable",
                             CVarGetInteger("gRandomizeShopsanityPrices", RO_SHOPSANITY_PRICE_BALANCED) == RO_SHOPSANITY_PRICE_BALANCED,
-                            "This can only apply to a wallet range.");
-                        UIWidgets::InsertHelpHoverText("Random selection between the selected wallet tier's affordable price and the affordable prices of the preceding wallet tiers.\n\n"
-                            "Affordable prices per tier: starter = 10, adult = 105, giant = 205, tycoon = 505\n\n"
-                            "Use this to enable wallet tier locking, but make shop items not as expensive as they could be.");
+                            "Solo puede aplicarse a un rango de bolsa.");
+                        UIWidgets::InsertHelpHoverText("Selección al azar entre el precio asequible del nivel de bolsa elegido y los precios asequibles de los niveles anteriores.\n\n"
+                            "Precios asequibles por nivel: inicial = 10, adulto = 105, gigante = 205, magnate = 505\n\n"
+                            "Úsalo para bloquear niveles de bolsa pero sin que los objetos de las tiendas sean tan caros como podrían.");
                 }
 
                 UIWidgets::PaddedSeparator();
 
                 // Shuffle Scrubs
-                ImGui::Text(Settings::Scrubsanity.GetName().c_str());
+                ImGui::Text(RandoSettingLabel(Settings::Scrubsanity.GetName()).c_str());
                 UIWidgets::InsertHelpHoverText(
-                    "Off - Scrubs will not be shuffled. The 3 Scrubs that give one-time items in the vanilla game "
-                    "(PoH, Deku Nut capacity, and Deku Stick capacity) will have random items.\n"
+                    "No: los deku mercaderes no se mezclan. Los 3 que dan objetos únicos en el juego original "
+                    "(pieza de corazón, capacidad de nueces deku y de palos deku) darán objetos al azar.\n"
                     "\n"
-                    "Affordable - Scrubs will be shuffled and their item will cost 10 rupees.\n"
+                    "Asequibles: los deku mercaderes se mezclan y su objeto costará 10 rupias.\n"
                     "\n"
-                    "Expensive - Scrubs will be shuffled and their item will cost the vanilla price.\n"
+                    "Caros: los deku mercaderes se mezclan y su objeto costará el precio original.\n"
                     "\n"
-                    "Random - Scrubs will be shuffled and their item will cost will be between 0-95 rupees.\n");
+                    "Al azar: los deku mercaderes se mezclan y su objeto costará entre 0 y 95 rupias.\n");
                 UIWidgets::EnhancementCombobox("gRandomizeShuffleScrubs", randoShuffleScrubs, RO_SCRUBS_MAX, RO_SCRUBS_OFF);
 
                 UIWidgets::PaddedSeparator();
 
                 // Shuffle Cows
-                UIWidgets::EnhancementCheckbox(Settings::ShuffleCows.GetName().c_str(), "gRandomizeShuffleCows");
-                UIWidgets::InsertHelpHoverText("Cows give a randomized item from the pool upon performing Epona's Song in front of them.");
+                UIWidgets::EnhancementCheckbox(RandoSettingLabel(Settings::ShuffleCows.GetName()).c_str(), "gRandomizeShuffleCows");
+                UIWidgets::InsertHelpHoverText("Las vacas dan un objeto aleatorio del grupo al tocarles la Canción de Epona delante.");
 
                 UIWidgets::PaddedSeparator();
 
-                UIWidgets::EnhancementCheckbox(Settings::ShuffleMagicBeans.GetName().c_str(), "gRandomizeShuffleBeans");
+                UIWidgets::EnhancementCheckbox(RandoSettingLabel(Settings::ShuffleMagicBeans.GetName()).c_str(), "gRandomizeShuffleBeans");
                 UIWidgets::InsertHelpHoverText(
-                    "Enabling this adds a pack of 10 beans to the item pool and changes the Magic Bean "
-                    "Salesman to sell a random item at a price of 60 rupees."
+                    "Al activarlo se añade un paquete de 10 judías al grupo de objetos y el vendedor de "
+                    "judías mágicas venderá un objeto al azar por 60 rupias."
                 );
 
                 UIWidgets::PaddedSeparator();
 
                 // Shuffle Merchants
-                ImGui::Text(Settings::ShuffleMerchants.GetName().c_str());
+                ImGui::Text(RandoSettingLabel(Settings::ShuffleMerchants.GetName()).c_str());
                 UIWidgets::InsertHelpHoverText(
-                    "Enabling this adds a Giant's Knife and a pack of Bombchus to the item pool "
-                    "and changes both Medigoron and the Haunted Wasteland Carpet Salesman to sell "
-                    "a random item once at the price of 200 rupees.\n\n"
-                    "On (no hints) - Salesmen will be included but won't tell you what you'll get.\n"
-                    "On (with hints) - Salesmen will be included and you'll know what you're buying."
+                    "Al activarlo se añaden una Daga gigante y un paquete de bombuchus al grupo de objetos "
+                    "y tanto Medigoron como el vendedor de alfombras del desierto encantado venderán "
+                    "una vez un objeto al azar por 200 rupias.\n\n"
+                    "Sí (sin pistas): los vendedores se incluyen pero no te dicen qué vas a conseguir.\n"
+                    "Sí (con pistas): los vendedores se incluyen y sabrás qué compras."
                 );
                 UIWidgets::EnhancementCombobox("gRandomizeShuffleMerchants", randoShuffleMerchants, RO_SHUFFLE_MERCHANTS_MAX, RO_SHUFFLE_MERCHANTS_OFF);
 
                 UIWidgets::PaddedSeparator();
 
                 // Shuffle Frog Song Rupees
-                UIWidgets::EnhancementCheckbox(Settings::ShuffleFrogSongRupees.GetName().c_str(), "gRandomizeShuffleFrogSongRupees");
+                UIWidgets::EnhancementCheckbox(RandoSettingLabel(Settings::ShuffleFrogSongRupees.GetName()).c_str(), "gRandomizeShuffleFrogSongRupees");
                 UIWidgets::InsertHelpHoverText(
-                    "Shuffles 5 Purple Rupees into to the item pool, and allows\n"
-                    "you to earn items by playing songs at the Frog Choir.\n"
+                    "Mezcla 5 rupias moradas en el grupo de objetos y permite\n"
+                    "conseguir objetos tocando canciones en el coro de ranas.\n"
                     "\n"
-                    "This setting does not effect the item earned from playing\n"
-                    "the Song of Storms and the frog song minigame."
+                    "Este ajuste no afecta al objeto que se consigue tocando\n"
+                    "la Canción de la tormenta y el minijuego de las ranas."
                 );
 
                 UIWidgets::PaddedSeparator();
 
                 // Shuffle Adult Trade Quest
-                UIWidgets::EnhancementCheckbox(Settings::ShuffleAdultTradeQuest.GetName().c_str(),
+                UIWidgets::EnhancementCheckbox(RandoSettingLabel(Settings::ShuffleAdultTradeQuest.GetName()).c_str(),
                                                 "gRandomizeShuffleAdultTrade");
                 UIWidgets::InsertHelpHoverText(
-                    "Adds all of the adult trade quest items into the pool, each of which "
-                    "can be traded for a unique reward.\n"
+                    "Añade al grupo todos los objetos de la secuencia de trueques de adulto, cada uno de los cuales "
+                    "puede cambiarse por una recompensa única.\n"
                     "\n"
-                    "You will be able to choose which of your owned adult trade items is visible "
-                    "in the inventory by selecting the item with A and using the control stick or "
-                    "D-pad.\n"
+                    "Podrás elegir cuál de tus objetos de trueque de adulto se ve "
+                    "en el inventario seleccionándolo con A y usando el stick o "
+                    "la cruceta.\n"
                     "\n"
-                    "If disabled, only the Claim Check will be found in the pool."
+                    "Si se desactiva, en el grupo solo estará el Albarán."
                 );
 
                 UIWidgets::PaddedSeparator();
@@ -3835,14 +3903,14 @@ void DrawRandoEditor(bool& open) {
                 // Forcefully enabled if Ganon's Boss Key is on the cursed man
                 bool forceEnable100GSShuffle =
                     (CVarGetInteger("gRandomizeShuffleGanonBossKey", RO_GANON_BOSS_KEY_VANILLA) == RO_GANON_BOSS_KEY_KAK_TOKENS);
-                const char* disable100GSRewardText = "This option is forcefully enabled because \"Ganon's Boss Key\" is set to \"100 GS Reward.\"";
-                UIWidgets::EnhancementCheckbox(Settings::Shuffle100GSReward.GetName().c_str(), "gRandomizeShuffle100GSReward",
+                const char* disable100GSRewardText = "Esta opción se activa a la fuerza porque \"Gran llave de Ganon\" está en \"Premio 100 GS\".";
+                UIWidgets::EnhancementCheckbox(RandoSettingLabel(Settings::Shuffle100GSReward.GetName()).c_str(), "gRandomizeShuffle100GSReward",
                     forceEnable100GSShuffle, disable100GSRewardText, UIWidgets::CheckboxGraphics::Checkmark);
                 UIWidgets::InsertHelpHoverText(
-                    "Shuffle the item the cursed rich man in the House of Skulltula gives when you "
-                    "have collected all 100 Gold Skulltula Tokens.\n"
+                    "Mezcla el objeto que da el rico maldito de la Casa de las Skulltulas cuando "
+                    "has reunido los 100 símbolos de Skulltula dorada.\n"
                     "\n"
-                    "You can still talk to him multiple times to get Huge Rupees."
+                    "Aun así, puedes hablar con él varias veces para conseguir rupias enormes."
                 );
 
                 UIWidgets::PaddedSeparator();
@@ -3857,93 +3925,93 @@ void DrawRandoEditor(bool& open) {
                 ImGui::PushItemWidth(-FLT_MIN);
 
                 // Shuffle Dungeon Rewards
-                ImGui::Text(Settings::ShuffleRewards.GetName().c_str());
+                ImGui::Text(RandoSettingLabel(Settings::ShuffleRewards.GetName()).c_str());
                 UIWidgets::InsertHelpHoverText(
-                    "Shuffles the location of spiritual stones and medallions.\n"
+                    "Mezcla el lugar de las piedras espirituales y los medallones.\n"
                     "\n"
-                    "End of dungeons - Spiritual stones and medallions will be given as rewards "
-                    "for beating major dungeons. Link will always start with one stone or medallion.\n"
+                    "Al final de mazmorras: las piedras espirituales y los medallones se dan como recompensa "
+                    "por vencer las mazmorras importantes. Link siempre empieza con una piedra o un medallón.\n"
                     "\n"
-                    "Any dungeon - Spiritual stones and medallions can be found inside any dungeon.\n"
+                    "Cualquier mazmorra: las piedras espirituales y los medallones pueden estar en cualquier mazmorra.\n"
                     "\n"
-                    "Overworld - Spiritual stones and medallions can only be found outside of dungeons.\n"
+                    "Exterior: las piedras espirituales y los medallones solo pueden estar fuera de las mazmorras.\n"
                     "\n"
-                    "Anywhere - Spiritual stones and medallions can appear anywhere."
+                    "Cualquier lugar: las piedras espirituales y los medallones pueden aparecer en cualquier sitio."
                 );
                 UIWidgets::EnhancementCombobox("gRandomizeShuffleDungeonReward", randoShuffleDungeonRewards, RO_DUNGEON_REWARDS_MAX, RO_DUNGEON_REWARDS_END_OF_DUNGEON);
 
                 UIWidgets::PaddedSeparator();
 
                 // Maps & Compasses
-                ImGui::Text(Settings::MapsAndCompasses.GetName().c_str());
+                ImGui::Text(RandoSettingLabel(Settings::MapsAndCompasses.GetName()).c_str());
                 UIWidgets::InsertHelpHoverText(
-                    "Start with - You will start with Maps & Compasses from all dungeons.\n"
+                    "Empezar con: empiezas con los mapas y las brújulas de todas las mazmorras.\n"
                     "\n"
-                    "Vanilla - Maps & Compasses will appear in their vanilla locations.\n"
+                    "Original: los mapas y las brújulas aparecen en su lugar original.\n"
                     "\n"
-                    "Own dungeon - Maps & Compasses can only appear in their respective dungeon.\n"
+                    "Su mazmorra: los mapas y las brújulas solo pueden aparecer en su propia mazmorra.\n"
                     "\n"
-                    "Any dungeon - Maps & Compasses can only appear inside of any dungon.\n"
+                    "Cualquier mazmorra: los mapas y las brújulas solo pueden aparecer dentro de alguna mazmorra.\n"
                     "\n"
-                    "Overworld - Maps & Compasses can only appear outside of dungeons.\n"
+                    "Exterior: los mapas y las brújulas solo pueden aparecer fuera de las mazmorras.\n"
                     "\n"
-                    "Anywhere - Maps & Compasses can appear anywhere in the world."
+                    "Cualquier lugar: los mapas y las brújulas pueden aparecer en cualquier parte del mundo."
                 );
                 UIWidgets::EnhancementCombobox("gRandomizeStartingMapsCompasses", randoShuffleMapsAndCompasses, RO_DUNGEON_ITEM_LOC_MAX, RO_DUNGEON_ITEM_LOC_OWN_DUNGEON);
 
                 UIWidgets::PaddedSeparator();
 
                 // Keysanity
-                ImGui::Text(Settings::Keysanity.GetName().c_str());
+                ImGui::Text(RandoSettingLabel(Settings::Keysanity.GetName()).c_str());
                 UIWidgets::InsertHelpHoverText(
-                    "Start with - You will start with all Small Keys from all dungeons.\n"
+                    "Empezar con: empiezas con todas las llaves pequeñas de todas las mazmorras.\n"
                     "\n"
-                    "Vanilla - Small Keys will appear in their vanilla locations. "
-                    "You start with 3 keys in Spirit Temple MQ because the vanilla key layout is not beatable in logic.\n"
+                    "Original: las llaves pequeñas aparecen en su lugar original. "
+                    "Empiezas con 3 llaves en el Templo del Espíritu MQ porque la distribución original no es superable según la lógica.\n"
                     "\n"
-                    "Own dungeon - Small Keys can only appear in their respective dungeon. "
-                    "If Fire Temple is not a Master Quest dungeon, the door to the Boss Key chest will be unlocked.\n"
+                    "Su mazmorra: las llaves pequeñas solo pueden aparecer en su propia mazmorra. "
+                    "Si el Templo del Fuego no es de Master Quest, la puerta al cofre de la gran llave estará abierta.\n"
                     "\n"
-                    "Any dungeon - Small Keys can only appear inside of any dungon.\n"
+                    "Cualquier mazmorra: las llaves pequeñas solo pueden aparecer dentro de alguna mazmorra.\n"
                     "\n"
-                    "Overworld - Small Keys can only appear outside of dungeons.\n"
+                    "Exterior: las llaves pequeñas solo pueden aparecer fuera de las mazmorras.\n"
                     "\n"
-                    "Anywhere - Small Keys can appear anywhere in the world."
+                    "Cualquier lugar: las llaves pequeñas pueden aparecer en cualquier parte del mundo."
                 );
                 UIWidgets::EnhancementCombobox("gRandomizeKeysanity", randoShuffleSmallKeys, RO_DUNGEON_ITEM_LOC_MAX, RO_DUNGEON_ITEM_LOC_OWN_DUNGEON);
 
                 UIWidgets::PaddedSeparator();
 
                  // Key Rings
-                ImGui::Text(Settings::KeyRings.GetName().c_str());
+                ImGui::Text(RandoSettingLabel(Settings::KeyRings.GetName()).c_str());
                 UIWidgets::InsertHelpHoverText(
-                    "Keyrings will replace all small keys from a particular dungeon with a single keyring that awards all keys for it's associated dungeon\n"
+                    "Los llaveros sustituyen todas las llaves pequeñas de una mazmorra por un único llavero que da todas las llaves de esa mazmorra.\n"
                     "\n"
-                    "Off - No dungeons will have their keys replaced with keyrings.\n"
+                    "No: ninguna mazmorra tendrá sus llaves sustituidas por llaveros.\n"
                     "\n"
-                    "Random - A random amount of dungeons(0-8) will have their keys replaced with keyrings.\n"
+                    "Al azar: una cantidad al azar de mazmorras (0-8) tendrá sus llaves sustituidas por llaveros.\n"
                     "\n"
-                    "Count - A specified amount of randomly selected dungeons will have their keys replaced with keyrings.\n"
+                    "Cantidad: una cantidad indicada de mazmorras elegidas al azar tendrá sus llaves sustituidas por llaveros.\n"
                     "\n"
-                    "Selection - Hand select which dungeons will have their keys replaced with keyrings."
+                    "Selección: elige a mano qué mazmorras tendrán sus llaves sustituidas por llaveros."
                 );
                 UIWidgets::EnhancementCombobox("gRandomizeShuffleKeyRings", randoShuffleKeyRings, RO_KEYRINGS_MAX, RO_KEYRINGS_OFF);
                 ImGui::PopItemWidth();
                 switch (CVarGetInteger("gRandomizeShuffleKeyRings", RO_KEYRINGS_OFF)) {
                     case RO_KEYRINGS_COUNT:
                         ImGui::Dummy(ImVec2(0.0f, 0.0f));
-                        UIWidgets::EnhancementSliderInt("Key Ring Count: %d", "##RandomizeShuffleKeyRingsRandomCount",
+                        UIWidgets::EnhancementSliderInt("Llaveros: %d", "##RandomizeShuffleKeyRingsRandomCount",
                                                         "gRandomizeShuffleKeyRingsRandomCount", 1, 8, "", 8, true);
                         break;
                     case RO_KEYRINGS_SELECTION:
-                        UIWidgets::EnhancementCheckbox("Forest Temple##RandomizeShuffleKeyRings", "gRandomizeShuffleKeyRingsForestTemple");
-                        UIWidgets::EnhancementCheckbox("Fire Temple##RandomizeShuffleKeyRings", "gRandomizeShuffleKeyRingsFireTemple");
-                        UIWidgets::EnhancementCheckbox("Water Temple##RandomizeShuffleKeyRings", "gRandomizeShuffleKeyRingsWaterTemple");
-                        UIWidgets::EnhancementCheckbox("Spirit Temple##RandomizeShuffleKeyRings", "gRandomizeShuffleKeyRingsSpiritTemple");
-                        UIWidgets::EnhancementCheckbox("Shadow Temple##RandomizeShuffleKeyRings", "gRandomizeShuffleKeyRingsShadowTemple");
-                        UIWidgets::EnhancementCheckbox("Bottom of the Well##RandomizeShuffleKeyRings", "gRandomizeShuffleKeyRingsBottomOfTheWell");
-                        UIWidgets::EnhancementCheckbox("GTG##RandomizeShuffleKeyRings", "gRandomizeShuffleKeyRingsGTG");
-                        UIWidgets::EnhancementCheckbox("Ganon's Castle##RandomizeShuffleKeyRings", "gRandomizeShuffleKeyRingsGanonsCastle");
+                        UIWidgets::EnhancementCheckbox("Templo del Bosque##RandomizeShuffleKeyRings", "gRandomizeShuffleKeyRingsForestTemple");
+                        UIWidgets::EnhancementCheckbox("Templo del Fuego##RandomizeShuffleKeyRings", "gRandomizeShuffleKeyRingsFireTemple");
+                        UIWidgets::EnhancementCheckbox("Templo del Agua##RandomizeShuffleKeyRings", "gRandomizeShuffleKeyRingsWaterTemple");
+                        UIWidgets::EnhancementCheckbox("Templo del Espíritu##RandomizeShuffleKeyRings", "gRandomizeShuffleKeyRingsSpiritTemple");
+                        UIWidgets::EnhancementCheckbox("Templo de las Sombras##RandomizeShuffleKeyRings", "gRandomizeShuffleKeyRingsShadowTemple");
+                        UIWidgets::EnhancementCheckbox("Pozo de Kakariko##RandomizeShuffleKeyRings", "gRandomizeShuffleKeyRingsBottomOfTheWell");
+                        UIWidgets::EnhancementCheckbox("CIG##RandomizeShuffleKeyRings", "gRandomizeShuffleKeyRingsGTG");
+                        UIWidgets::EnhancementCheckbox("Castillo de Ganon##RandomizeShuffleKeyRings", "gRandomizeShuffleKeyRingsGanonsCastle");
                         break;
                     default:
                         break;
@@ -3953,90 +4021,90 @@ void DrawRandoEditor(bool& open) {
                 UIWidgets::PaddedSeparator();
 
                 // Gerudo Keys
-                ImGui::Text(Settings::GerudoKeys.GetName().c_str());
+                ImGui::Text(RandoSettingLabel(Settings::GerudoKeys.GetName()).c_str());
                 UIWidgets::InsertHelpHoverText(
-                    "Vanilla - Thieve's Hideout Keys will appear in their vanilla locations.\n"
+                    "Original: las llaves de la guarida de las ladronas aparecen en su lugar original.\n"
                     "\n"
-                    "Any dungeon - Thieve's Hideout Keys can only appear inside of any dungon.\n"
+                    "Cualquier mazmorra: las llaves de la guarida de las ladronas solo pueden aparecer dentro de alguna mazmorra.\n"
                     "\n"
-                    "Overworld - Thieve's Hideout Keys can only appear outside of dungeons.\n"
+                    "Exterior: las llaves de la guarida de las ladronas solo pueden aparecer fuera de las mazmorras.\n"
                     "\n"
-                    "Anywhere - Thieve's Hideout Keys can appear anywhere in the world."
+                    "Cualquier lugar: las llaves de la guarida de las ladronas pueden aparecer en cualquier parte del mundo."
                 );
                 UIWidgets::EnhancementCombobox("gRandomizeGerudoKeys", randoShuffleGerudoFortressKeys, RO_GERUDO_KEYS_MAX, RO_GERUDO_KEYS_VANILLA);
 
                 UIWidgets::PaddedSeparator();
 
                 // Boss Keysanity
-                ImGui::Text(Settings::BossKeysanity.GetName().c_str());
+                ImGui::Text(RandoSettingLabel(Settings::BossKeysanity.GetName()).c_str());
                 UIWidgets::InsertHelpHoverText(
-                    "Start with - You will start with Boss keys from all dungeons.\n"
+                    "Empezar con: empiezas con las grandes llaves de todas las mazmorras.\n"
                     "\n"
-                    "Vanilla - Boss Keys will appear in their vanilla locations.\n"
+                    "Original: las grandes llaves aparecen en su lugar original.\n"
                     "\n"
-                    "Own dungeon - Boss Keys can only appear in their respective dungeon.\n"
+                    "Su mazmorra: las grandes llaves solo pueden aparecer en su propia mazmorra.\n"
                     "\n"
-                    "Any dungeon - Boss Keys can only appear inside of any dungon.\n"
+                    "Cualquier mazmorra: las grandes llaves solo pueden aparecer dentro de alguna mazmorra.\n"
                     "\n"
-                    "Overworld - Boss Keys can only appear outside of dungeons.\n"
+                    "Exterior: las grandes llaves solo pueden aparecer fuera de las mazmorras.\n"
                     "\n"
-                    "Anywhere - Boss Keys can appear anywhere in the world."
+                    "Cualquier lugar: las grandes llaves pueden aparecer en cualquier parte del mundo."
                 );
                 UIWidgets::EnhancementCombobox("gRandomizeBossKeysanity", randoShuffleBossKeys, RO_DUNGEON_ITEM_LOC_MAX, RO_DUNGEON_ITEM_LOC_OWN_DUNGEON);
 
                 UIWidgets::PaddedSeparator();
 
                 // Ganon's Boss Key
-                ImGui::Text(Settings::GanonsBossKey.GetName().c_str());
+                ImGui::Text(RandoSettingLabel(Settings::GanonsBossKey.GetName()).c_str());
                 UIWidgets::InsertHelpHoverText(
-                    "Vanilla - Ganon's Boss Key will appear in the vanilla location.\n"
+                    "Original: la gran llave de Ganon aparece en su lugar original.\n"
                     "\n"
-                    "Own dungeon - Ganon's Boss Key can appear anywhere inside Ganon's Castle.\n"
+                    "Su mazmorra: la gran llave de Ganon puede aparecer en cualquier parte del castillo de Ganon.\n"
                     "\n"
-                    "Start with - Places Ganon's Boss Key in your starting inventory."
+                    "Empezar con: pone la gran llave de Ganon en tu inventario inicial."
                     "\n"
-                    "Any dungeon - Ganon's Boss Key Key can only appear inside of any dungon.\n"
+                    "Cualquier mazmorra: la gran llave de Ganon solo puede aparecer dentro de alguna mazmorra.\n"
                     "\n"
-                    "Overworld - Ganon's Boss Key Key can only appear outside of dungeons.\n"
+                    "Exterior: la gran llave de Ganon solo puede aparecer fuera de las mazmorras.\n"
                     "\n"
-                    "Anywhere - Ganon's Boss Key Key can appear anywhere in the world.\n"
+                    "Cualquier lugar: la gran llave de Ganon puede aparecer en cualquier parte del mundo.\n"
                     "\n"
-                    "LACS - These settings put the boss key on the Light Arrow Cutscene location, from Zelda in Temple of Time as adult, with differing requirements:\n"
-                    "- Vanilla: Obtain the Shadow Medallion and Spirit Medallion\n"
-                    "- Medallions: Obtain the specified amount of medallions.\n"
-                    "- Stones: Obtain the specified amount of spiritual stones.\n"
-                    "- Dungeon rewards: Obtain the specified total sum of spiritual stones or medallions.\n"
-                    "- Dungeons: Complete the specified amount of dungeons. Dungeons are considered complete after stepping in to the blue warp after the boss.\n"
-                    "- Tokens: Obtain the specified amount of Skulltula tokens.\n"
+                    "LACS: estos ajustes colocan la gran llave en el lugar de la escena de las flechas de luz (Zelda en el Templo del Tiempo, de adulto), con distintos requisitos:\n"
+                    "- Original: consigue el Medallón de la Sombra y el del Espíritu\n"
+                    "- Medallones: consigue la cantidad indicada de medallones.\n"
+                    "- Piedras: consigue la cantidad indicada de piedras espirituales.\n"
+                    "- Recompensas: consigue la suma total indicada de piedras espirituales o medallones.\n"
+                    "- Mazmorras: completa la cantidad indicada de mazmorras. Se consideran completadas al pisar el portal azul tras el jefe.\n"
+                    "- Símbolos: consigue la cantidad indicada de símbolos de Skulltula.\n"
                     "\n"
-                    "100 GS Reward - Ganon's Boss Key will be awarded by the cursed rich man after you collect 100 Gold Skulltula Tokens."
+                    "Premio 100 GS: el rico maldito te dará la gran llave de Ganon tras reunir 100 símbolos de Skulltula dorada."
                 );
                 UIWidgets::EnhancementCombobox("gRandomizeShuffleGanonBossKey", randoShuffleGanonsBossKey, RO_GANON_BOSS_KEY_MAX, RO_GANON_BOSS_KEY_VANILLA);
                 ImGui::PopItemWidth();
                 switch (CVarGetInteger("gRandomizeShuffleGanonBossKey", RO_GANON_BOSS_KEY_VANILLA)) {
                     case RO_GANON_BOSS_KEY_LACS_MEDALLIONS:
                         ImGui::Dummy(ImVec2(0.0f, 0.0f));
-                        UIWidgets::EnhancementSliderInt("Medallion Count: %d", "##RandoLacsMedallionCount",
+                        UIWidgets::EnhancementSliderInt("Medallones: %d", "##RandoLacsMedallionCount",
                                                         "gRandomizeLacsMedallionCount", 1, 6, "", 6, true);
                         break;
                     case RO_GANON_BOSS_KEY_LACS_STONES:
                         ImGui::Dummy(ImVec2(0.0f, 0.0f));
-                        UIWidgets::EnhancementSliderInt("Stone Count: %d", "##RandoLacsStoneCount",
+                        UIWidgets::EnhancementSliderInt("Piedras: %d", "##RandoLacsStoneCount",
                                                         "gRandomizeLacsStoneCount", 1, 3, "", 3, true);
                         break;
                     case RO_GANON_BOSS_KEY_LACS_REWARDS:
                         ImGui::Dummy(ImVec2(0.0f, 0.0f));
-                        UIWidgets::EnhancementSliderInt("Reward Count: %d", "##RandoLacsRewardCount",
+                        UIWidgets::EnhancementSliderInt("Recompensas: %d", "##RandoLacsRewardCount",
                                                         "gRandomizeLacsRewardCount", 1, 9, "", 9, true);
                         break;
                     case RO_GANON_BOSS_KEY_LACS_DUNGEONS:
                         ImGui::Dummy(ImVec2(0.0f, 0.0f));
-                        UIWidgets::EnhancementSliderInt("Dungeon Count: %d", "##RandoLacsDungeonCount",
+                        UIWidgets::EnhancementSliderInt("Mazmorras: %d", "##RandoLacsDungeonCount",
                                                         "gRandomizeLacsDungeonCount", 1, 8, "", 8, true);
                         break;
                     case RO_GANON_BOSS_KEY_LACS_TOKENS:
                         ImGui::Dummy(ImVec2(0.0f, 0.0f));
-                        UIWidgets::EnhancementSliderInt("Token Count: %d", "##RandoLacsTokenCount",
+                        UIWidgets::EnhancementSliderInt("Símbolos: %d", "##RandoLacsTokenCount",
                                                         "gRandomizeLacsTokenCount", 1, 100, "", 100, true);
                         break;
                     default:
@@ -4054,12 +4122,12 @@ void DrawRandoEditor(bool& open) {
             ImGui::EndTabItem();
         }
 
-        if (ImGui::BeginTabItem("Gameplay")) {
+        if (ImGui::BeginTabItem("Jugabilidad")) {
             ImGui::PushStyleVar(ImGuiStyleVar_CellPadding, cellPadding);
             if (ImGui::BeginTable("tableRandoGameplay", 3, ImGuiTableFlags_BordersH | ImGuiTableFlags_BordersV)) {
-                ImGui::TableSetupColumn("Timesavers", ImGuiTableColumnFlags_WidthStretch, 200.0f);
-                ImGui::TableSetupColumn("Item Pool & Hints", ImGuiTableColumnFlags_WidthStretch, 200.0f);
-                ImGui::TableSetupColumn("Additional Features", ImGuiTableColumnFlags_WidthStretch, 200.0f);
+                ImGui::TableSetupColumn("Ahorro de tiempo", ImGuiTableColumnFlags_WidthStretch, 200.0f);
+                ImGui::TableSetupColumn("Objetos y pistas", ImGuiTableColumnFlags_WidthStretch, 200.0f);
+                ImGui::TableSetupColumn("Funciones adicionales", ImGuiTableColumnFlags_WidthStretch, 200.0f);
                 ImGui::PushItemFlag(ImGuiItemFlags_Disabled, true);
                 ImGui::TableHeadersRow();
                 ImGui::PopItemFlag();
@@ -4071,59 +4139,59 @@ void DrawRandoEditor(bool& open) {
                 ImGui::BeginChild("ChildTimeSavers", ImVec2(0, -8));
 
                 // Cuccos to return
-                UIWidgets::EnhancementSliderInt("Cuccos to return: %d", "##RandoCuccosToReturn",
+                UIWidgets::EnhancementSliderInt("Cucos a devolver: %d", "##RandoCuccosToReturn",
                                                "gRandomizeCuccosToReturn", 0, 7, "", 7, true);
-                UIWidgets::InsertHelpHoverText("The amount of cuccos needed to claim the reward from Anju the cucco lady");
+                UIWidgets::InsertHelpHoverText("Cantidad de cucos necesaria para cobrar la recompensa de Anju, la chica de los cucos");
 
                 UIWidgets::PaddedSeparator();
 
                 // Big Poe Target Count
-                UIWidgets::EnhancementSliderInt("Big Poe Target Count: %d", "##RandoBigPoeTargetCount",
+                UIWidgets::EnhancementSliderInt("Poes grandes necesarios: %d", "##RandoBigPoeTargetCount",
                                                "gRandomizeBigPoeTargetCount", 1, 10, "", 10, true);
-                UIWidgets::InsertHelpHoverText("The Poe collector will give a reward for turning in this many Big Poes.");
+                UIWidgets::InsertHelpHoverText("El coleccionista de Poes dará una recompensa por entregarle esta cantidad de Poes grandes.");
 
                 UIWidgets::PaddedSeparator();
 
                 // Skip child stealth
                 // Disabled when Skip Child Zelda is active
                 bool disableChildStealth = CVarGetInteger("gRandomizeSkipChildZelda", 0);
-                static const char* disableChildStealthText = "This option is disabled because \"Skip Child Zelda\" is enabled";
-                UIWidgets::EnhancementCheckbox(Settings::SkipChildStealth.GetName().c_str(), "gRandomizeSkipChildStealth", disableChildStealth, disableChildStealthText);
-                UIWidgets::InsertHelpHoverText("The crawlspace into Hyrule Castle goes straight to Zelda, skipping the guards.");
+                static const char* disableChildStealthText = "Esta opción está desactivada porque \"Omitir a Zelda niña\" está activado";
+                UIWidgets::EnhancementCheckbox(RandoSettingLabel(Settings::SkipChildStealth.GetName()).c_str(), "gRandomizeSkipChildStealth", disableChildStealth, disableChildStealthText);
+                UIWidgets::InsertHelpHoverText("El pasadizo al castillo de Hyrule lleva directo a Zelda, sin pasar por los guardias.");
 
                 UIWidgets::PaddedSeparator();
 
                 // Skip child zelda
-                UIWidgets::EnhancementCheckbox("Skip Child Zelda", "gRandomizeSkipChildZelda");
-                UIWidgets::InsertHelpHoverText("Start with Zelda's Letter and the item Impa would normally give you and skip the sequence up "
-                                    "until after meeting Zelda. Disables the ability to shuffle Weird Egg.");
+                UIWidgets::EnhancementCheckbox("Omitir a Zelda niña", "gRandomizeSkipChildZelda");
+                UIWidgets::InsertHelpHoverText("Empiezas con la carta de Zelda y el objeto que Impa te daría normalmente, y te saltas la secuencia hasta "
+                                    "después de conocer a Zelda. Desactiva la posibilidad de mezclar el Huevo extraño.");
 
                 UIWidgets::PaddedSeparator();
 
                 // Skip Epona race
-                UIWidgets::EnhancementCheckbox(Settings::SkipEponaRace.GetName().c_str(), "gRandomizeSkipEponaRace");
-                UIWidgets::InsertHelpHoverText("Epona can be summoned with Epona's Song without needing to race Ingo.");
+                UIWidgets::EnhancementCheckbox(RandoSettingLabel(Settings::SkipEponaRace.GetName()).c_str(), "gRandomizeSkipEponaRace");
+                UIWidgets::InsertHelpHoverText("Se puede llamar a Epona con la Canción de Epona sin tener que competir contra Ingo.");
 
                 UIWidgets::PaddedSeparator();
 
                 // Skip tower escape
-                UIWidgets::EnhancementCheckbox(Settings::SkipTowerEscape.GetName().c_str(), "gRandomizeSkipTowerEscape");
-                UIWidgets::InsertHelpHoverText("The tower escape sequence between Ganondorf and Ganon will be skipped.");
+                UIWidgets::EnhancementCheckbox(RandoSettingLabel(Settings::SkipTowerEscape.GetName()).c_str(), "gRandomizeSkipTowerEscape");
+                UIWidgets::InsertHelpHoverText("Se omite la huida de la torre entre Ganondorf y Ganon.");
 
                 UIWidgets::PaddedSeparator();
 
                 // Complete mask quest
-                UIWidgets::EnhancementCheckbox(Settings::CompleteMaskQuest.GetName().c_str(),
+                UIWidgets::EnhancementCheckbox(RandoSettingLabel(Settings::CompleteMaskQuest.GetName()).c_str(),
                                               "gRandomizeCompleteMaskQuest");
-                UIWidgets::InsertHelpHoverText("Once the happy mask shop is opened, all masks will be available to be borrowed.");
+                UIWidgets::InsertHelpHoverText("Una vez abierta la tienda de máscaras, se podrán pedir prestadas todas las máscaras.");
 
                 UIWidgets::PaddedSeparator();
 
                 // Skip Scarecrow Song
-                UIWidgets::EnhancementCheckbox(Settings::FreeScarecrow.GetName().c_str(),
+                UIWidgets::EnhancementCheckbox(RandoSettingLabel(Settings::FreeScarecrow.GetName()).c_str(),
                                                "gRandomizeSkipScarecrowsSong");
                 UIWidgets::InsertHelpHoverText(
-                    "Start with the ability to summon Pierre the scarecrow. Pulling out an ocarina in the usual locations will automatically summon him."
+                    "Empiezas con la capacidad de invocar al espantapájaros Pierre. Sacar una ocarina en los sitios habituales lo invocará automáticamente."
                 );
 
                 UIWidgets::PaddedSeparator();
@@ -4137,88 +4205,88 @@ void DrawRandoEditor(bool& open) {
                 ImGui::PushItemWidth(-FLT_MIN);
 
                 // Item Pool Settings
-                ImGui::Text(Settings::ItemPoolValue.GetName().c_str());
+                ImGui::Text(RandoSettingLabel(Settings::ItemPoolValue.GetName()).c_str());
                 UIWidgets::InsertHelpHoverText(
-                    "Sets how many major items appear in the item pool.\n"
+                    "Define cuántos objetos importantes aparecen en el grupo de objetos.\n"
                     "\n"
-                    "Plentiful - Extra major items are added to the pool.\n"
+                    "Abundante: se añaden objetos importantes extra al grupo.\n"
                     "\n"
-                    "Balanced - Original item pool.\n"
+                    "Equilibrado: grupo de objetos original.\n"
                     "\n"
-                    "Scarce - Some excess items are removed, including health upgrades.\n"
+                    "Escaso: se quitan algunos objetos sobrantes, incluidas las mejoras de salud.\n"
                     "\n"
-                    "Minimal - Most excess items are removed."
+                    "Mínimo: se quitan casi todos los objetos sobrantes."
                 );
                 UIWidgets::EnhancementCombobox("gRandomizeItemPool", randoItemPool, RO_ITEM_POOL_MAX, RO_ITEM_POOL_BALANCED);
                 UIWidgets::PaddedSeparator();
 
                 // Ice Traps
-                ImGui::Text(Settings::IceTrapValue.GetName().c_str());
+                ImGui::Text(RandoSettingLabel(Settings::IceTrapValue.GetName()).c_str());
                 UIWidgets::InsertHelpHoverText(
-                    "Sets how many items are replaced by ice traps.\n"
+                    "Define cuántos objetos se sustituyen por trampas de hielo.\n"
                     "\n"
-                    "Off - No ice traps.\n"
+                    "No: sin trampas de hielo.\n"
                     "\n"
-                    "Normal - Only Ice Traps from the base item pool are shuffled in.\n"
+                    "Normal: solo se mezclan las trampas de hielo del grupo de objetos base.\n"
                     "\n"
-                    "Extra - Chance to replace added junk items with additional ice traps.\n"
+                    "Extra: posibilidad de sustituir los objetos basura añadidos por trampas de hielo adicionales.\n"
                     "\n"
-                    "Mayhem - All added junk items will be Ice Traps.\n"
+                    "Caos: todos los objetos basura añadidos serán trampas de hielo.\n"
                     "\n"
-                    "Onslaught - All junk items will be replaced by Ice Traps, even those "
-                    "in the base pool."
+                    "Aluvión: todos los objetos basura se sustituyen por trampas de hielo, incluso los "
+                    "del grupo base."
                 );
                 UIWidgets::EnhancementCombobox("gRandomizeIceTraps", randoIceTraps, RO_ICE_TRAPS_MAX, RO_ICE_TRAPS_NORMAL);
 
                 UIWidgets::PaddedSeparator();
 
                 // Gossip Stone Hints
-                ImGui::Text(Settings::GossipStoneHints.GetName().c_str());
+                ImGui::Text(RandoSettingLabel(Settings::GossipStoneHints.GetName()).c_str());
                 UIWidgets::InsertHelpHoverText(
-                    "Allows Gossip Stones to provide hints on item locations. Hints mentioning "
-                    "\"Way of the Hero\" indicate a location that holds an item required to beat "
-                    "the seed.\n"
+                    "Permite que las piedras chismosas den pistas sobre dónde están los objetos. Las pistas que mencionan "
+                    "\"el Camino del Héroe\" indican un lugar con un objeto necesario para completar "
+                    "la seed.\n"
                     "\n"
-                    "No hints - No hints will be given at all.\n"
+                    "Sin pistas: no se da ninguna pista.\n"
                     "\n"
-                    "Need Nothing - Hints are always available from Gossip Stones.\n"
+                    "Sin requisitos: las piedras chismosas dan pistas siempre.\n"
                     "\n"
-                    "Need Stone of Agony - Hints are only available after obtaining the Stone of Agony.\n"
+                    "Piedra de la Agonía: las pistas solo están disponibles tras conseguir la Piedra de la Agonía.\n"
                     "\n"
-                    "Need Mask of Truth - Hints are only available whilst wearing the Mask of Truth.\n");
+                    "Máscara de la Verdad: las pistas solo están disponibles llevando puesta la Máscara de la Verdad.\n");
                 UIWidgets::EnhancementCombobox("gRandomizeGossipStoneHints", randoGossipStoneHints, RO_GOSSIP_STONES_MAX, RO_GOSSIP_STONES_NEED_NOTHING);
                 if (CVarGetInteger("gRandomizeGossipStoneHints", RO_GOSSIP_STONES_NEED_NOTHING) != RO_GOSSIP_STONES_NONE) {
                     // Hint Clarity
                     ImGui::Dummy(ImVec2(0.0f, 0.0f));
                     ImGui::Indent();
-                    ImGui::Text(Settings::ClearerHints.GetName().c_str());
+                    ImGui::Text(RandoSettingLabel(Settings::ClearerHints.GetName()).c_str());
                     UIWidgets::InsertHelpHoverText(
-                        "Sets the difficulty of hints.\n"
+                        "Define la dificultad de las pistas.\n"
                         "\n"
-                        "Obscure - Hints are unique for each item, but the writing may be cryptic.\n"
-                        "Ex: Kokiri Sword > a butter knife\n"
+                        "Oscuras: las pistas son únicas para cada objeto, pero el texto puede ser críptico.\n"
+                        "Ej.: Espada Kokiri > un cuchillo de mantequilla\n"
                         "\n"
-                        "Ambiguous - Hints are clearly written, but may refer to more than one item.\n"
-                        "Ex: Kokiri Sword > a sword\n"
+                        "Ambiguas: las pistas están bien escritas, pero pueden referirse a más de un objeto.\n"
+                        "Ej.: Espada Kokiri > una espada\n"
                         "\n"
-                        "Clear - Hints are clearly written and are unique for each item.\n"
-                        "Ex: Kokiri Sword > the Kokiri Sword"
+                        "Claras: las pistas están bien escritas y son únicas para cada objeto.\n"
+                        "Ej.: Espada Kokiri > la Espada Kokiri"
                     );
                     UIWidgets::EnhancementCombobox("gRandomizeHintClarity", randoHintClarity, RO_HINT_CLARITY_MAX, RO_HINT_CLARITY_CLEAR);
 
                     // Hint Distribution
                     ImGui::Dummy(ImVec2(0.0f, 0.0f));
-                    ImGui::Text(Settings::HintDistribution.GetName().c_str());
+                    ImGui::Text(RandoSettingLabel(Settings::HintDistribution.GetName()).c_str());
                     UIWidgets::InsertHelpHoverText(
-                        "Sets how many hints will be useful.\n"
+                        "Define cuántas pistas serán útiles.\n"
                         "\n"
-                        "Useless - Only junk hints.\n"
+                        "Inútiles: solo pistas basura.\n"
                         "\n"
-                        "Balanced - Recommended hint spread.\n"
+                        "Equilibradas: reparto de pistas recomendado.\n"
                         "\n"
-                        "Strong - More useful hints.\n"
+                        "Fuertes: más pistas útiles.\n"
                         "\n"
-                        "Very Strong - Many powerful hints."
+                        "Muy fuertes: muchas pistas poderosas."
                     );
                     UIWidgets::EnhancementCombobox("gRandomizeHintDistribution", randoHintDistribution, RO_HINT_DIST_MAX, RO_HINT_DIST_BALANCED);
                     ImGui::Unindent();
@@ -4227,33 +4295,33 @@ void DrawRandoEditor(bool& open) {
                 UIWidgets::PaddedSeparator();
                 
                 //Extra Hints
-                ImGui::Text("Extra Hints");
+                ImGui::Text("Pistas extra");
                 UIWidgets::InsertHelpHoverText(
-                    "This setting adds some hints at locations other than Gossip Stones.\n\n"
-                    "House of Skulltula: # - Talking to a cursed House of Skulltula resident will tell you the reward they will give you for obtaining that many tokens."
+                    "Este ajuste añade pistas en lugares distintos de las piedras chismosas.\n\n"
+                    "Casa de las Skulltulas: # - Hablar con un habitante maldito de la Casa de las Skulltulas te dirá qué recompensa te dará por conseguir esa cantidad de símbolos."
                 );
                 
                 ImGui::Indent();
                 //Altar, Light Arrows, and Warp Songs are enabled by default
-                UIWidgets::PaddedEnhancementCheckbox("Altar Text", "gRandomizeAltarHint", true, false, false, "", UIWidgets::CheckboxGraphics::Cross, true);
-                UIWidgets::InsertHelpHoverText("Reading the Temple of Time altar as child will tell you the locations of the Spiritual Stones.\n"
-                    "Reading the Temple of Time altar as adult will tell you the locations of the Medallions, as well as the conditions for building the Rainbow Bridge and getting the Boss Key for Ganon's Castle.");
-                UIWidgets::PaddedEnhancementCheckbox("Ganondorf (Light Arrows)", "gRandomizeLAHint", true, false, false, "", UIWidgets::CheckboxGraphics::Cross, true);
-                UIWidgets::InsertHelpHoverText("Talking to Ganondorf in his boss room will tell you the location of the Light Arrows. If this option is enabled and Ganondorf is reachable without Light Arrows, Gossip Stones will never hint the Light Arrows.");
-                UIWidgets::PaddedEnhancementCheckbox("Dampe's Diary (Hookshot)", "gRandomizeDampeHint", true, false);
-                UIWidgets::InsertHelpHoverText("Reading the diary of Dampé the gravekeeper as adult will tell you the location of one of the Hookshots.");
-                UIWidgets::PaddedEnhancementCheckbox("Greg the Green Rupee", "gRandomizeGregHint", true, false);
-                UIWidgets::InsertHelpHoverText("Talking to the chest game owner after buying a key will tell you the location of Greg the Green Rupee.");
-                UIWidgets::PaddedEnhancementCheckbox("Warp Song text", "gRandomizeWarpSongText", true, false, !CVarGetInteger("gRandomizeShuffleWarpSongs", RO_GENERIC_OFF),
-                 "This option is disabled since warp songs are not shuffled.", UIWidgets::CheckboxGraphics::Cross, true);
-                UIWidgets::InsertHelpHoverText("Playing a warp song will tell you where it leads. (If warp song destinations are vanilla, this is always enabled.)");
-                UIWidgets::PaddedEnhancementCheckbox("Scrub Item text", "gRandomizeScrubText", true, false, false, "", UIWidgets::CheckboxGraphics::Cross, false);
-                UIWidgets::InsertHelpHoverText("Business scrubs will reveal the identity of what they're selling.");
-                UIWidgets::PaddedEnhancementCheckbox("House of Skulltula: 10", "gRandomize10GSHint", true, false);
-                UIWidgets::PaddedEnhancementCheckbox("House of Skulltula: 20", "gRandomize20GSHint", true, false);
-                UIWidgets::PaddedEnhancementCheckbox("House of Skulltula: 30", "gRandomize30GSHint", true, false);                
-                UIWidgets::PaddedEnhancementCheckbox("House of Skulltula: 40", "gRandomize40GSHint", true, false);
-                UIWidgets::PaddedEnhancementCheckbox("House of Skulltula: 50", "gRandomize50GSHint", true, false);
+                UIWidgets::PaddedEnhancementCheckbox("Texto del altar", "gRandomizeAltarHint", true, false, false, "", UIWidgets::CheckboxGraphics::Cross, true);
+                UIWidgets::InsertHelpHoverText("Leer el altar del Templo del Tiempo de niño te dirá dónde están las piedras espirituales.\n"
+                    "Leer el altar del Templo del Tiempo de adulto te dirá dónde están los medallones, además de las condiciones para construir el puente arcoíris y conseguir la gran llave del castillo de Ganon.");
+                UIWidgets::PaddedEnhancementCheckbox("Ganondorf (flechas de luz)", "gRandomizeLAHint", true, false, false, "", UIWidgets::CheckboxGraphics::Cross, true);
+                UIWidgets::InsertHelpHoverText("Hablar con Ganondorf en su sala te dirá dónde están las flechas de luz. Si esta opción está activada y se puede llegar a Ganondorf sin las flechas de luz, las piedras chismosas nunca darán pistas sobre ellas.");
+                UIWidgets::PaddedEnhancementCheckbox("Diario de Dampé (gancho)", "gRandomizeDampeHint", true, false);
+                UIWidgets::InsertHelpHoverText("Leer el diario de Dampé, el enterrador, de adulto te dirá dónde está uno de los ganchos.");
+                UIWidgets::PaddedEnhancementCheckbox("Greg, la rupia verde", "gRandomizeGregHint", true, false);
+                UIWidgets::InsertHelpHoverText("Hablar con el dueño del juego de los cofres tras comprar una llave te dirá dónde está Greg, la rupia verde.");
+                UIWidgets::PaddedEnhancementCheckbox("Texto de canciones de teletransporte", "gRandomizeWarpSongText", true, false, !CVarGetInteger("gRandomizeShuffleWarpSongs", RO_GENERIC_OFF),
+                 "Esta opción está desactivada porque las canciones de teletransporte no se mezclan.", UIWidgets::CheckboxGraphics::Cross, true);
+                UIWidgets::InsertHelpHoverText("Tocar una canción de teletransporte te dirá adónde lleva. (Si los destinos son los originales, siempre está activado.)");
+                UIWidgets::PaddedEnhancementCheckbox("Texto de objeto de deku mercader", "gRandomizeScrubText", true, false, false, "", UIWidgets::CheckboxGraphics::Cross, false);
+                UIWidgets::InsertHelpHoverText("Los deku mercaderes revelarán qué están vendiendo.");
+                UIWidgets::PaddedEnhancementCheckbox("Casa de las Skulltulas: 10", "gRandomize10GSHint", true, false);
+                UIWidgets::PaddedEnhancementCheckbox("Casa de las Skulltulas: 20", "gRandomize20GSHint", true, false);
+                UIWidgets::PaddedEnhancementCheckbox("Casa de las Skulltulas: 30", "gRandomize30GSHint", true, false);                
+                UIWidgets::PaddedEnhancementCheckbox("Casa de las Skulltulas: 40", "gRandomize40GSHint", true, false);
+                UIWidgets::PaddedEnhancementCheckbox("Casa de las Skulltulas: 50", "gRandomize50GSHint", true, false);
                 ImGui::Unindent();
 
 
@@ -4268,45 +4336,45 @@ void DrawRandoEditor(bool& open) {
                 ImGui::BeginChild("ChildAdditionalFeatures", ImVec2(0, -8));
                 ImGui::PushItemWidth(-FLT_MIN);
 
-                UIWidgets::EnhancementCheckbox("Full Wallets", "gRandomizeFullWallets");
-                UIWidgets::InsertHelpHoverText("Start with a full wallet. All wallet upgrades come filled with rupees.");
+                UIWidgets::EnhancementCheckbox("Bolsas llenas", "gRandomizeFullWallets");
+                UIWidgets::InsertHelpHoverText("Empiezas con la bolsa llena. Todas las mejoras de bolsa vienen llenas de rupias.");
 
                 UIWidgets::PaddedSeparator();
 
                 // Bombchus in Logic
-                UIWidgets::EnhancementCheckbox(Settings::BombchusInLogic.GetName().c_str(), "gRandomizeBombchusInLogic");
+                UIWidgets::EnhancementCheckbox(RandoSettingLabel(Settings::BombchusInLogic.GetName()).c_str(), "gRandomizeBombchusInLogic");
                 UIWidgets::InsertHelpHoverText(
-                    "Bombchus are properly considered in logic.\n"
+                    "Los bombuchus se tienen bien en cuenta en la lógica.\n"
                     "\n"
-                    "The first Bombchu pack will always be 20, and subsequent packs will be "
-                    "5 or 10 based on how many you have.\n"
-                    "Once found, they can be replenished at the Bombchu shop.\n"
+                    "El primer paquete de bombuchus será siempre de 20 y los siguientes serán de "
+                    "5 o 10 según cuántos tengas.\n"
+                    "Una vez encontrados, se pueden reponer en la tienda de bombuchus.\n"
                     "\n"
-                    "Bombchu Bowling is opened by obtaining Bombchus."
+                    "La bolera de bombuchus se abre al conseguir bombuchus."
                 );
 
                 UIWidgets::PaddedSeparator();
 
                 // Enable Bombchu Drops
-                UIWidgets::EnhancementCheckbox("Enable Bombchu Drops", "gRandomizeEnableBombchuDrops");
+                UIWidgets::EnhancementCheckbox("Botín de bombuchus", "gRandomizeEnableBombchuDrops");
                 UIWidgets::InsertHelpHoverText(
-                    "Once you obtain bombchus for the first time, refills can be found in bushes and other places where bomb drops can normally spawn."
+                    "Una vez conseguidos los bombuchus por primera vez, las recargas pueden aparecer en arbustos y otros sitios donde suelen caer bombas."
                 );
 
                 UIWidgets::PaddedSeparator();
 
-                UIWidgets::EnhancementCheckbox("Blue Fire Arrows", "gRandomizeBlueFireArrows");
+                UIWidgets::EnhancementCheckbox("Flechas de fuego azul", "gRandomizeBlueFireArrows");
                 UIWidgets::InsertHelpHoverText(
-                    "Ice Arrows act like Blue Fire, making them able to melt red ice. "
-                    "Item placement logic will respect this option, so it might be required to use this to progress."
+                    "Las flechas de hielo actúan como fuego azul y pueden derretir el hielo rojo. "
+                    "La lógica de colocación de objetos respetará esta opción, así que puede ser necesario usarla para avanzar."
                 );
 
                 UIWidgets::PaddedSeparator();
 
-                UIWidgets::EnhancementCheckbox("Sunlight Arrows", "gRandomizeSunlightArrows");
+                UIWidgets::EnhancementCheckbox("Flechas de luz solar", "gRandomizeSunlightArrows");
                 UIWidgets::InsertHelpHoverText(
-                    "Light Arrows can be used to light up the sun switches instead of using the Mirror Shield. "
-                    "Item placement logic will respect this option, so it might be required to use this to progress."
+                    "Las flechas de luz sirven para activar los interruptores solares en lugar de usar el escudo espejo. "
+                    "La lógica de colocación de objetos respetará esta opción, así que puede ser necesario usarla para avanzar."
                 );
 
                 UIWidgets::PaddedSeparator();
@@ -4320,7 +4388,7 @@ void DrawRandoEditor(bool& open) {
         }
 
         static bool locationsTabOpen = false;
-        if (ImGui::BeginTabItem("Locations")) {
+        if (ImGui::BeginTabItem("Ubicaciones")) {
             ImGui::PushStyleVar(ImGuiStyleVar_CellPadding, cellPadding);
             if (!locationsTabOpen) {
                 locationsTabOpen = true;
@@ -4335,8 +4403,8 @@ void DrawRandoEditor(bool& open) {
             }
 
             if (ImGui::BeginTable("tableRandoLocations", 2, ImGuiTableFlags_BordersH | ImGuiTableFlags_BordersV)) {
-                ImGui::TableSetupColumn("Included", ImGuiTableColumnFlags_WidthStretch, 200.0f);
-                ImGui::TableSetupColumn("Excluded", ImGuiTableColumnFlags_WidthStretch, 200.0f);
+                ImGui::TableSetupColumn("Incluidas", ImGuiTableColumnFlags_WidthStretch, 200.0f);
+                ImGui::TableSetupColumn("Excluidas", ImGuiTableColumnFlags_WidthStretch, 200.0f);
                 ImGui::PushItemFlag(ImGuiItemFlags_Disabled, true);
                 ImGui::TableHeadersRow();
                 ImGui::PopItemFlag();
@@ -4354,7 +4422,7 @@ void DrawRandoEditor(bool& open) {
                     bool hasItems = false;
                     for (auto [randomizerCheck, rcObject] : rcObjects) {
                         if (rcObject->visibleInImgui && !excludedLocations.count(rcObject->rc) &&
-                            locationSearch.PassFilter(rcObject->rcSpoilerName.c_str())) {
+                            (locationSearch.PassFilter(rcObject->rcSpoilerName.c_str()) || locationSearch.PassFilter(rcObject->rcShortName.c_str()))) {
 
                             hasItems = true;
                             break;
@@ -4366,7 +4434,7 @@ void DrawRandoEditor(bool& open) {
                         if (ImGui::TreeNode(RandomizerCheckObjects::GetRCAreaName(rcArea).c_str())) {
                             for (auto [randomizerCheck, rcObject] : rcObjects) {
                                 if (rcObject->visibleInImgui && !excludedLocations.count(rcObject->rc) &&
-                                    locationSearch.PassFilter(rcObject->rcSpoilerName.c_str())) {
+                                    (locationSearch.PassFilter(rcObject->rcSpoilerName.c_str()) || locationSearch.PassFilter(rcObject->rcShortName.c_str()))) {
 
                                     if (ImGui::ArrowButton(std::to_string(rcObject->rc).c_str(), ImGuiDir_Right)) {
                                         excludedLocations.insert(rcObject->rc);
@@ -4438,47 +4506,47 @@ void DrawRandoEditor(bool& open) {
             locationsTabOpen = false;
         }
 
-        if (ImGui::BeginTabItem("Tricks/Glitches")) {
+        if (ImGui::BeginTabItem("Trucos/Glitches")) {
             ImGui::PushStyleVar(ImGuiStyleVar_CellPadding, cellPadding);
             if (ImGui::BeginTable("tableRandoLogic", 1, ImGuiTableFlags_BordersH | ImGuiTableFlags_BordersV)) {
                 ImGui::TableSetupColumn("", ImGuiTableColumnFlags_WidthStretch, 200.0f);
                 ImGui::TableNextRow();
                 ImGui::TableNextColumn();
                 ImGui::PushItemWidth(170.0);
-                ImGui::Text("Logic Rules");
+                ImGui::Text("Reglas de lógica");
                 UIWidgets::InsertHelpHoverText(
-                    "Glitchless - No glitches are required, but may require some minor tricks.\n"
+                    "Sin glitches: no hace falta ningún glitch, pero pueden hacer falta algunos trucos menores.\n"
                     "\n"
-                    "No logic - Item placement is completely random. MAY BE IMPOSSIBLE TO BEAT."
+                    "Sin lógica: la colocación de objetos es totalmente aleatoria. PUEDE SER IMPOSIBLE DE COMPLETAR."
                 );
                 UIWidgets::EnhancementCombobox("gRandomizeLogicRules", randoLogicRules, RO_LOGIC_MAX, RO_LOGIC_GLITCHLESS);
                 if (CVarGetInteger("gRandomizeLogicRules", RO_LOGIC_GLITCHLESS) == RO_LOGIC_GLITCHLESS) {
                     ImGui::SameLine();
-                    UIWidgets::EnhancementCheckbox(Settings::LocationsReachable.GetName().c_str(), "gRandomizeAllLocationsReachable", false, "", UIWidgets::CheckboxGraphics::Cross, RO_GENERIC_ON);
+                    UIWidgets::EnhancementCheckbox(RandoSettingLabel(Settings::LocationsReachable.GetName()).c_str(), "gRandomizeAllLocationsReachable", false, "", UIWidgets::CheckboxGraphics::Cross, RO_GENERIC_ON);
                     UIWidgets::InsertHelpHoverText(
-                        "When this options is enabled, the randomizer will "
-                        "guarantee that every item is obtainable and every "
-                        "location is reachable. When disabled, only "
-                        "required items and locations to beat the game "
-                        "will be guaranteed reachable."
+                        "Si esta opción está activada, el randomizer "
+                        "garantizará que todos los objetos se puedan conseguir y que todos los "
+                        "lugares sean accesibles. Si está desactivada, solo se garantiza que sean accesibles "
+                        "los objetos y lugares necesarios para completar el "
+                        "juego."
                     );
                 }
 
                 UIWidgets::PaddedSeparator();
 
                 // Enable Glitch-Useful Cutscenes
-                UIWidgets::EnhancementCheckbox(Settings::EnableGlitchCutscenes.GetName().c_str(),
+                UIWidgets::EnhancementCheckbox(RandoSettingLabel(Settings::EnableGlitchCutscenes.GetName()).c_str(),
                                               "gRandomizeEnableGlitchCutscenes");
                 UIWidgets::InsertHelpHoverText(
-                    "The cutscenes of the Poes in Forest Temple and Darunia in Fire Temple will not be skipped. "
-                    "These cutscenes are only useful for glitched gameplay and can be safely skipped otherwise.");
+                    "No se omitirán las escenas de los Poes en el Templo del Bosque ni la de Darunia en el Templo del Fuego. "
+                    "Estas escenas solo sirven para jugar con glitches y, si no, se pueden omitir sin problema.");
 
                 ImGui::PopItemWidth();
                 ImGui::EndTable();
             }
             if (ImGui::BeginTable("tableRandoTricksGlitches", 2, ImGuiTableFlags_BordersH | ImGuiTableFlags_BordersV)) {
-                ImGui::TableSetupColumn("Disabled", ImGuiTableColumnFlags_WidthStretch, 200.0f);
-                ImGui::TableSetupColumn("Enabled", ImGuiTableColumnFlags_WidthStretch, 200.0f);
+                ImGui::TableSetupColumn("Desactivado", ImGuiTableColumnFlags_WidthStretch, 200.0f);
+                ImGui::TableSetupColumn("Activado", ImGuiTableColumnFlags_WidthStretch, 200.0f);
                 ImGui::PushItemFlag(ImGuiItemFlags_Disabled, true);
                 ImGui::TableHeadersRow();
                 ImGui::PopItemFlag();
@@ -4489,7 +4557,7 @@ void DrawRandoEditor(bool& open) {
                 window->DC.CurrLineTextBaseOffset = 0.0f;
                 ImGui::BeginChild("ChildTricksGlitchesDisabled", ImVec2(0, -8));
 
-                ImGui::Text("Coming soon");
+                ImGui::Text("Próximamente");
 
                 ImGui::EndChild();
 
@@ -4498,7 +4566,7 @@ void DrawRandoEditor(bool& open) {
                 window->DC.CurrLineTextBaseOffset = 0.0f;
                 ImGui::BeginChild("ChildTricksGlitchesEnabled", ImVec2(0, -8));
 
-                ImGui::Text("Coming soon");
+                ImGui::Text("Próximamente");
 
                 ImGui::EndChild();
                 ImGui::EndTable();
@@ -4507,13 +4575,13 @@ void DrawRandoEditor(bool& open) {
             ImGui::EndTabItem();
         }
 
-        if (ImGui::BeginTabItem("Starting Inventory")) {
+        if (ImGui::BeginTabItem("Inventario inicial")) {
             ImGui::PushStyleVar(ImGuiStyleVar_CellPadding, cellPadding);
             if (ImGui::BeginTable("tableRandoStartingInventory", 3,
                                   ImGuiTableFlags_BordersH | ImGuiTableFlags_BordersV)) {
-                ImGui::TableSetupColumn("Starting Equipment", ImGuiTableColumnFlags_WidthStretch, 200.0f);
-                ImGui::TableSetupColumn("Starting Items", ImGuiTableColumnFlags_WidthStretch, 200.0f);
-                ImGui::TableSetupColumn("Starting Songs", ImGuiTableColumnFlags_WidthStretch, 200.0f);
+                ImGui::TableSetupColumn("Equipamiento inicial", ImGuiTableColumnFlags_WidthStretch, 200.0f);
+                ImGui::TableSetupColumn("Objetos iniciales", ImGuiTableColumnFlags_WidthStretch, 200.0f);
+                ImGui::TableSetupColumn("Canciones iniciales", ImGuiTableColumnFlags_WidthStretch, 200.0f);
                 ImGui::PushItemFlag(ImGuiItemFlags_Disabled, true);
                 ImGui::TableHeadersRow();
                 ImGui::PopItemFlag();
@@ -4526,15 +4594,15 @@ void DrawRandoEditor(bool& open) {
                 // Don't display this option if Dungeon Rewards are Shuffled to End of Dungeon.
                 // TODO: Show this but disabled when we have options for disabled Comboboxes.
                 if (CVarGetInteger("gRandomizeShuffleDungeonReward", RO_DUNGEON_REWARDS_END_OF_DUNGEON) != RO_DUNGEON_REWARDS_END_OF_DUNGEON) {
-                    ImGui::Text(Settings::LinksPocketItem.GetName().c_str());
+                    ImGui::Text(RandoSettingLabel(Settings::LinksPocketItem.GetName()).c_str());
                     UIWidgets::EnhancementCombobox("gRandomizeLinksPocket", randoLinksPocket, RO_LINKS_POCKET_MAX, RO_LINKS_POCKET_DUNGEON_REWARD);
                     UIWidgets::PaddedSeparator();
                 }
 
-                UIWidgets::EnhancementCheckbox(Settings::StartingKokiriSword.GetName().c_str(),
+                UIWidgets::EnhancementCheckbox(RandoSettingLabel(Settings::StartingKokiriSword.GetName()).c_str(),
                                               "gRandomizeStartingKokiriSword");
                 UIWidgets::PaddedSeparator();
-                UIWidgets::EnhancementCheckbox(Settings::StartingDekuShield.GetName().c_str(),
+                UIWidgets::EnhancementCheckbox(RandoSettingLabel(Settings::StartingDekuShield.GetName()).c_str(),
                                               "gRandomizeStartingDekuShield");
 
                 UIWidgets::PaddedSeparator();
@@ -4546,12 +4614,12 @@ void DrawRandoEditor(bool& open) {
                 window->DC.CurrLineTextBaseOffset = 0.0f;
                 ImGui::BeginChild("ChildStartingItems", ImVec2(0, -8));
 
-                UIWidgets::EnhancementCheckbox(Settings::StartingOcarina.GetName().c_str(), "gRandomizeStartingOcarina");
+                UIWidgets::EnhancementCheckbox(RandoSettingLabel(Settings::StartingOcarina.GetName()).c_str(), "gRandomizeStartingOcarina");
                 UIWidgets::PaddedSeparator();
-                UIWidgets::EnhancementCheckbox(Settings::StartingConsumables.GetName().c_str(),
+                UIWidgets::EnhancementCheckbox(RandoSettingLabel(Settings::StartingConsumables.GetName()).c_str(),
                                               "gRandomizeStartingConsumables");
                 UIWidgets::PaddedSeparator();
-                UIWidgets::EnhancementSliderInt("Gold Skulltula Tokens: %d", "##RandoStartingSkulltulaToken", "gRandomizeStartingSkulltulaToken", 0, 100, "", 0, true);
+                UIWidgets::EnhancementSliderInt("Símbolos de Skulltula dorada: %d", "##RandoStartingSkulltulaToken", "gRandomizeStartingSkulltulaToken", 0, 100, "", 0, true);
                 UIWidgets::PaddedSeparator();
 
                 ImGui::EndChild();
@@ -4561,43 +4629,43 @@ void DrawRandoEditor(bool& open) {
                 window->DC.CurrLineTextBaseOffset = 0.0f;
                 ImGui::BeginChild("ChildStartingSongs", ImVec2(0, -8));
 
-                UIWidgets::EnhancementCheckbox(Settings::StartingZeldasLullaby.GetName().c_str(),
+                UIWidgets::EnhancementCheckbox(RandoSettingLabel(Settings::StartingZeldasLullaby.GetName()).c_str(),
                                                "gRandomizeStartingZeldasLullaby");
 
-                UIWidgets::EnhancementCheckbox(Settings::StartingEponasSong.GetName().c_str(),
+                UIWidgets::EnhancementCheckbox(RandoSettingLabel(Settings::StartingEponasSong.GetName()).c_str(),
                                                "gRandomizeStartingEponasSong");
 
-                UIWidgets::EnhancementCheckbox(Settings::StartingSariasSong.GetName().c_str(),
+                UIWidgets::EnhancementCheckbox(RandoSettingLabel(Settings::StartingSariasSong.GetName()).c_str(),
                                                "gRandomizeStartingSariasSong");
 
-                UIWidgets::EnhancementCheckbox(Settings::StartingSunsSong.GetName().c_str(),
+                UIWidgets::EnhancementCheckbox(RandoSettingLabel(Settings::StartingSunsSong.GetName()).c_str(),
                                                "gRandomizeStartingSunsSong");
 
-                UIWidgets::EnhancementCheckbox(Settings::StartingSongOfTime.GetName().c_str(),
+                UIWidgets::EnhancementCheckbox(RandoSettingLabel(Settings::StartingSongOfTime.GetName()).c_str(),
                                                "gRandomizeStartingSongOfTime");
 
-                UIWidgets::EnhancementCheckbox(Settings::StartingSongOfStorms.GetName().c_str(),
+                UIWidgets::EnhancementCheckbox(RandoSettingLabel(Settings::StartingSongOfStorms.GetName()).c_str(),
                                                "gRandomizeStartingSongOfStorms");
                 UIWidgets::PaddedSeparator();
-                ImGui::Text("Warp Songs");
+                ImGui::Text("Canciones de teletransporte");
                 UIWidgets::PaddedSeparator();
 
-                UIWidgets::EnhancementCheckbox(Settings::StartingMinuetOfForest.GetName().c_str(),
+                UIWidgets::EnhancementCheckbox(RandoSettingLabel(Settings::StartingMinuetOfForest.GetName()).c_str(),
                                                "gRandomizeStartingMinuetOfForest");
 
-                UIWidgets::EnhancementCheckbox(Settings::StartingBoleroOfFire.GetName().c_str(),
+                UIWidgets::EnhancementCheckbox(RandoSettingLabel(Settings::StartingBoleroOfFire.GetName()).c_str(),
                                                "gRandomizeStartingBoleroOfFire");
 
-                UIWidgets::EnhancementCheckbox(Settings::StartingSerenadeOfWater.GetName().c_str(),
+                UIWidgets::EnhancementCheckbox(RandoSettingLabel(Settings::StartingSerenadeOfWater.GetName()).c_str(),
                                                "gRandomizeStartingSerenadeOfWater");
 
-                UIWidgets::EnhancementCheckbox(Settings::StartingRequiemOfSpirit.GetName().c_str(),
+                UIWidgets::EnhancementCheckbox(RandoSettingLabel(Settings::StartingRequiemOfSpirit.GetName()).c_str(),
                                                "gRandomizeStartingRequiemOfSpirit");
 
-                UIWidgets::EnhancementCheckbox(Settings::StartingNocturneOfShadow.GetName().c_str(),
+                UIWidgets::EnhancementCheckbox(RandoSettingLabel(Settings::StartingNocturneOfShadow.GetName()).c_str(),
                                                "gRandomizeStartingNocturneOfShadow");
 
-                UIWidgets::EnhancementCheckbox(Settings::StartingPreludeOfLight.GetName().c_str(),
+                UIWidgets::EnhancementCheckbox(RandoSettingLabel(Settings::StartingPreludeOfLight.GetName()).c_str(),
                                                "gRandomizeStartingPreludeOfLight");
 
                 UIWidgets::PaddedSeparator();

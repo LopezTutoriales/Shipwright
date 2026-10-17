@@ -640,7 +640,7 @@ void HintTable_Init_Item() {
                        Text{"explosives", /*french*/"un paquet d'explosifs", /*spanish*/"un montón de explosivos"},
                      },
                        //clear text
-                       Text{"Bombchus", /*french*/"un paquet de Missiles", /*spanish*/"unos bombchus"}
+                       Text{"Bombchus", /*french*/"un paquet de Missiles", /*spanish*/"unos bombuchus"}
     );
 
     hintTable[PROGRESSIVE_GORONSWORD] = HintText::Item({
@@ -1784,7 +1784,7 @@ void HintTable_Init_Item() {
                        Text{"explosives", /*french*/"un paquet d'explosifs", /*spanish*/"un montón de explosivos"},
                      },
                        //clear text
-                       Text{"Bombchus (5 pieces)", /*french*/"une demi-dizaine de Missiles", /*spanish*/"unos (5) bombchus"}
+                       Text{"Bombchus (5 pieces)", /*french*/"une demi-dizaine de Missiles", /*spanish*/"unos (5) bombuchus"}
     );
 
     hintTable[BOMBCHU_10] = HintText::Item({
@@ -1799,7 +1799,7 @@ void HintTable_Init_Item() {
                        Text{"explosives", /*french*/"un paquet d'explosifs", /*spanish*/"un montón de explosivos"},
                      },
                        //clear text
-                       Text{"Bombchus (10 pieces)", /*french*/"une dizaine de Missiles", /*spanish*/"unos (10) bombchus"}
+                       Text{"Bombchus (10 pieces)", /*french*/"une dizaine de Missiles", /*spanish*/"unos (10) bombuchus"}
     );
 
     hintTable[BOMBCHU_20] = HintText::Item({
@@ -1814,7 +1814,7 @@ void HintTable_Init_Item() {
                        Text{"explosives", /*french*/"un paquet d'explosifs", /*spanish*/"un montón de explosivos"},
                      },
                        //clear text
-                       Text{"Bombchus (20 pieces)", /*french*/"une vingtaine de Missiles", /*spanish*/"unos (20) bombchus"}
+                       Text{"Bombchus (20 pieces)", /*french*/"une vingtaine de Missiles", /*spanish*/"unos (20) bombuchus"}
     );
 
   //BOMBCHU_DROP

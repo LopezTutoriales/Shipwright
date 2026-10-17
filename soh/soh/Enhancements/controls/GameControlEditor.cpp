@@ -81,9 +81,9 @@ namespace GameControlEditor {
     static CustomButtonMap ocarinaA4 = {"A4", "gOcarinaA4BtnMap", BTN_CRIGHT};
     static CustomButtonMap ocarinaF4 = {"F4", "gOcarinaF4BtnMap", BTN_CDOWN};
     static CustomButtonMap ocarinaD4 = {"D4", "gOcarinaD4BtnMap", BTN_A};
-    static CustomButtonMap ocarinaSongDisable = {"Disable songs", "gOcarinaDisableBtnMap", BTN_L};
-    static CustomButtonMap ocarinaSharp = {"Pitch up", "gOcarinaSharpBtnMap", BTN_R};
-    static CustomButtonMap ocarinaFlat = {"Pitch down", "gOcarinaFlatBtnMap", BTN_Z};
+    static CustomButtonMap ocarinaSongDisable = {"Desactivar canciones", "gOcarinaDisableBtnMap", BTN_L};
+    static CustomButtonMap ocarinaSharp = {"Subir tono", "gOcarinaSharpBtnMap", BTN_R};
+    static CustomButtonMap ocarinaFlat = {"Bajar tono", "gOcarinaFlatBtnMap", BTN_Z};
 
     void DrawUI(bool&);
 
@@ -92,19 +92,19 @@ namespace GameControlEditor {
 
         addButtonName(BTN_A,		"A");
         addButtonName(BTN_B,		"B");
-        addButtonName(BTN_CUP,		"C Up");
-        addButtonName(BTN_CDOWN,	"C Down");
-        addButtonName(BTN_CLEFT,	"C Left");
-        addButtonName(BTN_CRIGHT,	"C Right");
+        addButtonName(BTN_CUP,		"C arriba");
+        addButtonName(BTN_CDOWN,	"C abajo");
+        addButtonName(BTN_CLEFT,	"C izquierda");
+        addButtonName(BTN_CRIGHT,	"C derecha");
         addButtonName(BTN_L,		"L");
         addButtonName(BTN_Z,		"Z");
         addButtonName(BTN_R,		"R");
         addButtonName(BTN_START,	"Start");
-        addButtonName(BTN_DUP,		"D-pad up");
-        addButtonName(BTN_DDOWN,	"D-pad down");
-        addButtonName(BTN_DLEFT,	"D-pad left");
-        addButtonName(BTN_DRIGHT,	"D-pad right");
-        addButtonName(0,			"None");
+        addButtonName(BTN_DUP,		"Cruceta arriba");
+        addButtonName(BTN_DDOWN,	"Cruceta abajo");
+        addButtonName(BTN_DLEFT,	"Cruceta izquierda");
+        addButtonName(BTN_DRIGHT,	"Cruceta derecha");
+        addButtonName(0,			"Ninguno");
     }
 
     // Draw a button mapping setting consisting of a padded label and button dropdown.
@@ -116,7 +116,7 @@ namespace GameControlEditor {
         if (buttonNames.contains(currentButton)) {
             preview = buttonNames[currentButton]->second;
         } else {
-            preview = "Unknown";
+            preview = "Desconocido";
         }
 
         UIWidgets::Spacer(0);
@@ -144,7 +144,7 @@ namespace GameControlEditor {
     }
 
     void DrawOcarinaControlPanel() {
-        if (!ImGui::CollapsingHeader("Ocarina Controls")) {
+        if (!ImGui::CollapsingHeader("Controles de la ocarina")) {
             return;
         }
 
@@ -152,12 +152,12 @@ namespace GameControlEditor {
             return;
         }
 
-        ImGui::TableSetupColumn("Custom Ocarina Controls", PANEL_TABLE_COLUMN_FLAGS | ImGuiTableColumnFlags_WidthStretch);
+        ImGui::TableSetupColumn("Controles personalizados de la ocarina", PANEL_TABLE_COLUMN_FLAGS | ImGuiTableColumnFlags_WidthStretch);
         TableHelper::InitHeader(false);
         
         ImVec2 cursor = ImGui::GetCursorPos();
         ImGui::SetCursorPos(ImVec2(cursor.x + 5, cursor.y + 5));
-        UIWidgets::EnhancementCheckbox("Customize Ocarina Controls", "gCustomOcarinaControls");
+        UIWidgets::EnhancementCheckbox("Personalizar controles de la ocarina", "gCustomOcarinaControls");
 
         if (CVarGetInteger("gCustomOcarinaControls", 0) == 1) {
             if (ImGui::BeginTable("tableCustomMainOcarinaControls", 2, ImGuiTableFlags_SizingStretchProp)) {
@@ -167,11 +167,11 @@ namespace GameControlEditor {
                     disableMask |= BTN_DUP | BTN_DDOWN | BTN_DLEFT | BTN_DRIGHT;
                 }
 
-                ImGui::TableSetupColumn("Notes##CustomOcarinaNotes", PANEL_TABLE_COLUMN_FLAGS);
-                ImGui::TableSetupColumn("Modifiers##CustomOcaranaModifiers", PANEL_TABLE_COLUMN_FLAGS);
+                ImGui::TableSetupColumn("Notas##CustomOcarinaNotes", PANEL_TABLE_COLUMN_FLAGS);
+                ImGui::TableSetupColumn("Modificadores##CustomOcaranaModifiers", PANEL_TABLE_COLUMN_FLAGS);
                 TableHelper::InitHeader(false);
 
-                SohImGui::BeginGroupPanel("Notes", ImGui::GetContentRegionAvail());
+                SohImGui::BeginGroupPanel("Notas", ImGui::GetContentRegionAvail());
                 labelWidth = ImGui::CalcTextSize("D5").x + 10;
                 DrawMapping(ocarinaD5, labelWidth, disableMask);
                 DrawMapping(ocarinaB4, labelWidth, disableMask);
@@ -184,7 +184,7 @@ namespace GameControlEditor {
 
                 TableHelper::NextCol();
 
-                SohImGui::BeginGroupPanel("Modifiers", ImGui::GetContentRegionAvail());
+                SohImGui::BeginGroupPanel("Modificadores", ImGui::GetContentRegionAvail());
                 labelWidth = ImGui::CalcTextSize(ocarinaSongDisable.label).x + 10;
                 DrawMapping(ocarinaSongDisable, labelWidth, disableMask);
                 DrawMapping(ocarinaSharp, labelWidth, disableMask);
@@ -196,19 +196,19 @@ namespace GameControlEditor {
         } else {
             UIWidgets::Spacer(0);
             ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 5);
-            ImGui::TextWrapped("To modify the main ocarina controls, select the \"Customize Ocarina Controls\" checkbox.");
+            ImGui::TextWrapped("Para modificar los controles principales de la ocarina, marca la casilla \"Personalizar controles de la ocarina\".");
             UIWidgets::Spacer(0);
         }
 
-        SohImGui::BeginGroupPanel("Alternate controls", ImGui::GetContentRegionAvail());
+        SohImGui::BeginGroupPanel("Controles alternativos", ImGui::GetContentRegionAvail());
         if (ImGui::BeginTable("tableOcarinaAlternateControls", 2, ImGuiTableFlags_SizingFixedSame)) {
-            ImGui::TableSetupColumn("D-pad", PANEL_TABLE_COLUMN_FLAGS);
-            ImGui::TableSetupColumn("Right stick", PANEL_TABLE_COLUMN_FLAGS);
+            ImGui::TableSetupColumn("Cruceta", PANEL_TABLE_COLUMN_FLAGS);
+            ImGui::TableSetupColumn("Stick derecho", PANEL_TABLE_COLUMN_FLAGS);
             TableHelper::InitHeader(false);
             ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 5);
-            UIWidgets::EnhancementCheckbox("Play with D-pad", "gDpadOcarina");
+            UIWidgets::EnhancementCheckbox("Tocar con la cruceta", "gDpadOcarina");
             TableHelper::NextCol();
-            UIWidgets::EnhancementCheckbox("Play with camera stick", "gRStickOcarina");
+            UIWidgets::EnhancementCheckbox("Tocar con el stick de cámara", "gRStickOcarina");
             ImGui::EndTable();
         }
         SohImGui::EndGroupPanel();
@@ -221,32 +221,32 @@ namespace GameControlEditor {
     void DrawCustomButtons() {
         SohImGui::GetInputEditor()->DrawControllerSelect(CurrentPort - 1);
         
-        SohImGui::GetInputEditor()->DrawButton("Modifier 1", BTN_MODIFIER1, CurrentPort - 1, &BtnReading);
-        SohImGui::GetInputEditor()->DrawButton("Modifier 2", BTN_MODIFIER2, CurrentPort - 1, &BtnReading);
+        SohImGui::GetInputEditor()->DrawButton("Modificador 1", BTN_MODIFIER1, CurrentPort - 1, &BtnReading);
+        SohImGui::GetInputEditor()->DrawButton("Modificador 2", BTN_MODIFIER2, CurrentPort - 1, &BtnReading);
     }
 
     void DrawCameraControlPanel() {
-        if (!ImGui::CollapsingHeader("Camera Controls")) {
+        if (!ImGui::CollapsingHeader("Controles de cámara")) {
             return;
         }
 
         UIWidgets::Spacer(0);
-        SohImGui::BeginGroupPanel("Aiming/First-Person Camera", ImGui::GetContentRegionAvail());
-        UIWidgets::PaddedEnhancementCheckbox("Right Stick Aiming", "gRightStickAiming");
-        DrawHelpIcon("Allows for aiming with the right stick in:\n-First-Person/C-Up view\n-Weapon Aiming");
-        UIWidgets::PaddedEnhancementCheckbox("Invert Aiming X Axis", "gInvertAimingXAxis");
-        DrawHelpIcon("Inverts the Camera X Axis in:\n-First-Person/C-Up view\n-Weapon Aiming");
+        SohImGui::BeginGroupPanel("Cámara de apuntado/primera persona", ImGui::GetContentRegionAvail());
+        UIWidgets::PaddedEnhancementCheckbox("Apuntar con el stick derecho", "gRightStickAiming");
+        DrawHelpIcon("Permite apuntar con el stick derecho en:\n-Vista en primera persona/C arriba\n-Apuntado de armas");
+        UIWidgets::PaddedEnhancementCheckbox("Invertir eje X al apuntar", "gInvertAimingXAxis");
+        DrawHelpIcon("Invierte el eje X de la cámara en:\n-Vista en primera persona/C arriba\n-Apuntado de armas");
         ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 5);
-        UIWidgets::PaddedEnhancementCheckbox("Invert Aiming Y Axis", "gInvertAimingYAxis");
-        DrawHelpIcon("Inverts the Camera Y Axis in:\n-First-Person/C-Up view\n-Weapon Aiming");
+        UIWidgets::PaddedEnhancementCheckbox("Invertir eje Y al apuntar", "gInvertAimingYAxis");
+        DrawHelpIcon("Invierte el eje Y de la cámara en:\n-Vista en primera persona/C arriba\n-Apuntado de armas");
         ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 5);
-        UIWidgets::PaddedEnhancementCheckbox("Disable Auto-Centering in First-Person View", "gDisableAutoCenterViewFirstPerson");
-        DrawHelpIcon("Prevents the C-Up view from auto-centering, allowing for Gyro Aiming");
-        UIWidgets::PaddedEnhancementCheckbox("Enable Custom Aiming/First-Person sensitivity", "gEnableFirstPersonSensitivity", true, false);
+        UIWidgets::PaddedEnhancementCheckbox("Sin autocentrado en primera persona", "gDisableAutoCenterViewFirstPerson");
+        DrawHelpIcon("Evita que la vista C arriba se recentre sola, permitiendo apuntar con el giroscopio");
+        UIWidgets::PaddedEnhancementCheckbox("Sensibilidad personalizada al apuntar", "gEnableFirstPersonSensitivity", true, false);
         if (CVarGetInteger("gEnableFirstPersonSensitivity", 0)) {
-            UIWidgets::EnhancementSliderFloat("Aiming/First-Person Horizontal Sensitivity: %d %%", "##FirstPersonSensitivity Horizontal",
+            UIWidgets::EnhancementSliderFloat("Sensibilidad horizontal al apuntar: %d %%", "##FirstPersonSensitivity Horizontal",
                                                 "gFirstPersonCameraSensitivityX", 0.01f, 5.0f, "", 1.0f, true, true);
-            UIWidgets::EnhancementSliderFloat("Aiming/First-Person Vertical Sensitivity: %d %%", "##FirstPersonSensitivity Vertical",
+            UIWidgets::EnhancementSliderFloat("Sensibilidad vertical al apuntar: %d %%", "##FirstPersonSensitivity Vertical",
                                               "gFirstPersonCameraSensitivityY", 0.01f, 5.0f, "", 1.0f, true, true);
         } else {
             CVarSetFloat("gFirstPersonCameraSensitivity", 1.0f);
@@ -254,72 +254,72 @@ namespace GameControlEditor {
         SohImGui::EndGroupPanel();
 
         UIWidgets::Spacer(0);
-        SohImGui::BeginGroupPanel("Third-Person Camera", ImGui::GetContentRegionAvail());
+        SohImGui::BeginGroupPanel("Cámara en tercera persona", ImGui::GetContentRegionAvail());
 
-        UIWidgets::PaddedEnhancementCheckbox("Free Camera", "gFreeCamera");
-        DrawHelpIcon("Enables free camera control\nNote: You must remap C buttons off of the right stick in the "
-                            "controller config menu, and map the camera stick to the right stick.");
-        UIWidgets::PaddedEnhancementCheckbox("Invert Camera X Axis", "gInvertXAxis");
-        DrawHelpIcon("Inverts the Camera X Axis in:\n-Free camera");
-        UIWidgets::PaddedEnhancementCheckbox("Invert Camera Y Axis", "gInvertYAxis");
-        DrawHelpIcon("Inverts the Camera Y Axis in:\n-Free camera");
-+       UIWidgets::EnhancementSliderFloat("Third-Person Horizontal Sensitivity: %d %%", "##ThirdPersonSensitivity Horizontal",
+        UIWidgets::PaddedEnhancementCheckbox("Cámara libre", "gFreeCamera");
+        DrawHelpIcon("Activa el control libre de la cámara\nNota: debes quitar los botones C del stick derecho en el "
+                            "menú de configuración del mando y asignar el stick de cámara al stick derecho.");
+        UIWidgets::PaddedEnhancementCheckbox("Invertir eje X de la cámara", "gInvertXAxis");
+        DrawHelpIcon("Invierte el eje X de la cámara en:\n-Cámara libre");
+        UIWidgets::PaddedEnhancementCheckbox("Invertir eje Y de la cámara", "gInvertYAxis");
+        DrawHelpIcon("Invierte el eje Y de la cámara en:\n-Cámara libre");
++       UIWidgets::EnhancementSliderFloat("Sensibilidad horizontal (3.ª persona): %d %%", "##ThirdPersonSensitivity Horizontal",
 +                                            "gThirdPersonCameraSensitivityX", 0.01f, 5.0f, "", 1.0f, true, true);
-+       UIWidgets::EnhancementSliderFloat("Third-Person Vertical Sensitivity: %d %%", "##ThirdPersonSensitivity Vertical",
++       UIWidgets::EnhancementSliderFloat("Sensibilidad vertical (3.ª persona): %d %%", "##ThirdPersonSensitivity Vertical",
 +                                          "gThirdPersonCameraSensitivityY", 0.01f, 5.0f, "", 1.0f, true, true);
-        UIWidgets::EnhancementSliderInt("Camera Distance: %d", "##CamDist",
+        UIWidgets::EnhancementSliderInt("Distancia de cámara: %d", "##CamDist",
                                         "gFreeCameraDistMax", 100, 900, "", 185, true);
-        UIWidgets::EnhancementSliderInt("Camera Transition Speed: %d", "##CamTranSpeed",
+        UIWidgets::EnhancementSliderInt("Velocidad de transición: %d", "##CamTranSpeed",
                                         "gFreeCameraTransitionSpeed", 0, 900, "", 25, true);
         SohImGui::EndGroupPanel();
     }
 
     void DrawDpadControlPanel() {
-        if (!ImGui::CollapsingHeader("D-Pad Controls")) {
+        if (!ImGui::CollapsingHeader("Controles de la cruceta")) {
             return;
         }
 
         ImVec2 cursor = ImGui::GetCursorPos();
         ImGui::SetCursorPos(ImVec2(cursor.x + 5, cursor.y + 5));
-        SohImGui::BeginGroupPanel("D-Pad Options", ImGui::GetContentRegionAvail());
-        UIWidgets::PaddedEnhancementCheckbox("D-pad Support on Pause Screen", "gDpadPause");
-        DrawHelpIcon("Navigate Pause with the D-pad\nIf used with D-pad as Equip Items, you must hold C-Up to equip instead of navigate\n"
-                    "To make the cursor only move a single space no matter how long a direction is held, manually set gDpadHoldChange to 0");
-        UIWidgets::PaddedEnhancementCheckbox("D-pad Support in Text Boxes", "gDpadText");
-        DrawHelpIcon("Navigate choices in text boxes, shop item selection, and the file select / name entry screens with the D-pad\n"
-                    "To make the cursor only move a single space during name entry no matter how long a direction is held, manually set gDpadHoldChange to 0");
-        UIWidgets::PaddedEnhancementCheckbox("D-pad as Equip Items", "gDpadEquips");
-        DrawHelpIcon("Equip items and equipment on the D-pad\nIf used with D-pad on Pause Screen, you must hold C-Up to equip instead of navigate");
+        SohImGui::BeginGroupPanel("Opciones de la cruceta", ImGui::GetContentRegionAvail());
+        UIWidgets::PaddedEnhancementCheckbox("Cruceta en la pantalla de pausa", "gDpadPause");
+        DrawHelpIcon("Navega por la pausa con la cruceta\nSi se usa con la cruceta para equipar objetos, debes mantener C arriba para equipar en lugar de navegar\n"
+                    "Para que el cursor se mueva solo una casilla sin importar cuánto mantengas una dirección, pon gDpadHoldChange a 0 manualmente");
+        UIWidgets::PaddedEnhancementCheckbox("Cruceta en cuadros de texto", "gDpadText");
+        DrawHelpIcon("Navega por las opciones de los cuadros de texto, la selección de objetos en tiendas y las pantallas de selección de archivo y nombre con la cruceta\n"
+                    "Para que el cursor se mueva solo una casilla al escribir el nombre sin importar cuánto mantengas una dirección, pon gDpadHoldChange a 0 manualmente");
+        UIWidgets::PaddedEnhancementCheckbox("Cruceta para equipar objetos", "gDpadEquips");
+        DrawHelpIcon("Equipa objetos y equipamiento con la cruceta\nSi se usa con la cruceta en la pantalla de pausa, debes mantener C arriba para equipar en lugar de navegar");
         SohImGui::EndGroupPanel();
     }
 
     void DrawMiscControlPanel() {
-        if (!ImGui::CollapsingHeader("Miscellaneous Controls")) {
+        if (!ImGui::CollapsingHeader("Controles varios")) {
             return;
         }
 
         ImVec2 cursor = ImGui::GetCursorPos();
         ImGui::SetCursorPos(ImVec2(cursor.x + 5, cursor.y + 5));
-        SohImGui::BeginGroupPanel("Misc Controls", ImGui::GetContentRegionAvail());
-        UIWidgets::PaddedText("Allow the cursor to be on any slot");
-        static const char* cursorOnAnySlot[3] = { "Only in Rando", "Always", "Never" };
+        SohImGui::BeginGroupPanel("Varios", ImGui::GetContentRegionAvail());
+        UIWidgets::PaddedText("Permitir el cursor en cualquier casilla");
+        static const char* cursorOnAnySlot[3] = { "Solo en Rando", "Siempre", "Nunca" };
         UIWidgets::EnhancementCombobox("gPauseAnyCursor", cursorOnAnySlot, PAUSE_ANY_CURSOR_MAX, PAUSE_ANY_CURSOR_RANDO_ONLY);
-        DrawHelpIcon("Allows the cursor on the pause menu to be over any slot. Sometimes required in rando to select "
-                     "certain items.");
+        DrawHelpIcon("Permite que el cursor del menú de pausa esté sobre cualquier casilla. A veces es necesario en el rando para seleccionar "
+                     "ciertos objetos.");
         UIWidgets::Spacer(0);
-        UIWidgets::PaddedEnhancementCheckbox("Enable walk speed modifiers", "gEnableWalkModify", true, false);
-        DrawHelpIcon("Hold the assigned button to change the maximum walking speed\nTo change the assigned button, go into the Ports tabs above");
+        UIWidgets::PaddedEnhancementCheckbox("Activar modificadores de velocidad al andar", "gEnableWalkModify", true, false);
+        DrawHelpIcon("Mantén el botón asignado para cambiar la velocidad máxima al andar\nPara cambiar el botón asignado, ve a las pestañas de Puertos de arriba");
          if (CVarGetInteger("gEnableWalkModify", 0)) {
             UIWidgets::Spacer(5);
-            SohImGui::BeginGroupPanel("Walk Modifier", ImGui::GetContentRegionAvail());
-            UIWidgets::PaddedEnhancementCheckbox("Toggle modifier instead of holding", "gWalkSpeedToggle", true, false);
-            UIWidgets::EnhancementSliderFloat("Modifier 1: %d %%", "##WalkMod1", "gWalkModifierOne", 0.0f, 5.0f, "", 1.0f, true);
-            UIWidgets::EnhancementSliderFloat("Modifier 2: %d %%", "##WalkMod2", "gWalkModifierTwo", 0.0f, 5.0f, "", 1.0f, true);
+            SohImGui::BeginGroupPanel("Modificador al andar", ImGui::GetContentRegionAvail());
+            UIWidgets::PaddedEnhancementCheckbox("Alternar modificador en vez de mantener", "gWalkSpeedToggle", true, false);
+            UIWidgets::EnhancementSliderFloat("Modificador 1: %d %%", "##WalkMod1", "gWalkModifierOne", 0.0f, 5.0f, "", 1.0f, true);
+            UIWidgets::EnhancementSliderFloat("Modificador 2: %d %%", "##WalkMod2", "gWalkModifierTwo", 0.0f, 5.0f, "", 1.0f, true);
             SohImGui::EndGroupPanel();
         }
         UIWidgets::Spacer(0);
-        UIWidgets::PaddedEnhancementCheckbox("Answer Navi Prompt with L Button", "gNaviOnL");
-        DrawHelpIcon("Speak to Navi with L but enter first-person camera with C-Up");
+        UIWidgets::PaddedEnhancementCheckbox("Responder a Navi con el botón L", "gNaviOnL");
+        DrawHelpIcon("Habla con Navi con L pero entra en primera persona con C arriba");
         SohImGui::EndGroupPanel();
 
     }
@@ -331,15 +331,15 @@ namespace GameControlEditor {
         }
 
         ImGui::SetNextWindowSize(ImVec2(465, 430), ImGuiCond_FirstUseEver);
-        if (ImGui::Begin("Game Controls Configuration", &open)) {
+        if (ImGui::Begin("Configuración de controles del juego", &open)) {
             ImGui::BeginTabBar("##CustomControllers");
-            if (ImGui::BeginTabItem("Generic")) {
+            if (ImGui::BeginTabItem("Genérico")) {
                 CurrentPort = 0;
                 ImGui::EndTabItem();
             }
 
             for (int i = 1; i <= 4; i++) {
-                if (ImGui::BeginTabItem(StringHelper::Sprintf("Port %d", i).c_str())) {
+                if (ImGui::BeginTabItem(StringHelper::Sprintf("Puerto %d", i).c_str())) {
                     CurrentPort = i;
                     ImGui::EndTabItem();
                 }

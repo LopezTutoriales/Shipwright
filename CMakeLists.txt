@@ -22,6 +22,9 @@ set(PROJECT_TEAM "github.com/harbourmasters" CACHE STRING "")
 set_property(DIRECTORY ${CMAKE_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT soh)
 add_compile_options($<$<CXX_COMPILER_ID:MSVC>:/MP>)
 
+# GCC 15 (VitaSDK) no longer includes <cstdint> transitively: force it for all C++ sources
+add_compile_options("$<$<COMPILE_LANGUAGE:CXX>:-include;cstdint>")
+
 if (CMAKE_SYSTEM_NAME STREQUAL "Generic")
     set(CMAKE_SYSTEM_NAME "PSVita")
 endif()
